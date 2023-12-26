@@ -80,7 +80,9 @@
                         @foreach($products as $product)
                             <div class="w-fit border border-gray-300 relative group py-4">
                                 <div class="w-fit absolute z-50 top-0 left-0">
-                                    <div class="px-4 py-1 bg-lime-500 text-white text-sm rounded-md mt-4 ml-4">{{$product->discount}}%</div>
+                                    @if($product->discount != 0)
+                                        <div class="px-4 py-1 bg-lime-500 text-white text-sm rounded-md mt-4 ml-4">{{$product->discount}}%</div>
+                                    @endif
                                 </div>
                                 <div class="">
                                     <img src="{{$product->thumbnail}}" alt="" class="">
@@ -89,7 +91,9 @@
                                     <h4 class="font-medium text-base text-gray-600">{{$product->name}}</h4>
                                     <div class="text-lg space-x-2 italic">
                                         <span class="">{{number_format($product->price - (($product->price * $product->discount)/100))}} ₫</span>
-                                        <span class="text-gray-600 line-through">{{number_format($product->price)}} ₫</span>
+                                        @if($product->discount != 0)
+                                            <span class="text-gray-600 line-through">{{number_format($product->price)}} ₫</span>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="bg-[#00000080] w-full h-full absolute top-0 left-0 hidden group-hover:flex group-hover:justify-center group-hover:items-center transition-all">
@@ -106,8 +110,9 @@
                                             <a href="" class="py-2 px-3 text-white block border hover:border-lime-500 hover:bg-lime-500 border-white transition-all cursor-pointer"><i class="fa-solid fa-code-compare"></i></a>
                                             <a href="" class="py-2 px-3 text-white block border hover:border-lime-500 hover:bg-lime-500 border-white transition-all cursor-pointer"><i class="fa-solid fa-cart-shopping"></i></a>
                                         </div>
-                                        <form action="{{route('add', $product->id)}}" method="GET" class="flex justify-between text-white text-center border hover:border-lime-500 hover:bg-lime-500 border-white transition-all cursor-pointer">
-                                            <button type="submit" class="flex justify-between py-2 px-3">
+                                        <form action="{{route('add', $product->id)}}" method="POST" class="addToCartForm justify-between text-white text-center border hover:border-lime-500 hover:bg-lime-500 border-white transition-all cursor-pointer">
+                                            @csrf
+                                            <button type="button" class="addToCartBtn flex justify-between py-2 px-3">
                                                 <div class=""><i class="fa-solid fa-cart-shopping"></i></div>
                                                 <input type="hidden" name="amount" value="1">
                                                 <input type="hidden" name="product_id" value="{{$product->id}}">
@@ -144,4 +149,5 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('js/app.js') }}"></script>
 </x-app-layout>

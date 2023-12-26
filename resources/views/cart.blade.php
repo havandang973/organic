@@ -90,41 +90,52 @@
                         @csrf
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="text-black font-bold">THÔNG TIN ĐƠN HÀNG</h3>
-                            <button type="submit" class="px-4 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cập nhật</button>
+                            @if(Cart::count())
+                                <button type="submit" class="px-4 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cập nhật</button>
+                            @endif
                         </div>
-                        <div class="h-72 overflow-auto">
-                            @foreach(Cart::content() as $row)
-                                <div class="w-full flex space-x-3 mt-5">
-                                    <div class="w-1/3">
-                                        <a href="{{route('productDetail', ['id' => $row->id])}}" class="">
-                                            <img src="{{$row->options->thumbnail}}" alt="" class="">
-                                        </a>
-                                    </div>
-                                    <div class="w-1/2 space-y-2">
-                                        <a href="{{route('productDetail', ['id' => $row->id])}}" class="">
-                                            <div class="text-blue-500 font-bold">{{number_format($row->options->discount)}}đ <span class="mx-2 text-gray-400 line-through">{{number_format($row->price)}}₫</span></div>
-                                            <div class="text-black font-bold">{{$row->name}}</div>
-                                        </a>
-                                        <div class="">
-                                            <span class="">Số lượng:</span>
-                                            <input name="qty[{{$row->rowId}}]" type="number" class="w-12 text-center border pl-2 outline-none focus:border-lime-500" placeholder="1" min="1" value="{{$row->qty}}">
+                        @if(Cart::count())
+                            <div class="h-72 overflow-auto">
+                                @foreach(Cart::content() as $row)
+                                    <div class="w-full flex space-x-3 mt-5">
+                                        <div class="w-1/3">
+                                            <a href="{{route('productDetail', ['id' => $row->id])}}" class="">
+                                                <img src="{{$row->options->thumbnail}}" alt="" class="">
+                                            </a>
                                         </div>
+                                        <div class="w-1/2 space-y-2">
+                                            <a href="{{route('productDetail', ['id' => $row->id])}}" class="">
+                                                <div class="text-blue-500 font-bold">{{number_format($row->options->discount)}}đ
+                                                    {{--                                                <span class="mx-2 text-gray-400 line-through">{{number_format($row->price)}}₫</span>--}}
+                                                </div>
+                                                <div class="text-black font-bold">{{$row->name}}</div>
+                                            </a>
+                                            <div class="">
+                                                <span class="">Số lượng:</span>
+                                                <input name="qty[{{$row->rowId}}]" type="number" class="w-16 text-center border pl-2 outline-none focus:border-lime-500" placeholder="1" min="1" value="{{$row->qty}}">
+                                            </div>
+                                        </div>
+                                        <div><a href="{{route('remove', $row->rowId)}}" class="text-danger"><i class="fa-solid fa-xmark"></i></a></div>
                                     </div>
-                                    <div><a href="{{route('remove', $row->rowId)}}" class="text-danger"><i class="fa-solid fa-xmark"></i></a></div>
+                                @endforeach
+                            </div>
+                            <div class="space-y-5 mt-4">
+                                <div class="flex justify-between">
+                                    <span class="text-black font-semibold">Tổng cộng: </span>
+                                    <span class="font-bold">{{Cart::total()}} đ</span>
                                 </div>
-                            @endforeach
-                        </div>
+                                <div class="flex justify-between ">
+                                    <span class="text-black font-semibold">Thành tiền: </span>
+                                    <span class="text-blue-500 font-bold">{{Cart::total()}} đ</span>
+                                </div>
+                            </div>
+                        @else
+                            <div class="h-72 overflow-auto flex flex-col items-center justify-center space-y-4">
+                                <img class="size-20" src="https://salt.tikicdn.com/ts/upload/eb/f3/a3/25b2ccba8f33a5157f161b6a50f64a60.png">
+                                <p class="text-center">Chưa Có Sản Phẩm</p>
+                            </div>
+                        @endif
                     </form>
-                    <div class="space-y-5 mt-4">
-                        <div class="flex justify-between">
-                            <span class="text-black font-semibold">Tổng cộng: </span>
-                            <span class="font-bold">{{Cart::total()}} đ</span>
-                        </div>
-                        <div class="flex justify-between ">
-                            <span class="text-black font-semibold">Thành tiền: </span>
-                            <span class="text-blue-500 font-bold">{{Cart::total()}} đ</span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

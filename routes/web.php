@@ -6,14 +6,17 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CompleteController;
+use \App\Http\Controllers\Admin\UserController;
 use \App\Http\Controllers\OrderEmailController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
+| routes are loaded by the RouteServiceProviderAdmin and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
 */
@@ -22,6 +25,11 @@ use \App\Http\Controllers\OrderEmailController;
 //    return view('index');
 //});
 
+
+Route::get('/header', function () {
+    return view('layouts.header');
+});
+
 Route::get('/', [ProductController::class, 'index'])->name('home');
 
 Route::get('/products/{id}', [ProductController::class, 'find'])->name('productDetail');
@@ -29,7 +37,7 @@ Route::get('/products/{id}', [ProductController::class, 'find'])->name('productD
 //Route::get('/carts', [CartController::class, 'index'])->name('cart')->middleware('auth');
 //Route::post('/carts', [CartController::class, 'store']);
 
-Route::get('/cart/add/{id}',  [CartController::class, 'add'])->name('add');
+Route::post('/cart/add/{id}',  [CartController::class, 'add'])->name('add');
 Route::get('/cart', function () {
     return view('cart');
 });
@@ -43,31 +51,41 @@ Route::post('/orders',  [OrderController::class, 'store']);
 Route::get('/completes', [CompleteController::class, 'index'])->name('complete');
 Route::post('/completes', [CompleteController::class, 'store']);
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('CheckRole:ADMIN')->group(function () {
+    Route::prefix('/edit')->group(function () {
+        Route::get('/user/{name}', [UserController::class, 'index_edit']);
+        Route::post('/user/{name}', [UserController::class, 'edit'])->name('edit.user');
+        Route::get('/product/{name}', [\App\Http\Controllers\Admin\ProductController::class, 'index_edit']);
+        Route::post('/product/{name}', [\App\Http\Controllers\Admin\ProductController::class, 'edit'])->name('edit.product');
+    });
+    Route::prefix('/delete')->group(function () {
+        Route::get('/user/{name}', [UserController::class, 'index_delete']);
+        Route::post('/user/{name}', [UserController::class, 'delete'])->name('delete.user');
+        Route::get('/product/{name}', [\App\Http\Controllers\Admin\ProductController::class, 'delete'])->name('delete.product');
+        Route::get('/order/{orderId}', [\App\Http\Controllers\Admin\OrderController::class, 'delete'])->name('delete.order');
+    });
     Route::prefix('/list')->group(function () {
-        Route::get('/product', function () {
-            return view('admin.list.product');
-        })->name('list.product');
-        Route::get('/user', function () {
-            return view('admin.list.user');
-        })->name('list.user');
+        Route::get('/product', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('list.product');
+        Route::get('/user', [UserController::class, 'index'])->name('list.user');
         Route::get('/post', function () {
             return view('admin.list.post');
         })->name('list.post');
-        Route::get('/order', function () {
-            return view('admin.list.order');
-        })->name('list.order');
+        Route::get('/order', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('list.order');
+        Route::get('/order-detail/{orderId}', [\App\Http\Controllers\Admin\OrderDetailController::class, 'index'])->name('list.orderDetail');
+
     });
     Route::prefix('/add')->group(function () {
         Route::get('/product', function () {
             return view('admin.add.product');
-        })->name('add.product');
+        });
+        Route::post('/product', [\App\Http\Controllers\Admin\ProductController::class, 'create'])->name('add.product');
         Route::get('/post', function () {
             return view('admin.add.post');
         })->name('add.post');
         Route::get('/user', function () {
             return view('admin.add.user');
-        })->name('add.user');
+        });
+        Route::post('/user', [UserController::class, 'add'])->name('add.user');
     });
     Route::get('/dashboard', function () {
         return view('admin.dashboard');

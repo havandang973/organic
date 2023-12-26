@@ -23,7 +23,7 @@ class CompleteController extends Controller
 
         $email = $order->email;
 
-//        dd($email);
+//        dd($carts);
         foreach ($carts as $cart) {
             $data = [
                 'order_id' => $order->id,
@@ -32,13 +32,14 @@ class CompleteController extends Controller
                 'amount' => $cart->price,
                 'total' => $cart->qty * $cart->price,
             ];
+
+            OrderDetail::query()->create($data);
         }
 
-        OrderDetail::query()->create($data);
+//        OrderDetail::query()->create($data);
+        Mail::to($email)->send(new OrderShipped());
 
         Cart::destroy();
-
-        Mail::to($email)->send(new OrderShipped());
 
         return redirect()->route('complete');
     }

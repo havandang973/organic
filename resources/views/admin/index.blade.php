@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Admin @yield('title')</title>
 
     <!-- Fonts -->
+    <link rel="icon" type="image/x-icon" href="https://thumbs.dreamstime.com/b/selo-textured-riscado-do-admin-com-fita-133881274.jpg">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -17,8 +18,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/solid.min.css">
     <!-- Scripts -->
-    @vite(['resources/css/style.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Place the first <script> tag in your HTML's <head> -->
+    <script src="https://cdn.tiny.cloud/1/xzg54i4713kryp53dkt9k9y7xci6nw373kqwn0ennlq45qth/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+            ],
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+        });
+    </script>
 </head>
 
 <body>
@@ -42,7 +62,7 @@
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
                             <x-dropdown align="right" width="48">
                                 <x-slot name="trigger">
-                                    <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 rounded-md text-white dark:text-gray-400 dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                                    <button class="inline-flex items-center px-3 py-2 text-sm leading-4 hover:text-gray-700 transition ease-in-out focus:outline-none">
                                         <div>{{ Auth::user()->name }}</div>
 
                                         <div class="ms-1">
@@ -54,15 +74,11 @@
                                 </x-slot>
 
                                 <x-slot name="content">
-                                    <x-dropdown-link :href="route('profile.edit')">
-                                        {{ __('Profile') }}
-                                    </x-dropdown-link>
-
                                     <!-- Authentication -->
-                                    <form method="POST" action="{{ route('logout') }}">
+                                    <form method="POST" action="{{ route('admin.logout') }}">
                                         @csrf
 
-                                        <x-dropdown-link :href="route('logout')"
+                                        <x-dropdown-link :href="route('admin.logout')"
                                                          onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                             {{ __('Log Out') }}
@@ -96,15 +112,15 @@
                                 </div>
 
                                 <div class="mt-3 space-y-1">
-                                    <x-responsive-nav-link :href="route('profile.edit')">
-                                        {{ __('Profile') }}
-                                    </x-responsive-nav-link>
+{{--                                    <x-responsive-nav-link :href="route('profile.edit')">--}}
+{{--                                        {{ __('Profile') }}--}}
+{{--                                    </x-responsive-nav-link>--}}
 
                                     <!-- Authentication -->
-                                    <form method="POST" action="{{ route('logout') }}">
+                                    <form method="POST" action="{{ route('admin.logout') }}">
                                         @csrf
 
-                                        <x-responsive-nav-link :href="route('logout')"
+                                        <x-responsive-nav-link :href="route('admin.logout')"
                                                                onclick="event.preventDefault();
                                         this.closest('form').submit();">
                                             {{ __('Log Out') }}
@@ -117,7 +133,7 @@
                         @if (Route::has('login'))
                             <div class="flex items-center">
                                 <div class="border-r pr-4">
-                                    <a href="{{ route('login') }}" class="text-black hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Đăng nhập</a>
+                                    <a href="{{ route('admin.login') }}" class="text-black hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Đăng nhập</a>
                                 </div>
                                 @endif
                     @endif
@@ -137,7 +153,7 @@
                         </a>
                         <i class="arrow fas fa-angle-right"></i>
                     </li>
-                    <li class="nav-link">
+                    <li class="nav-link active">
                         <a href="{{route('list.post')}}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="far fa-folder"></i>
@@ -151,7 +167,7 @@
                             <li><a href="{{route('list.post')}}">Danh sách</a></li>
                         </ul>
                     </li>
-                    <li class="nav-link">
+                    <li class="nav-link active">
                         <a href="{{route('list.post')}}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="far fa-folder"></i>
@@ -165,7 +181,7 @@
                             <li><a href="{{route('admin.cat')}}">Danh mục</a></li>
                         </ul>
                     </li>
-                    <li class="nav-link">
+                    <li class="nav-link active">
                         <a href="{{route('list.product')}}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="far fa-folder"></i>
@@ -179,7 +195,7 @@
                             <li><a href="{{route('admin.catProduct')}}">Danh mục</a></li>
                         </ul>
                     </li>
-                    <li class="nav-link">
+                    <li class="nav-link active">
                         <a href="{{route('list.order')}}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="far fa-folder"></i>
@@ -191,7 +207,7 @@
                             <li><a href="{{route('list.order')}}">Đơn hàng</a></li>
                         </ul>
                     </li>
-                    <li class="nav-link">
+                    <li class="nav-link active">
                         <a href="{{route('list.user')}}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="far fa-folder"></i>
@@ -202,7 +218,7 @@
 
                         <ul class="sub-menu">
                             <li><a href="{{route('add.user')}}">Thêm mới</a></li>
-                            <li><a href="{{route('list.order')}}">Danh sách</a></li>
+                            <li><a href="{{route('list.user')}}">Danh sách</a></li>
                         </ul>
                     </li>
 

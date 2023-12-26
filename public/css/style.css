@@ -108,7 +108,7 @@ ul#sidebar-menu * {
     padding-left: 22px;
     border-left: 1px dashed #b8b8b8;
     margin-left: 6px;
-    display: none;
+    /*display: none;*/
 }
 
 #sidebar-menu .sub-menu li a {
