@@ -26,5 +26,13 @@ class CartService
         ]);
     }
 
+    public function deleteProduct($rowId)
+    {
+        return Cart::remove($rowId);
+    }
 
+    public function updateProduct($rowId, $value)
+    {
+        return Cart::update($rowId, $value);
+    }
 }
