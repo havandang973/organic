@@ -30,12 +30,12 @@ function updateCartItems(cartContent, total) {
         var cartItemHTML = `
             <div class="cart-item w-full flex mt-5 text-sm">
                 <div class="w-1/3">
-                    <a href="${product.options.thumbnail}" class="">
+                    <a href="/products/${product.id}" class="">
                         <img src="${product.options.thumbnail}" alt="" class="">
                     </a>
                 </div>
                 <div class="w-1/2 space-y-2 ml-3">
-                    <a href="${product.options.thumbnail}" class="">
+                    <a href="/products/${product.id}" class="">
                         <div class="text-blue-500 font-bold">${product.options.discount}đ
                             <span class="mx-2 text-gray-400 line-through">${product.price}₫</span>
                         </div>
