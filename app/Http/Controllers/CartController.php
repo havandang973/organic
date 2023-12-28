@@ -41,7 +41,7 @@ class CartController extends Controller
         foreach ($data as $rowId=>$value) {
             (new CartService())->updateProduct($rowId, $value);
         }
-        return response()->json(['cartCount' => Cart::count()]);
+        return response()->json(['cartCount' => Cart::count(), 'total' => Cart::total()]);
 
 
     }

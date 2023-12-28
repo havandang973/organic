@@ -9,9 +9,11 @@ updateCart.forEach(function (btn) {
             .then(function (response) {
                 document.getElementById('cartItemCount').innerText = response.data.cartCount;
                 alert('Cập nhật giỏ hàng thành công');
+                updateTotal(response.data.total)
             })
             .catch(function (error) {
                 console.log(error);
             });
     });
 });
+

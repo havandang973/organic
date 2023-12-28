@@ -9,7 +9,8 @@ removeCart.forEach(function (btn) {
                 document.getElementById('cartItemCount').innerText = response.data.cartCount;
                 alert('Xóa sản phẩm khỏi giỏ hàng thành công');
                 btn.closest('.cart-item').remove();
-                updateCart(response.data.total)
+                updateTotal(response.data.total)
+
                 if(response.data.total == 0) {
                     document.getElementById('total').remove();
                     document.querySelector('.updateCart').remove()
@@ -21,7 +22,7 @@ removeCart.forEach(function (btn) {
     });
 });
 
-function updateCart(total) {
+function updateTotal(total) {
     var itemTotal = document.getElementsByClassName('total');
 
     Array.from(itemTotal).forEach(function(e) {

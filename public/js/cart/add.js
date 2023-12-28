@@ -9,6 +9,7 @@ addToCartBtns.forEach(function(btn) {
                 if(response.data.cartCount) {
                     alert('Thêm sản phẩm vào giỏ hàng thành công');
                     updateCartItems(response.data.cartContent, response.data.total);
+                    updateTotal(response.data.total)
                 }
             })
             .catch(function (error) {
@@ -20,13 +21,8 @@ addToCartBtns.forEach(function(btn) {
 
 function updateCartItems(cartContent, total) {
     var cartItemsContainer = document.getElementById('cartItemsContainer');
-    var itemTotal = document.getElementsByClassName('total');
 
     cartItemsContainer.innerHTML = '';
-
-    Array.from(itemTotal).forEach(function(e) {
-        e.innerText = total;
-    });
 
     for (var rowId in cartContent) {
         var product = cartContent[rowId];
