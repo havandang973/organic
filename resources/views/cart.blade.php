@@ -119,14 +119,14 @@
                                     </div>
                                 @endforeach
                             </div>
-                            <div class="space-y-5 mt-4">
+                            <div id="total" class="space-y-5 mt-4">
                                 <div class="flex justify-between">
                                     <span class="text-black font-semibold">Tổng cộng: </span>
-                                    <span class="font-bold">{{Cart::total()}} đ</span>
+                                    <span class="total font-bold">{{Cart::total()}} đ</span>
                                 </div>
                                 <div class="flex justify-between ">
                                     <span class="text-black font-semibold">Thành tiền: </span>
-                                    <span class="text-blue-500 font-bold">{{Cart::total()}} đ</span>
+                                    <span class="total text-blue-500 font-bold">{{Cart::total()}} đ</span>
                                 </div>
                             </div>
                         @else

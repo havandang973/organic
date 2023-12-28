@@ -31,7 +31,7 @@ class CartController extends Controller
     public function delete($rowId)
     {
         (new CartService())->deleteProduct($rowId);
-        return response()->json(['cartCount' => Cart::count()]);
+        return response()->json(['cartCount' => Cart::count(), 'total' => Cart::total()]);
     }
 
     public function update(Request $request)
