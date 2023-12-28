@@ -38,13 +38,13 @@ class CartController extends Controller
     {
         $data = $request->input('qty');
 
+        $request->validate([
+            'qty.*' => 'numeric|min:1',
+        ]);
+
         foreach ($data as $rowId=>$value) {
             (new CartService())->updateProduct($rowId, $value);
         }
         return response()->json(['cartCount' => Cart::count(), 'total' => Cart::total()]);
-
-
     }
-
-
 }

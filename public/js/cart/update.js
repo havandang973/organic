@@ -10,9 +10,11 @@ updateCart.forEach(function (btn) {
                 document.getElementById('cartItemCount').innerText = response.data.cartCount;
                 alert('Cập nhật giỏ hàng thành công');
                 updateTotal(response.data.total)
+                document.getElementById('error-item').classList.add('hidden');
             })
             .catch(function (error) {
-                console.log(error);
+                document.getElementById('error-item').classList.remove('hidden');
+                document.getElementById('error').innerText = "Số lượng sản phẩm phải lớn hơn 0";
             });
     });
 });
