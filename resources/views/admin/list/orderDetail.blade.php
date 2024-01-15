@@ -77,7 +77,7 @@
                 }
             ?>
             <div class="flex justify-between items-center m-3 mb-2 p-1">
-                <a href="{{route('list.order')}}" class="text-xs uppercase font-semibold rounded-md border border-transparent text-white px-6 py-2 bg-red-500">Thoát</a>
+                <a href="{{url()->previous()}}" class="text-xs uppercase font-semibold rounded-md border border-transparent text-white px-6 py-2 bg-red-500">Thoát</a>
 
                 <div class="order-calculations">
                     <div class="d-flex justify-content-between mb-2">

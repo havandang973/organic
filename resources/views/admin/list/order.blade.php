@@ -15,13 +15,13 @@
                         <th scope="col">Địa chỉ</th>
                         <th scope="col">Email</th>
                         <th scope="col">Số điện thoại</th>
-{{--                        <th scope="col">Trạng thái</th>--}}
+                        <th scope="col">Trạng thái</th>
                         <th scope="col">Thời gian</th>
                         <th scope="col">Tác vụ</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <?php $t = ($orders->currentPage() - 1) * $orders->perPage() + 1; ?>
+                    <?php use App\Enums\Status; $t = ($orders->currentPage() - 1) * $orders->perPage() + 1; ?>
                     @foreach($orders as $order)
                         <tr>
                             <th scope="row">{{$t++}}</th>
@@ -29,6 +29,22 @@
                             <td>{{$order->address}}</td>
                             <td>{{$order->email}}</td>
                             <td>{{$order->phone}}</td>
+                            <td>
+                                <form method="POST" action="{{route('edit.status', $order->id)}}" class="">
+                                    @csrf
+                                    <select class="form-control status" data-order-id="{{ $order->id }}" name="status">
+                                        <option value="{{ Status::PENDING }}" {{ $order->status === Status::PENDING ? 'selected' : '' }}>
+                                            {{ Status::PENDING }}
+                                        </option>
+                                        <option value="{{ Status::CANCELED }}" {{ $order->status === Status::CANCELED ? 'selected' : '' }}>
+                                            {{ Status::CANCELED }}
+                                        </option>
+                                        <option value="{{ Status::COMPLETED }}" {{ $order->status === Status::COMPLETED ? 'selected' : '' }}>
+                                            {{ Status::COMPLETED }}
+                                        </option>
+                                    </select>
+                                </form>
+                            </td>
 {{--                            <td><span class="badge badge-warning">Đang xử lý</span></td>--}}
                             <td>{{$order->created_at}}</td>
                             <td>
@@ -62,4 +78,6 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('js/status.js') }}"></script>
+
 @endsection

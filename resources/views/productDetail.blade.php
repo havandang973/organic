@@ -152,5 +152,5 @@
         <div class=""></div>
         <div class=""></div>
     </div>
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/cart/add.js') }}"></script>
 </x-app-layout>

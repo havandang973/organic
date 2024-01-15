@@ -57,6 +57,7 @@ Route::prefix('admin')->middleware('CheckRole:ADMIN')->group(function () {
         Route::post('/user/{name}', [UserController::class, 'edit'])->name('edit.user');
         Route::get('/product/{name}', [\App\Http\Controllers\Admin\ProductController::class, 'index_edit']);
         Route::post('/product/{name}', [\App\Http\Controllers\Admin\ProductController::class, 'edit'])->name('edit.product');
+        Route::post('/status/{orderId}', [\App\Http\Controllers\Admin\OrderController::class, 'edit'])->name('edit.status');
     });
     Route::prefix('/delete')->group(function () {
         Route::get('/user/{name}', [UserController::class, 'index_delete']);
@@ -87,9 +88,8 @@ Route::prefix('admin')->middleware('CheckRole:ADMIN')->group(function () {
         });
         Route::post('/user', [UserController::class, 'add'])->name('add.user');
     });
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+
+    Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
 
     Route::get('/cat', function () {
         return view('admin.cat');
