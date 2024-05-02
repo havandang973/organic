@@ -24,6 +24,12 @@ class User extends Authenticatable
         'role'
     ];
 
+    const ROLE = array(
+        'CUSTOMER' => 'CUSTOMER',
+        'ADMIN' => 'ADMIN',
+        'MANAGER' => 'MANAGER'
+    );
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -43,4 +49,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function address() {
+        return $this->hasMany(Address::class, "user_id", "id");
+    }
 }

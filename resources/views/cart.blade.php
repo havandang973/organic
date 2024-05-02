@@ -29,6 +29,27 @@
                         <div id="btn_address" class="w-full text-center h-full py-4 cursor-pointer">ĐỊA CHỈ GIAO HÀNG</div>
                         {{--                        <div id="btn_login" class="bg-gray-300 text-black hover:bg-white w-full h-full text-center py-4 cursor-pointer">ĐĂNG NHẬP</div>--}}
                     </div>
+                    <div class="w-full px-9">
+                        <div class="w-full grid grid-cols-3 gap-4">
+                            @foreach($addresses as $address)
+                                <div class="address hover:bg-sky-100 w-full bg-gray-100 rounded-lg space-y-2 px-5 py-3 cursor-pointer" onclick="showAddressInfo(this)">
+                                    <span class="email text-sm hidden">{{auth()->user()->email}}</span>
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fa-regular fa-user"></i>
+                                        <span class="name text-sm">{{$address->name}}</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span class="address-detail text-sm">{{$address->address}}</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-phone-volume"></i>
+                                        <span class="telephone text-sm">{{$address->telephone}}</span>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
                     <div id="address" class="w-full px-9">
                         <form action="/orders" method="POST" class="space-y-6 flex justify-center flex-wrap mt-10">
                             @csrf
@@ -60,16 +81,19 @@
                                     <span class="error text-red-600">{{ $errors->first('phone') }}</span>
                                 @endif
                             </div>
-{{--                            <div class="w-full flex-col space-y-6">--}}
-{{--                                <input value="{{ old('payment_methods') }}" name="payment_methods" type="text" class="w-full px-3 py-2 outline-none border" placeholder="Phương thức thanh toán">--}}
-{{--                                --}}{{--                                <input type="text" class="w-full px-3 py-2 outline-none border" placeholder="Ghi chú">--}}
-{{--                                @if ($errors->has('payment_methods'))--}}
-{{--                                    <span class="error text-red-600">{{ $errors->first('payment_methods') }}</span>--}}
-{{--                                @endif--}}
-{{--                            </div>--}}
-                            <div class="">
-                                <button type="submit" class="bg-blue-600 p-3 px-5 rounded text-white font-normal">Tiếp tục thanh toán <i class="fa-solid fa-arrow-right"></i></button>
-                            </div>
+                            {{--                            <div class="w-full flex-col space-y-6">--}}
+                            {{--                                <input value="{{ old('payment_methods') }}" name="payment_methods" type="text" class="w-full px-3 py-2 outline-none border" placeholder="Phương thức thanh toán">--}}
+                            {{--                                --}}{{--                                <input type="text" class="w-full px-3 py-2 outline-none border" placeholder="Ghi chú">--}}
+                            {{--                                @if ($errors->has('payment_methods'))--}}
+                            {{--                                    <span class="error text-red-600">{{ $errors->first('payment_methods') }}</span>--}}
+                            {{--                                @endif--}}
+                            {{--                            </div>--}}
+
+                            @if(Cart::count())
+                                <div class="">
+                                    <button type="submit" class="bg-blue-600 p-3 px-5 rounded text-white font-normal">Tiếp tục thanh toán <i class="fa-solid fa-arrow-right"></i></button>
+                                </div>
+                            @endif
                         </form>
                     </div>
                     <div id="login" class="hide w-full px-9">
@@ -161,4 +185,5 @@
     <script src="{{ asset('js/cart/add.js') }}"></script>
     <script src="{{ asset('js/cart/update.js') }}"></script>
     <script src="{{ asset('js/cart/delete.js') }}"></script>
+    <script src="{{ asset('js/address.js') }}"></script>
 </x-app-layout>

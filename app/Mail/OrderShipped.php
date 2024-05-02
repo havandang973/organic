@@ -2,6 +2,8 @@
 
 namespace App\Mail;
 
+use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -17,9 +19,10 @@ class OrderShipped extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($products, $order)
     {
-        //
+        $this->products = $products;
+        $this->order = $order;
     }
 
     /**
@@ -40,6 +43,11 @@ class OrderShipped extends Mailable
     {
         return new Content(
             view: 'email.ordership',
+            with: [
+                'name' => auth()->user()->name,
+                'products' => $this->products,
+                'order' => $this->order
+            ]
         );
     }
 

@@ -31,7 +31,9 @@
                             <td>{{$user->created_at}}</td>
                             <td>
                                 <a href="{{route('edit.user', $user->name)}}" class="btn bg-green-600 btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
-                                <a href="{{route('delete.user', $user->name)}}" class="btn bg-red-600 btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
+                                @if($user->id !== auth()->user()->id)
+                                    <a href="{{route('delete.user', $user->name)}}" class="btn bg-red-600 btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

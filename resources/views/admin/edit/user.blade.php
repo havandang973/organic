@@ -19,11 +19,15 @@
                         <input class="form-control" type="text" name="email" id="email" value="{{$user->email}}">
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
+
                     <div class="form-group">
                         <label for="">Nhóm quyền</label>
                         <select class="form-control" id="" name="role">
-                            <option>{{ $user->role }}</option>
-                            <option>{{ $user->role === 'CUSTOMER' ? 'ADMIN' : 'CUSTOMER' }}
+                            @foreach(\App\Models\User::ROLE as $role)
+                                <option value="{{ $role }}" {{ $user->role === $role ? 'selected' : '' }}>
+                                    {{ $role }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
 

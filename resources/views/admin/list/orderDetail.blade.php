@@ -20,7 +20,8 @@
                             <div class="d-flex justify-content-start align-items-center text-nowrap">
                                 <div class="avatar-wrapper">
                                     <div class="avatar me-2">
-                                        <img src="{{asset($order_detail->product->thumbnail)}}" alt="" class="rounded-2 w-20"></div>
+                                        <img src="{{asset($order_detail->product->thumbnail)}}" alt="" class="rounded-2 w-20">
+                                    </div>
                                 </div>
                                 <div class="d-flex flex-column"><h6 class="text-body mb-0">{{$order_detail->product->name}}</h6><small
                                         class="text-muted">{{$order_detail->product->name}}</small></div>

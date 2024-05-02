@@ -42,6 +42,9 @@
                                         <option value="{{ Status::COMPLETED }}" {{ $order->status === Status::COMPLETED ? 'selected' : '' }}>
                                             {{ Status::COMPLETED }}
                                         </option>
+                                        <option value="{{ Status::DELIVERY }}" {{ $order->status === Status::DELIVERY ? 'selected' : '' }}>
+                                            {{ Status::DELIVERY }}
+                                        </option>
                                     </select>
                                 </form>
                             </td>

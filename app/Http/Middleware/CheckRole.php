@@ -18,10 +18,10 @@ class CheckRole
     public function handle(Request $request, Closure $next, $role): Response
     {
         if(Auth::check()) {
-            if(Auth::user()->role == $role) {
-                return $next($request);
+            if(Auth::user()->role === $role) {
+                return redirect()->route('admin.login')->withErrors(['email' => 'Bạn không có quyền truy cập.']);
             }
         }
-        return redirect()->route('admin.login')->withErrors(['email' => 'Bạn không có quyền truy cập.']);
+        return $next($request);
     }
 }

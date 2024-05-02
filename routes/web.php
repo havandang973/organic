@@ -8,7 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CompleteController;
 use \App\Http\Controllers\Admin\UserController;
 use \App\Http\Controllers\OrderEmailController;
-
+use App\Http\Controllers\AddressController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,9 +38,7 @@ Route::get('/products/{id}', [ProductController::class, 'find'])->name('productD
 //Route::post('/carts', [CartController::class, 'store']);
 
 Route::post('/cart/add/{id}',  [CartController::class, 'add'])->name('add');
-Route::get('/cart', function () {
-    return view('cart');
-});
+Route::get('/cart', [CartController::class, 'index']);
 
 Route::get('/carts/delete/{rowId}', [CartController::class, 'delete'])->name('remove');
 Route::post('/carts/update',  [CartController::class, 'update'])->name('update');
@@ -51,7 +49,11 @@ Route::post('/orders',  [OrderController::class, 'store']);
 Route::get('/completes', [CompleteController::class, 'index'])->name('complete');
 Route::post('/completes', [CompleteController::class, 'store']);
 
-Route::prefix('admin')->middleware('CheckRole:ADMIN')->group(function () {
+Route::get('/address', [AddressController::class, 'index'])->name('address');
+Route::post('/address', [AddressController::class, 'store']);
+Route::get('/address/delete/{id}', [AddressController::class, 'delete'])->name('delete.address');
+
+Route::prefix('admin')->middleware(['CheckRole:CUSTOMER', 'AuthAdmin'])->group(function () {
     Route::prefix('/edit')->group(function () {
         Route::get('/user/{name}', [UserController::class, 'index_edit']);
         Route::post('/user/{name}', [UserController::class, 'edit'])->name('edit.user');

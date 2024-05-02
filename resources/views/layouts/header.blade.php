@@ -1,7 +1,7 @@
 <div class="w-full h-auto">
     <div class="">
         <div class="w-full bg-lime-500 py-1 text-white">
-            <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="max-w-7xl px-10 mx-auto flex justify-between items-center">
                 <div class="">
                     <p>FREE SHIPPING ON EVERY DEMESTIC ORDER OF $40 OR MORE!</p>
                 </div>
@@ -98,17 +98,17 @@
                 @endif
             </div>
         </div>
-        <div class="max-w-6xl mx-auto flex justify-between items-center my-8">
-            <div class="">
+        <div class="max-w-7xl px-10 mx-auto grid grid-cols-3 items-center my-8 space-x-6">
+            <div class="col-span-1">
                 <img src="https://food-03.web4s.vn/uploads/plugin/setting/3/1566437894-1150892441-organic.png" alt="">
             </div>
-            <div class="border-4 border-double p-4 text-center">
+            <div class="w-fit border-4 border-double p-4 text-center col-span-1">
                 <h5 class="font-medium">New Daily Holiday Deals</h5>
                 <h6 class="text-gray-500">24 Hours Only - Ends Midnight!</h6>
                 <h6 class="text-gray-500">No Promo code Required</h6>
             </div>
-            <div class="space-y-3">
-                <div class="flex space-x-3">
+            <div class="space-y-3 col-span-1">
+                <div class="flex justify-between flex-wrap">
                     <div class="flex items-center space-x-1">
                         <span class="text-lime-500"><i class="fa-solid fa-phone"></i></span>
                         <span class="">(+84)1234-5678</span>
@@ -118,18 +118,18 @@
                         <span class="">contact@yourdomain.com</span>
                     </div>
                 </div>
-                <div class="flex items-center">
-                    <input class="outline-none bg-gray-200 py-2 px-4 w-11/12" type="text" placeholder="Từ khóa tìm kiếm">
-                    <div class="bg-lime-400">
+                <div class="grid grid-cols-12 items-center">
+                    <input class="outline-none border-none bg-gray-200 py-2 px-4 col-span-10" type="text" placeholder="Từ khóa tìm kiếm">
+                    <div class="bg-lime-400 col-span-2 justify-content-center items-center">
                         <button type="submit" class="py-2 px-4"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="border-t">
-            <div class="max-w-6xl mx-auto flex justify-between items-center py-3">
+            <div class="max-w-7xl px-10 mx-auto flex justify-between items-center py-3">
                 <div class="">
-                    <ul class="flex space-x-10">
+                    <ul class="flex space-x-10 text-gray-600 font-semibold">
                         <li class="hover:text-lime-500"><a href="/">TRANG CHỦ</a></li>
                         <li class="hover:text-lime-500"><a href="#">CỬA HÀNG</a></li>
                         <li class="hover:text-lime-500"><a href="#">TIN TỨC</a></li>
@@ -138,6 +138,7 @@
                     </ul>
                 </div>
                 <div class="space-x-6 text-xl flex relative">
+                    <a href="{{route('address')}}"><i class="fa-solid fa-house"></i></a>
                     <a href="#" class=""><i class="fa-solid fa-code-compare"></i></a>
                     <div class="group">
                         <a href="/cart" class="">

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function index() {
-        $products = Product::paginate(5);
+        $products = Product::query()->latest('created_at')->paginate(5);
         return view('admin.list.product', compact('products'));
     }
 
