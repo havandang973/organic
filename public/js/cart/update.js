@@ -14,7 +14,7 @@ updateCart.forEach(function (btn) {
             })
             .catch(function (error) {
                 document.getElementById('error-item').classList.remove('hidden');
-                document.getElementById('error').innerText = "Số lượng sản phẩm phải lớn hơn 0";
+                document.getElementById('error').innerText = "Số lượng sản phẩm không hợp lệ";
             });
     });
 });

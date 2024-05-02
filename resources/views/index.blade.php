@@ -108,7 +108,7 @@
                                         <div class="flex space-x-3">
                                             <a href="{{route('productDetail', ['id' => $product->id])}}" class="py-2 px-3 text-white block border hover:border-lime-500 hover:bg-lime-500 border-white transition-all cursor-pointer"><i class="fa-solid fa-eye"></i></a>
                                             <a href="" class="py-2 px-3 text-white block border hover:border-lime-500 hover:bg-lime-500 border-white transition-all cursor-pointer"><i class="fa-solid fa-code-compare"></i></a>
-                                            <a href="" class="py-2 px-3 text-white block border hover:border-lime-500 hover:bg-lime-500 border-white transition-all cursor-pointer"><i class="fa-solid fa-cart-shopping"></i></a>
+                                            <a href="/cart" class="py-2 px-3 text-white block border hover:border-lime-500 hover:bg-lime-500 border-white transition-all cursor-pointer"><i class="fa-solid fa-cart-shopping"></i></a>
                                         </div>
                                         <form action="{{route('add', $product->id)}}" method="POST" class="addToCartForm justify-between text-white text-center border hover:border-lime-500 hover:bg-lime-500 border-white transition-all cursor-pointer">
                                             @csrf

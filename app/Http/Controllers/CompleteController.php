@@ -36,8 +36,9 @@ class CompleteController extends Controller
             OrderDetail::query()->create($data);
         }
 
+        $products = OrderDetail::query()->where('order_id', $data['order_id'])->get();
 //        OrderDetail::query()->create($data);
-        Mail::to($email)->send(new OrderShipped());
+        Mail::to($email)->send(new OrderShipped($products, $order));
 
         Cart::destroy();
 

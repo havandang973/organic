@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 //use App\Models\Cart;
 use App\Models\Product;
+use App\Repositories\AddressRepository;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,13 +13,25 @@ use App\Services\CartService;
 class CartController extends Controller
 {
 
-    public function __construct(ProductRepository $productRepo)
+    public function __construct(ProductRepository $productRepo, AddressRepository $addressRepo)
     {
         $this->productRepo = $productRepo;
+        $this->addressRepo = $addressRepo;
+    }
+
+    public function index() {
+        $id = Auth::user()->id;
+        $addresses = $this->addressRepo->getAllAddressByUserId($id);
+
+        return view('cart', compact('addresses'));
     }
 
     public function add(Request $request, $id)
     {
+        $request->validate([
+            'amount' => ['required', 'min:1', 'numeric', 'max:20'],
+        ]);
+
         $amount = $request->input('amount');
 
         $product = $this->productRepo->getProductById($id);
@@ -39,7 +52,7 @@ class CartController extends Controller
         $data = $request->input('qty');
 
         $request->validate([
-            'qty.*' => 'numeric|min:1',
+            'qty.*' => 'numeric|min:1|max:20',
         ]);
 
         foreach ($data as $rowId=>$value) {

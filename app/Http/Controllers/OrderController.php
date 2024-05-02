@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
-
+use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Services\CartService;
 class OrderController extends Controller
 {
     public function index() {
@@ -20,7 +21,6 @@ class OrderController extends Controller
         ]);
 
         $data = $request->all();
-
 //        Order::query()->create($data);
         return view('order', compact('data'));
     }

@@ -75,6 +75,8 @@
                                             bg-red-500
                                         @elseif($order->status === Status::COMPLETED)
                                             bg-green-500
+                                        @elseif($order->status === Status::DELIVERY)
+                                            bg-blue-500
                                         @else
                                             bg-yellow-500
                                         @endif">{{$order->status}}

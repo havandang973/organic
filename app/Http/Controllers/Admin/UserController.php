@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -69,5 +68,4 @@ class UserController extends Controller
         toastr()->success('Xóa User thành công', ['timeOut' => 2000]);
         return redirect()->route('list.user');
     }
-
 }
