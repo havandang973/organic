@@ -19,9 +19,7 @@ class AuthAdmin
     {
 
         if(Auth::check()) {
-//            if(Auth::user()->role == 'ADMIN') {
                 return $next($request);
-//            }
         }
 
         return redirect()->route('admin.login');

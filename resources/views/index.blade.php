@@ -80,7 +80,9 @@
                         @foreach($products as $product)
                             <div class="w-fit border border-gray-300 relative group py-4">
                                 <div class="w-fit absolute z-50 top-0 left-0">
-                                    @if($product->discount != 0)
+                                    @if($product->max_amount === 0)
+                                        <div class="px-4 py-1 bg-rose-600 text-white text-sm rounded-md mt-4 ml-4">Hết hàng</div>
+                                    @elseif($product->discount != 0)
                                         <div class="px-4 py-1 bg-lime-500 text-white text-sm rounded-md mt-4 ml-4">{{$product->discount}}%</div>
                                     @endif
                                 </div>

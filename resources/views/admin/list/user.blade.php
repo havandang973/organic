@@ -10,6 +10,7 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
+                        <th>Chọn <input type="checkbox" id="check-all" class=""></th>
                         <th scope="col">STT</th>
                         <th scope="col">Họ tên</th>
                         <th scope="col">Username</th>
@@ -23,6 +24,7 @@
                     <?php $t = ($users->currentPage() - 1) * $users->perPage() + 1; ?>
                     @foreach($users as $user)
                         <tr>
+                            <td><input type="checkbox" value="{{$user->name}}"></td>
                             <th scope="row">{{$t++}}</th>
                             <td>{{$user->name}}</td>
                             <td>{{$user->name}}</td>
@@ -60,4 +62,5 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('js/user/index.js') }}"></script>
 @endsection

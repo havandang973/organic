@@ -16,7 +16,7 @@
                     <div id="address" class="w-full px-9">
                         <div class="w-full grid grid-cols-4 gap-4">
                             @foreach($addresses as $address)
-                                <div class="w-full flex flex-col bg-gray-100 rounded-lg space-y-2 p-5 relative">
+                                <div class="w-full flex flex-col bg-white border-2 border-gray-200 rounded-lg cursor-pointer space-y-2 p-5 relative">
                                     <a class="mx-5 px-2 right-0 cursor-pointer block absolute rounded-lg border border-gray-600 hover:bg-gray-300" href="{{route('delete.address', $address->id)}}"><i class="text-xs block fa-solid fa-xmark"></i></a>
                                     <div class="flex items-center space-x-1">
                                         <i class="fa-regular fa-user"></i>

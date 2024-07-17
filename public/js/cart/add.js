@@ -1,4 +1,7 @@
+
 var addToCartBtns = document.querySelectorAll('.addToCartBtn')
+var addToCartForm = document.querySelector('.addToCartForm')
+
 addToCartBtns.forEach(function(btn) {
     btn.addEventListener('click', function () {
         var formData = new FormData(btn.closest('.addToCartForm'));
@@ -6,22 +9,24 @@ addToCartBtns.forEach(function(btn) {
         axios.post(btn.closest('.addToCartForm').action, formData)
             .then(function (response) {
                 document.getElementById('cartItemCount').innerText = response.data.cartCount;
+
                 if(response.data.cartCount) {
-                    alert('Thêm sản phẩm vào giỏ hàng thành công');
-                    updateCartItems(response.data.cartContent, response.data.total);
+                    // alert('Thêm sản phẩm vào giỏ hàng thành công');
+                    showNotification('Thêm sản phẩm vào giỏ hàng thành công');
+                    updateCartItems(response.data.cartContent);
                     updateTotal(response.data.total)
                 }
             })
             .catch(function (error) {
+                addToCartForm.innerHTML += `<span class="text-red-600">${error.response.data.message}</span>`;
                 console.error('Lỗi thêm sản phẩm vào giỏ hàng:', error);
             });
     });
 });
 
 
-function updateCartItems(cartContent, total) {
+function updateCartItems(cartContent) {
     var cartItemsContainer = document.getElementById('cartItemsContainer');
-
     cartItemsContainer.innerHTML = '';
 
     for (var rowId in cartContent) {
@@ -50,6 +55,5 @@ function updateCartItems(cartContent, total) {
         cartItemsContainer.innerHTML += cartItemHTML;
     }
 }
-
 
 

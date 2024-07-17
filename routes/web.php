@@ -25,6 +25,7 @@ use App\Http\Controllers\AddressController;
 //    return view('index');
 //});
 
+Route::get('/deletes}', [UserController::class, 'deletes']);
 
 Route::get('/header', function () {
     return view('layouts.header');

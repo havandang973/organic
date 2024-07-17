@@ -32,7 +32,7 @@
                     <div class="w-full px-9">
                         <div class="w-full grid grid-cols-3 gap-4">
                             @foreach($addresses as $address)
-                                <div class="address hover:bg-sky-100 w-full bg-gray-100 rounded-lg space-y-2 px-5 py-3 cursor-pointer" onclick="showAddressInfo(this)">
+                                <div class="address hover:bg-sky-100 w-full bg-white border-2 border-gray-200 rounded-lg cursor-pointer space-y-2 px-5 py-3 cursor-pointer" onclick="showAddressInfo(this)">
                                     <span class="email text-sm hidden">{{auth()->user()->email}}</span>
                                     <div class="flex items-center space-x-2">
                                         <i class="fa-regular fa-user"></i>

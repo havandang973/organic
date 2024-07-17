@@ -182,7 +182,7 @@
                                                         </div>
 {{--                                                        <div class="ml-3 cursor-pointer"><a data-row-id="{{$row->rowId}}" class="removeCart text-danger"><i class="fa-solid fa-xmark"></i></a></div>--}}
                                                     </div>
-                                                @endforeach
+                                                    @endforeach
                                             </div>
                                             <div class="space-y-5 mt-4 text-base">
                                                 <div class="flex justify-between">

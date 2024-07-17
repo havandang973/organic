@@ -14,8 +14,15 @@
                 <div class="w-4/5">
                     <div class="flex space-x-6">
                         <div class="space-y-6">
-                            <div class="">
+                            <div class="relative">
                                 <img class="w-80 border border-gray-300" src="{{asset($product->thumbnail)}}" alt="">
+                                <div class="w-fit absolute z-50 top-0 left-0">
+                                    @if($product->max_amount === 0)
+                                        <div class="px-4 py-1 bg-rose-600 text-white text-sm rounded-md mt-4 ml-4">Hết hàng</div>
+                                    @elseif($product->discount != 0)
+                                        <div class="px-4 py-1 bg-lime-500 text-white text-sm rounded-md mt-4 ml-4">{{$product->discount}}%</div>
+                                    @endif
+                                </div>
                             </div>
                             <div class="flex space-x-6">
                                 <img class="w-24 block border border-gray-300" src="{{asset($product->thumbnail)}}" alt="">
@@ -54,11 +61,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <form class="addToCartForm" action="{{ route('add', $product->id) }}" method="POST">
+                            <form class="addToCartForm space-y-2" action="{{ route('add', $product->id) }}" method="POST">
                                 @csrf
-                                <input type="number" name="amount" value="1" class="w-20 text-center border outline-none p-2 focus:border-lime-500" placeholder="1" required min="1" max="{{ $product->max_amount }}">
-                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                <button type="button" class="addToCartBtn bg-orange-400 rounded-sm py-2 px-4 text-white">Thêm vào giỏ hàng</button>
+                                <span class="text-gray-500 italic text-sm"><i>Mặt hàng còn <b>{{$product->max_amount}}</b> sản phẩm.</i></span>
+                                <div class="">
+                                    <input type="number" name="amount" value="1" class="w-20 text-center border outline-none p-2 focus:border-lime-500" placeholder="1" required min="1" max="{{ $product->max_amount }}">
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    @if($product->max_amount != 0)
+                                        <button type="button" class="addToCartBtn bg-orange-400 rounded-sm py-2 px-4 text-white">Thêm vào giỏ hàng</button>
+                                    @else
+                                        <button disabled class="bg-rose-500 rounded-sm py-2 px-4 text-white">Hết hàng</button>
+                                    @endif
+                                </div>
                             </form>
                         </div>
                     </div>

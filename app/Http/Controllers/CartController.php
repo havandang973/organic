@@ -20,21 +20,31 @@ class CartController extends Controller
     }
 
     public function index() {
+        if (!Auth::check()) {
+            return view('auth.login');
+        }
+
         $id = Auth::user()->id;
         $addresses = $this->addressRepo->getAllAddressByUserId($id);
-
         return view('cart', compact('addresses'));
     }
 
     public function add(Request $request, $id)
     {
+        $product = $this->productRepo->getProductById($id);
+
+        $messages = [
+            'amount.required' => 'Vui lòng nhập số lượng.',
+            'amount.min' => 'Số lượng nhỏ nhất là 1.',
+            'amount.numeric' => 'Số lượng phải là số.',
+            'amount.max' => 'Số lượng tối đa là :max.'
+        ];
+
         $request->validate([
-            'amount' => ['required', 'min:1', 'numeric', 'max:20'],
-        ]);
+            'amount' => ['required', 'min:1', 'numeric', 'max:' . $product->max_amount],
+        ], $messages);
 
         $amount = $request->input('amount');
-
-        $product = $this->productRepo->getProductById($id);
 
         (new CartService())->addProductCart($product, $amount);
 

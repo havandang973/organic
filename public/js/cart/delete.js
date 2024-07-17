@@ -7,7 +7,7 @@ removeCart.forEach(function (btn) {
         axios.get('/carts/delete/' + rowId) // Use the link as the endpoint
             .then(function (response) {
                 document.getElementById('cartItemCount').innerText = response.data.cartCount;
-                alert('Xóa sản phẩm khỏi giỏ hàng thành công');
+                showNotification('Xóa sản phẩm khỏi giỏ hàng thành công.');
                 btn.closest('.cart-item').remove();
                 updateTotal(response.data.total)
 

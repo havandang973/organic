@@ -1,10 +1,10 @@
 function showAddressInfo(element) {
     var addressElements = document.querySelectorAll('.address');
     addressElements.forEach(function(addrElement) {
-        addrElement.classList.remove('bg-sky-100');
+        addrElement.classList.remove('border-blue-600', 'bg-sky-100');
     });
 
-    element.classList.add('bg-sky-100')
+    element.classList.add('border-blue-600', 'bg-sky-100')
 
     var name = element.querySelector('.name').textContent;
     var address = element.querySelector('.address-detail').textContent;

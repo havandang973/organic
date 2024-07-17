@@ -68,4 +68,12 @@ class UserController extends Controller
         toastr()->success('Xóa User thành công', ['timeOut' => 2000]);
         return redirect()->route('list.user');
     }
+
+    public function deletes(Request $request, $names)
+    {
+        User::query()->where('name', $names)->delete();
+
+        toastr()->success('Xóa tất cả user thành công', ['timeOut' => 2000]);
+        return redirect()->route('list.user');
+    }
 }

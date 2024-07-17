@@ -17,6 +17,6 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "toastr": "^2.1.4"
+        "noty": "^3.2.0-beta-deprecated"
     }
 }
