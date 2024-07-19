@@ -26,8 +26,9 @@ class ProductController extends Controller
 //            $products = Product::all()->random(3);
 
             $product = $this->productRepo->getProductById($id);
-            $products = $this->productRepo->getRandomProduct(3);
+//            $products = $this->productRepo->getRandomProduct(7);
+            $products = $this->productRepo->getAllProduct();
 
-            return view('productDetail', ['product' => $product, 'products' => $products]);
+            return view('product-details', ['product' => $product, 'products' => $products]);
     }
 }

@@ -1,218 +1,65 @@
-<div class="w-full h-auto">
-    <div class="">
-        <div class="w-full bg-lime-500 py-1 text-white">
-            <div class="max-w-7xl px-10 mx-auto flex justify-between items-center">
-                <div class="">
-                    <p>FREE SHIPPING ON EVERY DEMESTIC ORDER OF $40 OR MORE!</p>
-                </div>
-                @if(\Illuminate\Support\Facades\Auth::check())
-                <!-- Settings Dropdown -->
-                <div class="hidden sm:flex sm:items-center sm:ms-6">
-                    <x-dropdown align="right" width="48">
-                        <x-slot name="trigger">
-                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 rounded-md text-white dark:text-gray-400 dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                                <div>{{ Auth::user()->name }}</div>
+<header id="full_nav">
+    <div class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="index.html">
+                    <img src="{{asset('uploads/logo.png')}}" alt="">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="icofont icofont-navigation-menu"></i>
+                </button>
 
-                                <div class="ms-1">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                            </button>
-                        </x-slot>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
 
-                        <x-slot name="content">
-                            <x-dropdown-link :href="route('profile.edit')">
-                                {{ __('Profile') }}
-                            </x-dropdown-link>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#full-about">About</a>
+                        </li>
 
-                            <!-- Authentication -->
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
+                        <li class="nav-item">
+                            <a class="nav-link" href="#product">Product</a>
+                        </li>
 
-                                <x-dropdown-link :href="route('logout')"
-                                                 onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                    {{ __('Log Out') }}
-                                </x-dropdown-link>
-                            </form>
-                        </x-slot>
-                    </x-dropdown>
-                </div>
-                <!-- Hamburger -->
-                <div class="-me-2 flex items-center sm:hidden">
-                    <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out">
-                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                            <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                            <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-                <!-- Responsive Navigation Menu -->
-                <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-                    <div class="pt-2 pb-3 space-y-1">
-                        <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Dashboard') }}
-                        </x-responsive-nav-link>
-                    </div>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#full-testimonial">Testimonial</a>
+                        </li>
 
-                    <!-- Responsive Settings Options -->
-                    <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-                        <div class="px-4">
-                            <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
-                            <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-                        </div>
-
-                        <div class="mt-3 space-y-1">
-                            <x-responsive-nav-link :href="route('profile.edit')">
-                                {{ __('Profile') }}
-                            </x-responsive-nav-link>
-
-                            <!-- Authentication -->
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-
-                                <x-responsive-nav-link :href="route('logout')"
-                                                       onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                                    {{ __('Log Out') }}
-                                </x-responsive-nav-link>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                @else
-                    @if (Route::has('login'))
-                        <div class="flex">
-                            <div class="border-r pr-4">
-                                <a href="{{ route('login') }}" class="text-white hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Đăng nhập</a>
+                        <li class="nav-item dropdown">
+								<span class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown">
+									Pages
+								</span>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="productdetails.html">Product Details</a>
+                                <a class="dropdown-item" href="blog.html">Blog</a>
+                                <a class="dropdown-item" href="blogdetails.html">Blog Details</a>
+                                <a class="dropdown-item" href="404-error.html">404-Error</a>
+                                <a class="dropdown-item" href="cartoverview.html">Cartoverview</a>
+                                <a class="dropdown-item" href="checkout.html">Checkout</a>
                             </div>
-                    @endif
-
-                    @if (Route::has('register'))
-                                <div class="pl-4">
-                                    <a href="{{ route('register') }}" class="text-white hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Đăng kí tài khoản</a>
-                                </div>
-                        </div>
-                    @endif
-                @endif
-            </div>
-        </div>
-        <div class="max-w-7xl px-10 mx-auto grid grid-cols-3 items-center my-8 space-x-6">
-            <div class="col-span-1">
-                <img src="https://food-03.web4s.vn/uploads/plugin/setting/3/1566437894-1150892441-organic.png" alt="">
-            </div>
-            <div class="w-fit border-4 border-double p-4 text-center col-span-1">
-                <h5 class="font-medium">New Daily Holiday Deals</h5>
-                <h6 class="text-gray-500">24 Hours Only - Ends Midnight!</h6>
-                <h6 class="text-gray-500">No Promo code Required</h6>
-            </div>
-            <div class="space-y-3 col-span-1">
-                <div class="flex justify-between flex-wrap">
-                    <div class="flex items-center space-x-1">
-                        <span class="text-lime-500"><i class="fa-solid fa-phone"></i></span>
-                        <span class="">(+84)1234-5678</span>
-                    </div>
-                    <div class="flex items-center space-x-1">
-                        <span class="text-lime-500"><i class="fa-solid fa-envelope"></i></span>
-                        <span class="">contact@yourdomain.com</span>
-                    </div>
-                </div>
-                <div class="grid grid-cols-12 items-center">
-                    <input class="outline-none border-none bg-gray-200 py-2 px-4 col-span-10" type="text" placeholder="Từ khóa tìm kiếm">
-                    <div class="bg-lime-400 col-span-2 justify-content-center items-center">
-                        <button type="submit" class="py-2 px-4"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="border-t">
-            <div class="max-w-7xl px-10 mx-auto flex justify-between items-center py-3">
-                <div class="">
-                    <ul class="flex space-x-10 text-gray-600 font-semibold">
-                        <li class="hover:text-lime-500"><a href="/">TRANG CHỦ</a></li>
-                        <li class="hover:text-lime-500"><a href="#">CỬA HÀNG</a></li>
-                        <li class="hover:text-lime-500"><a href="#">TIN TỨC</a></li>
-                        <li class="hover:text-lime-500"><a href="#">GIỚI THIỆU</a></li>
-                        <li class="hover:text-lime-500"><a href="#">LIÊN HỆ</a></li>
+                        </li>
                     </ul>
-                </div>
-                <div class="space-x-6 text-xl flex relative">
-                    <a href="{{route('address')}}"><i class="fa-solid fa-house"></i></a>
-                    <a href="#" class=""><i class="fa-solid fa-code-compare"></i></a>
-                    <div class="group">
-                        <a href="/cart" class="">
-                            <div class="relative">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                                <div id="cartItemCount" class="absolute -top-2 -right-2 w-5 h-5 text-white text-xs font-semibold rounded-full bg-lime-500 flex justify-center items-center">
-                                    {{{Cart::count()}}}</div>
-                            </div>
-                            @if(!request()->is('cart'))
-                                <div class="hidden group-hover:block w-96 shadow top-7 right-0 absolute z-[1000] bg-white p-4 py-8">
-                                <form class="updateCartForm" action="{{route('update')}}" method="POST">
-                                    @csrf
-                                    <div class="flex justify-between items-center mb-4">
-                                        <h4 class="text-black font-semibold text-lg">THÔNG TIN ĐƠN HÀNG</h4>
-{{--                                        @if(Cart::count())--}}
-{{--                                            <button type="button" class="updateCart px-4 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cập nhật</button>--}}
-{{--                                        @endif--}}
-                                    </div>
 
-                                        <div>
-                                            <div id="cartItemsContainer" class="h-72 overflow-auto">
-                                                @if(Cart::count())
-                                                    @foreach(Cart::content() as $row)
-                                                    <div class="cart-item w-full flex mt-5 text-sm">
-                                                        <div class="w-1/3">
-                                                            <a href="{{route('productDetail', ['id' => $row->id])}}" class="">
-                                                                <img src="{{$row->options->thumbnail}}" alt="" class="">
-                                                            </a>
-                                                        </div>
-                                                        <div class="w-1/2 space-y-2 ml-3">
-                                                            <a href="{{route('productDetail', ['id' => $row->id])}}" class="">
-                                                                <div class="text-blue-500 font-bold">{{number_format($row->options->discount)}}đ
-                                                                    <span class="mx-2 text-gray-400 line-through">{{number_format($row->price)}}₫</span>
-                                                                </div>
-                                                                <div class="text-black font-bold">{{$row->name}}</div>
-                                                            </a>
-                                                            <div class="">
-                                                                <span class="">Số lượng:</span>
-                                                                <input name="qty[{{$row->rowId}}]" disabled type="number" class="border-none w-16 h-7 text-center border pl-2 outline-none focus:border-lime-500" placeholder="1" min="1" value="{{$row->qty}}">
-                                                            </div>
-                                                        </div>
-{{--                                                        <div class="ml-3 cursor-pointer"><a data-row-id="{{$row->rowId}}" class="removeCart text-danger"><i class="fa-solid fa-xmark"></i></a></div>--}}
-                                                    </div>
-                                                    @endforeach
-                                            </div>
-                                            <div class="space-y-5 mt-4 text-base">
-                                                <div class="flex justify-between">
-                                                    <span class="text-black font-semibold">Tổng cộng: </span>
-                                                    <span class="total font-bold">{{Cart::total()}} đ</span>
-                                                </div>
-                                                <div class="flex justify-between text-base">
-                                                    <span class="text-black font-semibold">Thành tiền: </span>
-                                                    <span class="total text-blue-500 font-bold">{{Cart::total()}} đ</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @else
-                                        <div class="h-72 overflow-auto flex flex-col items-center justify-center space-y-4">
-                                            <img class="size-20" src="https://salt.tikicdn.com/ts/upload/eb/f3/a3/25b2ccba8f33a5157f161b6a50f64a60.png">
-                                            <p class="text-center">Chưa Có Sản Phẩm</p>
-                                        </div>
-                                    @endif
-                                </form>
-                            </div>
-                            @endif
-                        </a>
+                    <div class="header-content">
+                        <div class="header_contact text-right">
+                            <span>Call Us!</span>
+                            <span class="phone_no">+00 569 846 348</span>
+                        </div>
+                        <div class="header_icon" style="display: flex; justify-content: center; align-items: center">
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" x="0" y="0" viewBox="0 0 511.728 511.728" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M147.925 379.116c-22.357-1.142-21.936-32.588-.001-33.68 62.135.216 226.021.058 290.132.103 17.535 0 32.537-11.933 36.481-29.017l36.404-157.641c2.085-9.026-.019-18.368-5.771-25.629s-14.363-11.484-23.626-11.484c-25.791 0-244.716-.991-356.849-1.438L106.92 54.377c-4.267-15.761-18.65-26.768-34.978-26.768H15c-8.284 0-15 6.716-15 15s6.716 15 15 15h56.942a6.246 6.246 0 0 1 6.017 4.592l68.265 253.276c-12.003.436-23.183 5.318-31.661 13.92-8.908 9.04-13.692 21.006-13.471 33.695.442 25.377 21.451 46.023 46.833 46.023h21.872a52.18 52.18 0 0 0-5.076 22.501c0 28.95 23.552 52.502 52.502 52.502s52.502-23.552 52.502-52.502a52.177 52.177 0 0 0-5.077-22.501h94.716a52.185 52.185 0 0 0-5.073 22.493c0 28.95 23.553 52.502 52.502 52.502 28.95 0 52.503-23.553 52.503-52.502a52.174 52.174 0 0 0-5.464-23.285c5.936-1.999 10.216-7.598 10.216-14.207 0-8.284-6.716-15-15-15zm91.799 52.501c0 12.408-10.094 22.502-22.502 22.502s-22.502-10.094-22.502-22.502c0-12.401 10.084-22.491 22.483-22.501h.038c12.399.01 22.483 10.1 22.483 22.501zm167.07 22.494c-12.407 0-22.502-10.095-22.502-22.502 0-12.285 9.898-22.296 22.137-22.493h.731c12.24.197 22.138 10.208 22.138 22.493-.001 12.407-10.096 22.502-22.504 22.502zm74.86-302.233c.089.112.076.165.057.251l-15.339 66.425H414.43l8.845-67.023 58.149.234c.089.002.142.002.23.113zm-154.645 163.66v-66.984h53.202l-8.84 66.984zm-74.382 0-8.912-66.984h53.294v66.984zm-69.053 0h-.047c-3.656-.001-6.877-2.467-7.828-5.98l-16.442-61.004h54.193l8.912 66.984zm56.149-96.983-9.021-67.799 66.306.267v67.532zm87.286 0v-67.411l66.022.266-8.861 67.145zm-126.588-67.922 9.037 67.921h-58.287l-18.38-68.194zm237.635 164.905H401.63l8.84-66.984h48.973l-14.137 61.217a7.406 7.406 0 0 1-7.25 5.767z" fill="#ffffff" opacity="1" data-original="#000000" class=""></path></g></svg>
+                            <span id="amount" class="cart_no" style="font-size: 13px; font-weight: 500; padding: 11px; display: flex; justify-content: center; align-items: center">
+                                <span>{{{Cart::count()}}}</span>
+                            </span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </nav>
         </div>
     </div>
-</div>
+</header>
+
 <script src="{{ asset('js/cart/add.js') }}"></script>
 <script src="{{ asset('js/cart/update.js') }}"></script>
 <script src="{{ asset('js/cart/delete.js') }}"></script>
-
-

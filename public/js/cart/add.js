@@ -5,20 +5,19 @@ var addToCartForm = document.querySelector('.addToCartForm')
 addToCartBtns.forEach(function(btn) {
     btn.addEventListener('click', function () {
         var formData = new FormData(btn.closest('.addToCartForm'));
-
         axios.post(btn.closest('.addToCartForm').action, formData)
             .then(function (response) {
-                document.getElementById('cartItemCount').innerText = response.data.cartCount;
-
-                if(response.data.cartCount) {
-                    // alert('Thêm sản phẩm vào giỏ hàng thành công');
-                    showNotification('Thêm sản phẩm vào giỏ hàng thành công');
-                    updateCartItems(response.data.cartContent);
-                    updateTotal(response.data.total)
-                }
+                document.getElementById('amount').innerText = response.data.cartCount;
+                console.log(response.data)
+                showNotification('Thêm vào giỏ hàng thành công');
+                // if(response.data.cartCount) {
+                //     updateCartItems(response.data.cartContent);
+                //     updateTotal(response.data.total)
+                // }
             })
             .catch(function (error) {
-                addToCartForm.innerHTML += `<span class="text-red-600">${error.response.data.message}</span>`;
+                console.log('loi')
+                // addToCartForm.innerHTML += `<span class="text-red-600">${error.response.data.message}</span>`;
                 console.error('Lỗi thêm sản phẩm vào giỏ hàng:', error);
             });
     });
@@ -55,5 +54,3 @@ function updateCartItems(cartContent) {
         cartItemsContainer.innerHTML += cartItemHTML;
     }
 }
-
-
