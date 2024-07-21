@@ -5,25 +5,34 @@
 {{--        </h2>--}}
 {{--    </x-slot>--}}
 
-    <div class="py-12">
-        <div class="max-w-6xl mx-auto space-y-6">
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
+    <div class="py-5" style="margin-top: 8.5rem">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            @include('profile.partials.update-profile-information-form')
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
+                <div class="col-lg-8 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            @include('profile.partials.update-password-form')
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
+{{--                <div class="col-lg-8 mb-4">--}}
+{{--                    <div class="card shadow-sm">--}}
+{{--                        <div class="card-body">--}}
+{{--                            @include('profile.partials.delete-user-form')--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
         </div>
     </div>
+
 </x-app-layout>

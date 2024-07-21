@@ -31,7 +31,6 @@
             <span id="notification-message"></span>
         </div>
     </div>
-
 {{--            @include('layouts.navigation')--}}
             @include('layouts.header')
 
@@ -61,15 +60,15 @@
 
     .notification {
         position: fixed;
-        top: 20px;
+        top: 80px;
         right: 10px;
         background-color: #4caf50; /* Màu nền */
         color: white; /* Màu chữ */
-        padding: 6px;
+        padding: 8px;
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         z-index: 1000;
-        transition: opacity 0.5s ease;
+        transition: opacity 0.3s ease;
         opacity: 0;
         display: flex;
         align-items: center;

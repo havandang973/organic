@@ -23,11 +23,18 @@ class CompleteController extends Controller
     }
 
     public function index() {
+        if (!session('order_placed')) {
+            return view('404-error');
+        }
+
+        session()->forget('order_placed');
+
         return view('complete');
     }
 
     public function store(Request $request) {
         $data = $request->all();
+//        dd($data);
         $order = Order::query()->create($data);
         $carts = Cart::content();
         $email = $order->email;
@@ -36,13 +43,13 @@ class CompleteController extends Controller
         foreach ($carts as $cart) {
             $maxAmount= Product::query()->where('id', '=', $cart->id)->value('max_amount');
 
-            if ($maxAmount < $cart->qty) {
-                $id = Auth::user()->id;
-
-                toastr()->warning('Sản phẩm trong giỏ hàng đã hết.', ['timeOut' => 3000]);
-                $addresses = $this->addressRepo->getAllAddressByUserId($id);
-                return view('cart', compact('addresses'));
-            }
+//            if ($maxAmount < $cart->qty) {
+//                $id = Auth::user()->id;
+//
+//                toastr()->warning('Sản phẩm trong giỏ hàng đã hết.', ['timeOut' => 3000]);
+//                $addresses = $this->addressRepo->getAllAddressByUserId($id);
+//                return view('cart', compact('addresses'));
+//            }
 
             $data = [
                 'order_id' => $order->id,
@@ -62,6 +69,8 @@ class CompleteController extends Controller
         Mail::to($email)->send(new OrderShipped($products, $order));
 
         Cart::destroy();
+
+        session(['order_placed' => true]);
 
         return redirect()->route('complete');
     }

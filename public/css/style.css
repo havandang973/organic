@@ -189,10 +189,10 @@ button:hover {
 
 .btn:hover,
 .btn:focus {
-    color: #0f7404;
+    color: white;
     border-color: #0f7404;
     outline: 0;
-    background: #0f7404;
+    background: #0c5460;
 }
 
 .btn:focus::after,
@@ -249,9 +249,9 @@ button:hover {
 }
 
 .navbar-light .navbar-toggler {
-    color: rgb(255, 255, 255);
-    border-color: rgb(255, 255, 255);
-    outline: transparent;
+    color: #03262c;
+    /*border-color: rgb(255, 255, 255);*/
+    /*outline: transparent;*/
 }
 
 .navbar-light .navbar-nav .active > .nav-link,
@@ -1208,7 +1208,7 @@ button:hover {
 /* ORDER PART CSS START */
 /*------------------------------------------*/
 .order_part {
-    padding: 100px 0;
+    padding: 50px 0;
 }
 
 .order_txt h2 {
@@ -1253,18 +1253,15 @@ button:hover {
 }
 
 .form-control {
-    color: #fff !important;
+    color: black !important;
     transition: all 0.3s;
     padding: 10px 20px;
     height: 50px;
+    font-weight: 500;
 }
 .form-control:focus {
-    border-color: transparent;
-    background-color: #03262c;
-    box-shadow: none;
-}
-.form-control:focus::placeholder {
     color: #fff;
+    box-shadow: none;
 }
 
 .payment_method .form-check label.form-check-label{
@@ -1951,3 +1948,4 @@ button:hover {
 /*------------------------------------------*/
 /*FOOTER BOTTOM PART CSS END*/
 /*------------------------------------------*/
+

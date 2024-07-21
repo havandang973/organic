@@ -14,7 +14,9 @@ class Order extends Model
         'address',
         'email',
         'phone',
-        'status'
+        'status',
+        'payment_method',
+        'note'
     ];
 
     public function orderDetail() {

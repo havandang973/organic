@@ -44,8 +44,8 @@ Route::get('/cart', [CartController::class, 'index']);
 Route::get('/carts/delete/{rowId}', [CartController::class, 'delete'])->name('remove');
 Route::post('/carts/update',  [CartController::class, 'update'])->name('update');
 
-Route::get('/orders', [OrderController::class, 'index']);
-Route::post('/orders',  [OrderController::class, 'store']);
+Route::get('/checkout', [OrderController::class, 'index']);
+Route::post('/checkout',  [OrderController::class, 'store']);
 
 Route::get('/completes', [CompleteController::class, 'index'])->name('complete');
 Route::post('/completes', [CompleteController::class, 'store']);

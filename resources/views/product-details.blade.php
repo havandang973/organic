@@ -22,19 +22,13 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="product_img d-flex">
-                    <div class="small_img">
-                        <img class="w-100" src="{{asset('uploads/productdetails_imgthumbnail1.jpg')}}'" alt="" />
-                        <img class="w-100" src="{{asset('uploads/Productdetails_imgthamnail2.jpg')}}" alt="" />
-                        <img class="w-100" src="{{asset('uploads/productdetails_imgthamnail3.jpg')}}" alt="" />
-                    </div>
-
                     <div class="big_img">
                         @if($product->max_amount === 0)
                             <span class="sold-out-tag position-top-right">Hết hàng</span>
                         @elseif($product->discount != 0)
                             <span class="sold-out-tag position-top-right">-{{$product->discount}}%</span>
                         @endif
-                        <img src="{{asset($product->thumbnail)}}" class="w-100 img-fluid" alt="" />
+                        <img src="{{asset($product->thumbnail)}}" class="w-75 img-fluid" alt="" />
                     </div>
                 </div>
             </div>
@@ -63,24 +57,15 @@
                         <span>Xuất xứ: <b>{{$product->origin}}</b></span>
                     </div>
                     <div class="add_to_cart d-flex">
-{{--                        <div class="quantity d-flex">--}}
-{{--                            <div class="left_arrow">--}}
-{{--                                <button type="button"><i class="icofont-arrow-left"></i></button>--}}
-{{--                            </div>--}}
-{{--                            <div class="quantity_num">1</div>--}}
-{{--                            <div class="right_arrow">--}}
-{{--                                <button type="button"><i class="icofont-arrow-right"></i></button>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
                         @if($product->max_amount != 0)
                             <form action="{{route('add', $product->id)}}" method="POST" class="addToCartForm">
                                 @csrf
                                 <input type="number" name="amount" value="1" class="p-2 text-center font-weight-bolder" style="outline: none;" placeholder="1" required min="1" max="{{ $product->max_amount }}">
+                                <input type="hidden" name="product_id" value="{{$product->id}}">
                                 <button type="button" class="addToCartBtn btn border-transparent ml-5">
                                     Thêm giỏ hàng
-                                    <input type="hidden" name="amount" value="1">
-                                    <input type="hidden" name="product_id" value="{{$product->id}}">
                                 </button>
+                                <p id="error-amount" class="text-danger"></p>
                             </form>
                         @endif
                     </div>

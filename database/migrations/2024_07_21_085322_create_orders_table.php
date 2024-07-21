@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('address');
             $table->string('email');
             $table->string('phone');
+            $table->string('payment_method');
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

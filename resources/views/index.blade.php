@@ -1,4 +1,37 @@
 <x-app-layout>
+    <div class="full-banner">
+        <div class="container">
+            <div class="row banner-slider">
+                <div class="col-md-12">
+                    <div class="banner-content">
+                        <h1>100% <span>Organic</span></h1>
+                        <h3>Fresh & Natural Farm Food</h3>
+                        <p>The readable content of a page when looking at its layout point of using of letters, as opposed.</p>
+                        <a href="#" class="btn ">ALL PRoducts <i class="icofont-bubble-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="banner-content">
+                        <h1>100% <span>Organic</span></h1>
+                        <h3>Fresh & Natural Farm Food</h3>
+                        <p>The readable content of a page when looking at its layout point of using of letters, as opposed.</p>
+                        <a href="#" class="btn">ALL PRoducts <i class="icofont-bubble-right"></i></a>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+                    <div class="banner-content">
+                        <h1>100% <span>Organic</span></h1>
+                        <h3>Fresh & Natural Farm Food</h3>
+                        <p>The readable content of a page when looking at its layout point of using of letters, as opposed.</p>
+                        <a href="#" class="btn">ALL PRoducts <i class="icofont-bubble-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- FEATURES PART START -->
     <div class="full-features">
         <div class="container">
@@ -184,13 +217,12 @@
                                 </div>
 
                                 <div class="icons position-center">
-                                    <div class="rounded-icon">
+                                    <a class="rounded-icon" href="{{route('productDetail', ['id' => $product->id])}}">
                                         <i class="fa-solid fa-eye"></i>
-                                    </div>
-
-                                    <div class="rounded-icon">
+                                    </a>
+                                    <a class="rounded-icon" href="#">
                                         <i class="fa-solid fa-code-compare"></i>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
