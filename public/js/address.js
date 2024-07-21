@@ -1,5 +1,5 @@
 function showAddressInfo(element) {
-    var addressElements = document.querySelectorAll('.address');
+    var addressElements = document.querySelectorAll('.card');
     addressElements.forEach(function(addrElement) {
         addrElement.classList.remove('border-blue-600', 'bg-sky-100');
     });

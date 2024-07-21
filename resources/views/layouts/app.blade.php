@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-
-{{--        <title>{{ config('app.name', 'Organic') }}</title>--}}
-        <title>Organic @yield('title')</title>
-
-        <!-- Fonts -->
-        <link rel="icon" type="image/x-icon" href="{{asset('uploads/i-n-may-logo-home2-x11409.png')}}">
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <script src="https://cdn.tailwindcss.com/3.4.3"></script>
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Welcome | TazZA</title>
+    <meta name="description" content="" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- favicon -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Slick slider -->
+    <link rel="stylesheet" href="{{asset('css/slick.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/slick-theme.css')}}" />
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
+    <!-- Style css-->
+    <link rel="stylesheet" href="{{asset('css/style.css')}}" />
+    <!-- Responsive css-->
+    <link rel="stylesheet" href="{{asset('css/responsive.css')}}" />
+</head>
     <body class="font-sans antialiased">
     <div id="notification" class="notification hidden">
         <div class="flex justify-center items-center">
@@ -26,7 +31,6 @@
             <span id="notification-message"></span>
         </div>
     </div>
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
 {{--            @include('layouts.navigation')--}}
             @include('layouts.header')
 
@@ -46,7 +50,6 @@
             </main>
 
             @include('layouts.footer')
-        </div>
     </body>
 </html>
 
@@ -57,15 +60,15 @@
 
     .notification {
         position: fixed;
-        top: 10px;
+        top: 80px;
         right: 10px;
         background-color: #4caf50; /* Màu nền */
         color: white; /* Màu chữ */
-        padding: 10px 20px;
+        padding: 8px;
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         z-index: 1000;
-        transition: opacity 0.5s ease;
+        transition: opacity 0.3s ease;
         opacity: 0;
         display: flex;
         align-items: center;
@@ -92,4 +95,240 @@
             notification.classList.remove('show');
         }, 3000);
     }
+</script>
+<!-- jQuery -->
+<script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
+<!-- Slick slider -->
+<script src="{{asset('js/slick.min.js')}}"></script>
+<!-- Bootstrap JS -->
+<script src="{{asset('js/bootstrap.min.js')}}"></script>
+<!-- scripts -->
+<script src="{{asset('js/scripts.js')}}"></script>
+
+<script>
+    $(".banner-slider").slick({
+        infinite: false,
+        autoplay: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplaySpeed: 2000,
+        arrows:false,
+        dots: true,
+    });
+
+    $(".slider").slick({
+        infinite: false,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        arrows:false,
+        dots: true,
+
+        // the magic
+        responsive: [{
+            breakpoint: 1500,
+            settings: {
+                slidesToShow: 4,
+                infinite: true
+            }
+
+        }, {
+
+            breakpoint: 1201,
+            settings: {
+                slidesToShow: 3,
+                dots: true
+            }
+
+        }, {
+
+            breakpoint: 991,
+            settings: {
+                slidesToShow: 2,
+                dots: true
+            }
+
+        }, {
+
+            breakpoint: 600,
+            settings: {
+                slidesToShow: 1,
+                dots: true
+            }
+
+        }, {
+
+            breakpoint: 300,
+            settings: {
+                slidesToShow: 1,
+                dots: true
+            },
+        }]
+    });
+
+
+    $(".partner-slider").slick({
+        // normal options...
+        infinite: false,
+        slidesToShow: 5,
+        slidesToScroll: 2,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        infinite: true,
+        arrows:true,
+
+        // the magic
+        responsive: [{
+
+            breakpoint: 1500,
+            settings: {
+                slidesToShow: 4,
+                infinite: true
+            }
+
+        }, {
+
+            breakpoint: 1201,
+            settings: {
+                slidesToShow: 3,
+                dots: true
+            }
+
+        }, {
+
+            breakpoint: 991,
+            settings: {
+                slidesToShow: 2,
+                dots: true,
+                arrows:false,
+            }
+
+        }, {
+            breakpoint: 600,
+            settings: {
+                slidesToShow: 2,
+                dots: true,
+                arrows:false
+            }
+
+        }]
+    });
+
+
+
+    $(".product-slider").slick({
+        // normal options...
+        infinite: false,
+        slidesToShow: 5,
+        slidesToScroll: 2,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        infinite: true,
+        arrows:true,
+
+        // the magic
+        responsive: [{
+
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 3,
+                infinite: true
+            }
+
+        }, {
+
+            breakpoint: 600,
+            settings: {
+                slidesToShow: 2,
+                dots: true
+            }
+
+        }, {
+
+            breakpoint: 300,
+            settings: "unslick" // destroys slick
+
+        }]
+    });
+
+    //for testimonial
+    $('.testimonial-img').slick({
+        speed: 500,
+        arrows: false,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        asNavFor: '.testimonial-text',
+        centerMode: true,
+        centerPadding: 0,
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    centerMode: true,
+                    focusOnSelect: true,
+                    centerPadding: 0,
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    centerMode: true,
+                    focusOnSelect: true,
+                    centerPadding: 0,
+                }
+            },
+            {
+                breakpoint: 575,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    centerMode: true,
+                    focusOnSelect: true,
+                    centerPadding: 0,
+                }
+            }
+        ]
+    });
+
+
+
+    $('.testimonial-text').slick({
+        infinite: false,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        infinite: true,
+        arrows:true,
+        centerPadding: 0,
+        dots: false,
+        speed: 1000,
+        asNavFor: '.testimonial-img',
+        prevArrow: '<i class="icofont-double-right"></i>',
+        nextArrow: '<i class="icofont-double-left"></i>',
+
+        responsive: [
+            {
+                breakpoint: 991,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                }
+            },
+            {
+                breakpoint: 767,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                }
+            }
+        ]
+    });
 </script>

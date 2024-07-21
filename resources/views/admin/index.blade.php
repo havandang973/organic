@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/solid.min.css">
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('css/admin.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- Place the first <script> tag in your HTML's <head> -->
     <script src="https://cdn.tiny.cloud/1/646jy9zc6cb4mgm1b0t8hhzcijp2nbicvp3uudgwbb33c2g2/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>

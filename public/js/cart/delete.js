@@ -6,7 +6,7 @@ removeCart.forEach(function (btn) {
 
         axios.get('/carts/delete/' + rowId) // Use the link as the endpoint
             .then(function (response) {
-                document.getElementById('cartItemCount').innerText = response.data.cartCount;
+                document.getElementById('amount').innerText = response.data.cartCount;
                 showNotification('Xóa sản phẩm khỏi giỏ hàng thành công.');
                 btn.closest('.cart-item').remove();
                 updateTotal(response.data.total)
@@ -26,6 +26,6 @@ function updateTotal(total) {
     var itemTotal = document.getElementsByClassName('total');
 
     Array.from(itemTotal).forEach(function(e) {
-        e.innerText = total;
+        e.innerText = total + 'đ';
     });
 }

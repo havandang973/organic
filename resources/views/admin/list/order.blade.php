@@ -15,6 +15,7 @@
                         <th scope="col">Địa chỉ</th>
                         <th scope="col">Email</th>
                         <th scope="col">Số điện thoại</th>
+                        <th scope="col">Phương thức thanh toán</th>
                         <th scope="col">Trạng thái</th>
                         <th scope="col">Thời gian</th>
                         <th scope="col">Tác vụ</th>
@@ -29,6 +30,7 @@
                             <td>{{$order->address}}</td>
                             <td>{{$order->email}}</td>
                             <td>{{$order->phone}}</td>
+                            <td>{{$order->payment_method}}</td>
                             <td>
                                 <form method="POST" action="{{route('edit.status', $order->id)}}" class="">
                                     @csrf
