@@ -34,7 +34,10 @@ class CompleteController extends Controller
 
     public function store(Request $request) {
         $data = $request->all();
+        $data['user_id'] = auth()->id();
+        $data['order_code'] = str()->random(10);
 //        dd($data);
+
         $order = Order::query()->create($data);
         $carts = Cart::content();
         $email = $order->email;

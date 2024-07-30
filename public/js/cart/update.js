@@ -11,7 +11,6 @@ updateCart.forEach(function (btn) {
                 showNotification('Cập nhật giỏ hàng thành công');
                 updateTotal(response.data.total)
                 document.getElementById('error-item').classList.add('d-none');
-
             })
             .catch(function (error) {
                 document.getElementById('error-item').classList.remove('d-none');

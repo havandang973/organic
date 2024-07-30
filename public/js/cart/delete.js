@@ -12,7 +12,7 @@ removeCart.forEach(function (btn) {
                 updateTotal(response.data.total)
 
                 if(response.data.total == 0) {
-                    document.getElementById('total').remove();
+                    document.getElementById('checkout').remove();
                     document.querySelector('.updateCart').remove()
                 }
             })
@@ -28,4 +28,8 @@ function updateTotal(total) {
     Array.from(itemTotal).forEach(function(e) {
         e.innerText = total + 'đ';
     });
+}
+
+function reloadPage(amount) {
+    amount === 0 ? location.reload() : ''
 }
