@@ -216,13 +216,17 @@
                                     </form>
                                 </div>
 
-                                <div class="icons position-center">
+                                <div class="icons position-center" style="display: ruby;">
                                     <a class="rounded-icon" href="{{route('productDetail', ['id' => $product->id])}}">
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
-                                    <a class="rounded-icon" href="#">
-                                        <i class="fa-solid fa-code-compare"></i>
-                                    </a>
+                                    <form action="{{route('compare.add', $product->id)}}" method="POST" class="addToCompareForm">
+                                        @csrf
+                                        <button type="button" class="addToCompareBtn rounded-icon border-0">
+                                            <i class="fa-solid fa-code-compare"></i>
+                                            <input type="hidden" name="product_id" value="{{$product->id}}">
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -437,4 +441,6 @@
     </div>
 
     <script src="{{ asset('js/cart/add.js') }}"></script>
+    <script src="{{ asset('js/product/compare.js') }}"></script>
+
 </x-app-layout>

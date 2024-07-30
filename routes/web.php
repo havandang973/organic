@@ -24,8 +24,17 @@ use App\Http\Controllers\AddressController;
 //Route::get('/', function () {
 //    return view('index');
 //});
+Route::get('/compare', [ProductController::class, 'showCompare']);
+Route::post('/compare/product/add/{id}', [ProductController::class, 'storeCompare'])->name('compare.add');
+Route::post('/compare/product/delete/{id}', [ProductController::class, 'deleteCompare'])->name('compare.delete');
 
-Route::get('/deletes}', [UserController::class, 'deletes']);
+Route::get('/orders', [OrderController::class, 'showOrder'])->name('orders');
+Route::get('/order-details/product/{orderId}', [OrderController::class, 'showOrderDetail'])->name('order.detail');
+
+Route::post('canceled/order/{orderId}', [OrderController::class, 'canceledOrder'])->name('canceled.order');
+Route::get('/api/check-order-status', [\App\Http\Controllers\OrderController::class, 'checkOrderStatus']);
+
+//Route::get('/deletes', [UserController::class, 'deletes']);
 
 Route::get('/header', function () {
     return view('layouts.header');

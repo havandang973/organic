@@ -26,7 +26,7 @@
                 <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
                     <div class="card-header">DOANH SỐ</div>
                     <div class="card-body">
-                        <h5 class="card-title">{{$total}} VNĐ</h5>
+                        <h5 class="card-title">{{$totalFormatted}} VNĐ</h5>
                         <p class="card-text">Doanh số hệ thống</p>
                     </div>
                 </div>
@@ -42,6 +42,38 @@
             </div>
         </div>
         <!-- end analytic  -->
+
+        <!-- Form lọc theo thời gian -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Lọc doanh số
+            </div>
+            <div class="card-body">
+                <form action="{{ route('admin.dashboard') }}" method="GET">
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="start_date">Ngày bắt đầu</label>
+                            <input type="date" class="form-control" id="start_date" name="start_date" value="{{ request('start_date') }}">
+                        </div>
+                        <div class="col">
+                            <label for="end_date">Ngày kết thúc</label>
+                            <input type="date" class="form-control" id="end_date" name="end_date" value="{{ request('end_date') }}">
+                        </div>
+                        <div class="col align-self-end">
+                            <button type="submit" class="btn btn-primary">Lọc</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Hiển thị thông báo doanh số -->
+        @if(request('start_date') && request('end_date'))
+            <div class="alert alert-info">
+                {{ $salesMessage }}
+            </div>
+        @endif
+
         <div class="card">
             <div class="card-header font-weight-bold">
                 ĐƠN HÀNG MỚI
@@ -85,34 +117,14 @@
                             <td>{{$order->created_at}}</td>
                             <td>
                                 <a href="{{route('list.orderDetail', $order->id)}}" class="btn bg-green-600 btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
-{{--                                <a href="{{route('delete.order', $order->id)}}" class="btn bg-red-500 btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>--}}
+                                {{--                                <a href="{{route('delete.order', $order->id)}}" class="btn bg-red-500 btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>--}}
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
                 {{$orders->links()}}
-                {{--                <nav aria-label="Page navigation example">--}}
-                {{--                    <ul class="pagination">--}}
-                {{--                        <li class="page-item">--}}
-                {{--                            <a class="page-link" href="#" aria-label="Previous">--}}
-                {{--                                <span aria-hidden="true">Trước</span>--}}
-                {{--                                <span class="sr-only">Sau</span>--}}
-                {{--                            </a>--}}
-                {{--                        </li>--}}
-                {{--                        <li class="page-item"><a class="page-link" href="#">1</a></li>--}}
-                {{--                        <li class="page-item"><a class="page-link" href="#">2</a></li>--}}
-                {{--                        <li class="page-item"><a class="page-link" href="#">3</a></li>--}}
-                {{--                        <li class="page-item">--}}
-                {{--                            <a class="page-link" href="#" aria-label="Next">--}}
-                {{--                                <span aria-hidden="true">&raquo;</span>--}}
-                {{--                                <span class="sr-only">Next</span>--}}
-                {{--                            </a>--}}
-                {{--                        </li>--}}
-                {{--                    </ul>--}}
-                {{--                </nav>--}}
             </div>
         </div>
-
     </div>
 @endsection

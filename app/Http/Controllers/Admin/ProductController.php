@@ -9,9 +9,29 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index() {
-        $products = Product::query()->latest('created_at')->paginate(5);
-        return view('admin.list.product', compact('products'));
+    public function index(Request $request) {
+        $query = Product::query();
+
+        if ($request->filled('code')) {
+            $query->where('code', 'like', '%' . $request->code . '%');
+        }
+
+        if ($request->filled('name')) {
+            $query->where('name', 'like', '%' . $request->name . '%');
+        }
+
+        if ($request->filled('max_amount_min')) {
+            $query->where('max_amount', '>=', $request->max_amount_min);
+        }
+
+        if ($request->filled('max_amount_max')) {
+            $query->where('max_amount', '<=', $request->max_amount_max);
+        }
+
+        $products = $query->latest('created_at')->paginate(5);
+        $lowStockProducts = Product::where('max_amount', '<', 10)->latest('created_at')->get();
+
+        return view('admin.list.product', compact('products', 'lowStockProducts'));
     }
 
     public function index_edit(Request $request, $name) {

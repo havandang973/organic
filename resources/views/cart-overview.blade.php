@@ -121,8 +121,9 @@
                         </table>
                     </div>
                     @if(Cart::count())
-                        <div class="checkout_btn text-right">
+                        <div id="checkout" class="checkout_btn text-right">
                             <a href="/checkout" class="btn border-radius-0 border-transparent">Thanh toán</a>
+                            <input type="hidden" name="total" value="{{Cart::total()}} đ">
                         </div>
                     @endif
                 </div>

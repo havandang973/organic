@@ -7,10 +7,65 @@
                 Danh sách đơn hàng
             </div>
             <div class="card-body">
+                <!-- Filter Form -->
+                <form method="GET" action="{{ route('list.order') }}" class="form-inline mb-4" id="filterForm">
+                    <div class="form-group mb-3 mr-2">
+                        <label for="order_code" class="mr-2">Mã đơn hàng</label>
+                        <input type="text" class="form-control" id="order_code" name="order_code" value="{{ request('order_code') }}">
+                    </div>
+                    <div class="form-group mb-3 mr-2">
+                        <label for="email" class="mr-2">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ request('email') }}">
+                    </div>
+                    <div class="form-group mb-3 mr-2">
+                        <label for="name" class="mr-2">Tên khách hàng</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ request('name') }}">
+                    </div>
+                    <div class="form-group mb-3 mr-2">
+                        <label for="address" class="mr-2">Địa chỉ</label>
+                        <input type="text" class="form-control" id="address" name="address" value="{{ request('address') }}">
+                    </div>
+                    <div class="form-group mb-3 mr-2">
+                        <label for="phone" class="mr-2">Số điện thoại</label>
+                        <input type="text" class="form-control" id="phone" name="phone" value="{{ request('phone') }}">
+                    </div>
+                    <div class="form-group mb-3 mr-2">
+                        <label for="payment_method" class="mr-2">Phương thức thanh toán</label>
+                        <select class="form-control" id="payment_method" name="payment_method">
+                            <option value="">Tất cả</option>
+                            <option value="Credit Card" {{ request('payment_method') == 'Credit Card' ? 'selected' : '' }}>Credit Card</option>
+                            <option value="Cash" {{ request('payment_method') == 'Cash' ? 'selected' : '' }}>Cash</option>
+                            <option value="Bank Transfer" {{ request('payment_method') == 'Bank Transfer' ? 'selected' : '' }}>Bank Transfer</option>
+                            <!-- Thêm các phương thức thanh toán khác nếu có -->
+                        </select>
+                    </div>
+                    <div class="form-group mb-3 mr-2">
+                        <label for="status" class="mr-2">Trạng thái</label>
+                        <select class="form-control" id="status" name="status">
+                            <option value="">Tất cả</option>
+                            <option value="{{ \App\Enums\Status::PENDING }}" {{ request('status') == \App\Enums\Status::PENDING ? 'selected' : '' }}>{{ \App\Enums\Status::PENDING }}</option>
+                            <option value="{{ \App\Enums\Status::CANCELED }}" {{ request('status') == \App\Enums\Status::CANCELED ? 'selected' : '' }}>{{ \App\Enums\Status::CANCELED }}</option>
+                            <option value="{{ \App\Enums\Status::COMPLETED }}" {{ request('status') == \App\Enums\Status::COMPLETED ? 'selected' : '' }}>{{ \App\Enums\Status::COMPLETED }}</option>
+                            <option value="{{ \App\Enums\Status::DELIVERY }}" {{ request('status') == \App\Enums\Status::DELIVERY ? 'selected' : '' }}>{{ \App\Enums\Status::DELIVERY }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3 mr-2">
+                        <label for="from_date" class="mr-2">Từ ngày</label>
+                        <input type="date" class="form-control" id="from_date" name="from_date" value="{{ request('from_date') }}">
+                    </div>
+                    <div class="form-group mb-3 mr-2">
+                        <label for="to_date" class="mr-2">Đến ngày</label>
+                        <input type="date" class="form-control" id="to_date" name="to_date" value="{{ request('to_date') }}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Lọc</button>
+                    <button type="button" class="btn btn-danger ml-2" id="clearAll">Xóa tất cả</button>
+                </form>
+
                 <table class="table table-striped">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">Mã đơn hàng</th>
                         <th scope="col">Khách hàng</th>
                         <th scope="col">Địa chỉ</th>
                         <th scope="col">Email</th>
@@ -26,6 +81,7 @@
                     @foreach($orders as $order)
                         <tr>
                             <th scope="row">{{$t++}}</th>
+                            <td>{{$order->order_code}}</td>
                             <td>{{$order->name}}</td>
                             <td>{{$order->address}}</td>
                             <td>{{$order->email}}</td>
@@ -50,7 +106,6 @@
                                     </select>
                                 </form>
                             </td>
-{{--                            <td><span class="badge badge-warning">Đang xử lý</span></td>--}}
                             <td>{{$order->created_at}}</td>
                             <td>
                                 <a href="{{route('list.orderDetail', $order->id)}}" class="btn bg-green-600 btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
@@ -61,28 +116,10 @@
                     </tbody>
                 </table>
                 {{$orders->links()}}
-{{--                <nav aria-label="Page navigation example">--}}
-{{--                    <ul class="pagination">--}}
-{{--                        <li class="page-item">--}}
-{{--                            <a class="page-link" href="#" aria-label="Previous">--}}
-{{--                                <span aria-hidden="true">Trước</span>--}}
-{{--                                <span class="sr-only">Sau</span>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li class="page-item"><a class="page-link" href="#">1</a></li>--}}
-{{--                        <li class="page-item"><a class="page-link" href="#">2</a></li>--}}
-{{--                        <li class="page-item"><a class="page-link" href="#">3</a></li>--}}
-{{--                        <li class="page-item">--}}
-{{--                            <a class="page-link" href="#" aria-label="Next">--}}
-{{--                                <span aria-hidden="true">&raquo;</span>--}}
-{{--                                <span class="sr-only">Next</span>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-{{--                </nav>--}}
             </div>
         </div>
     </div>
     <script src="{{ asset('js/status.js') }}"></script>
-
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{asset('js/admin/index.js')}}"></script>
 @endsection

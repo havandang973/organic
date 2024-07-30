@@ -24,6 +24,19 @@ class AddressController extends Controller
     }
 
     public function store(Request $request) {
+        $messages = [
+            'name.required' => 'Vui lòng nhập tên',
+            'address.required' => 'Vui lòng nhập địa chỉ',
+            'telephone.required' => 'Vui lòng nhập số điện thoại',
+            'telephone.digits' => 'Số điện thoại phải là số và gồm 10 chữ số',
+        ];
+
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'telephone' => 'required|digits:10',
+        ], $messages);
+
         (new AddressService())->store($request);
 
         return back();
