@@ -28,8 +28,7 @@ class UserController extends Controller
             'role' => $request->role
         ]);
 
-        toastr()->success('Thêm User thành công', ['timeOut' => 2000]);
-        return view('admin.add.user');
+        return view('admin.add.user')->with('success', 'Thêm User thành công');
     }
 
     public function index_edit(Request $request, $name) {
@@ -50,8 +49,7 @@ class UserController extends Controller
         $user->fill($data);
         $user->save();
 
-        toastr()->success('Chỉnh sửa User thành công', ['timeOut' => 2000]);
-        return redirect()->route('list.user');
+        return redirect()->route('list.user')->with('success', 'Chỉnh sửa User thành công');
     }
 
     public function index_delete(Request $request, $name) {
@@ -65,15 +63,14 @@ class UserController extends Controller
 
         $user->delete();
 
-        toastr()->success('Xóa User thành công', ['timeOut' => 2000]);
-        return redirect()->route('list.user');
+        return redirect()->route('list.user')->with('success', 'Xóa User thành công');
     }
 
-    public function deletes(Request $request, $names)
-    {
-        User::query()->where('name', $names)->delete();
-
-        toastr()->success('Xóa tất cả user thành công', ['timeOut' => 2000]);
-        return redirect()->route('list.user');
-    }
+//    public function deletes(Request $request, $names)
+//    {
+//        User::query()->where('name', $names)->delete();
+//
+//        toastr()->success('Xóa tất cả user thành công', ['timeOut' => 2000]);
+//        return redirect()->route('list.user');
+//    }
 }

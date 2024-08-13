@@ -53,6 +53,7 @@
                     <strong>{{number_format($product->price - (($product->price * $product->discount)/100))}} ₫</strong>
                     <strong><del>{{number_format($product->price)}} ₫</del></strong>
                     <div>
+                        <span>Thương hiệu: <b>{{$product->brand->brand}}</b></span><br>
                         <span>Màu sắc: <b>{{$product->color}}</b></span><br>
                         <span>Xuất xứ: <b>{{$product->origin}}</b></span>
                     </div>

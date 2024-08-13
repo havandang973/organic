@@ -12,7 +12,7 @@ class Product extends Model
     protected $fillable = [
         'code',
         'thumbnail',
-        'brand',
+        'brand_id',
         'name',
         'price',
         'discount',
@@ -20,7 +20,8 @@ class Product extends Model
         'describe',
         'color',
         'origin',
-        'max_amount'
+        'max_amount',
+        'category_id'
     ];
 
     public function description()
@@ -36,5 +37,15 @@ class Product extends Model
     public function compareProducts()
     {
         return $this->hasMany(CompareProduct::class);
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class, 'brand_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
     }
 }

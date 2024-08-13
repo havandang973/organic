@@ -5,18 +5,18 @@
                 <div class="col-md-12">
                     <div class="banner-content">
                         <h1>100% <span>Organic</span></h1>
-                        <h3>Fresh & Natural Farm Food</h3>
-                        <p>The readable content of a page when looking at its layout point of using of letters, as opposed.</p>
-                        <a href="#" class="btn ">ALL PRoducts <i class="icofont-bubble-right"></i></a>
+                        <h3>Thực phẩm tươi & tự nhiên</h3>
+                        <p>Đảm bảo an toàn thực phẩm. Không chất bảo quản.</p>
+                        <a href="#" class="btn">Sản phẩm <i class="icofont-bubble-right"></i></a>
                     </div>
                 </div>
 
                 <div class="col-md-12">
                     <div class="banner-content">
                         <h1>100% <span>Organic</span></h1>
-                        <h3>Fresh & Natural Farm Food</h3>
-                        <p>The readable content of a page when looking at its layout point of using of letters, as opposed.</p>
-                        <a href="#" class="btn">ALL PRoducts <i class="icofont-bubble-right"></i></a>
+                        <h3>Thực phẩm tươi & tự nhiên</h3>
+                        <p>Đảm bảo an toàn thực phẩm. Không chất bảo quản.</p>
+                        <a href="#" class="btn">Sản phẩm <i class="icofont-bubble-right"></i></a>
                     </div>
                 </div>
 
@@ -40,7 +40,7 @@
                     <div class="features-box text-center">
                         <div class="features-icon-border">
                             <div class="features-icon">
-                                <i class="icofont icofont-wheat"></i>
+                                <i class="fa-solid fa-seedling"></i>
                             </div>
                         </div>
                         <div class="features-text">
@@ -54,7 +54,7 @@
                     <div class="features-box text-center">
                         <div class="features-icon-border">
                             <div class="features-icon">
-                                <i class="icofont icofont-truck-loaded"></i>
+                                <i class="fa-solid fa-truck-fast"></i>
                             </div>
                         </div>
                         <div class="features-text">
@@ -67,7 +67,7 @@
                     <div class="features-box text-center">
                         <div class="features-icon-border">
                             <div class="features-icon">
-                                <i class="icofont icofont-ui-chat"></i>
+                                <i class="fa-solid fa-comments"></i>
                             </div>
                         </div>
                         <div class="features-text">
@@ -80,7 +80,7 @@
                     <div class="features-box text-center">
                         <div class="features-icon-border">
                             <div class="features-icon">
-                                <i class="icofont icofont-rooster"></i>
+                                <i class="fa-solid fa-apple-whole"></i>
                             </div>
                         </div>
                         <div class="features-text">
@@ -93,7 +93,7 @@
                     <div class="features-box text-center">
                         <div class="features-icon-border">
                             <div class="features-icon">
-                                <i class="icofont icofont-wheat"></i>
+                                <i class="fa-solid fa-seedling"></i>
                             </div>
                         </div>
                         <div class="features-text">
@@ -106,7 +106,7 @@
                     <div class="features-box text-center">
                         <div class="features-icon-border">
                             <div class="features-icon">
-                                <i class="icofont icofont-truck-loaded"></i>
+                                <i class="fa-solid fa-truck-fast"></i>
                             </div>
                         </div>
                         <div class="features-text">
@@ -119,7 +119,7 @@
                     <div class="features-box text-center">
                         <div class="features-icon-border">
                             <div class="features-icon">
-                                <i class="icofont icofont-ui-chat"></i>
+                                <i class="fa-solid fa-comments"></i>
                             </div>
                         </div>
                         <div class="features-text">
@@ -132,7 +132,7 @@
                     <div class="features-box text-center">
                         <div class="features-icon-border">
                             <div class="features-icon">
-                                <i class="icofont icofont-rooster"></i>
+                                <i class="fa-solid fa-apple-whole"></i>
                             </div>
                         </div>
                         <div class="features-text">
@@ -149,12 +149,12 @@
     <div class="full-about" id="full-about">
         <div class="container">
             <div class="row">
-                <div class="about-title">
-                    <h2>About us</h2>
-                </div>
+{{--                <div class="about-title">--}}
+{{--                    <h2>About us</h2>--}}
+{{--                </div>--}}
                 <div class="col-md-6">
                     <div class="about-content">
-                        <h3>We Providing Services Since 1841 With Proud.</h3>
+                        <h3>Chúng tôi tự hào cung cấp dịch vụ từ năm 2022.</h3>
                         <div class="about-details">
                             <p>The readable content off a page when looking layout using Lorem Ipsum is that it has.</p>
                             <p>It is a long established fact that a reader will be distracted the readable content off a page when looking at its layout using Lorem Ipsum is that it has.</p>
@@ -162,10 +162,10 @@
 
                         <div class="about-icon-text align-items-center">
                             <div class="abt-icon">
-                                <i class="icofont-fruits"></i>
+                                <i class="fa-solid fa-leaf"></i>
                             </div>
                             <div class="abt-text">
-                                <h2>Fresh Look And <span>100% Organic</span> Farm Fresh Produce Right.</h2>
+                                <h2>Sản phẩm <span>tươi ngon 100%</span> từ trang trại hữu cơ..</h2>
                             </div>
                         </div>
                     </div>
@@ -180,8 +180,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h3 class="section-title">Our Best Seller Product</h3>
-                    <p class="section-subtitle">The passage experienced a surge in popularity during the 1960s when again during the 90s as desktop publishers</p>
+                    <h3 class="section-title">Sản phẩm bán chạy</h3>
                 </div>
             </div>
 
@@ -233,6 +232,11 @@
                     </div>
                 @endforeach
             </div>
+            <div class="text-center" style="margin-top: 2rem">
+                <a href="{{ route('products') }}">
+                    <button type="button" class="btn btn-success und">Xem thêm</button>
+                </a>
+            </div>
         </div>
     </div>
     <!-- BEST SELLER PART END -->
@@ -261,43 +265,37 @@
             <div class="row partner-slider">
                 <div class="col-md-12">
                     <div class="partner-img text-center">
-                        <img class="w-50 mx-auto" src="uploads/partner-1.png" alt="">
+                        <img class="w-50 mx-auto" src="https://admin.ems.com.vn/filemedia/company/EMS_LOGO1.1721463252.png" alt="">
                     </div>
                 </div>
 
                 <div class="col-md-12">
                     <div class="partner-img text-center">
-                        <img class="w-50 mx-auto" src="uploads/partner-2.png" alt="">
+                        <img class="w-50 mx-auto" src="https://www.tiendauroi.com/wp-content/uploads/2020/02/Grab-express.png" alt="">
                     </div>
                 </div>
 
                 <div class="col-md-12">
                     <div class="partner-img text-center">
-                        <img class="w-50 mx-auto" src="uploads/partner-3.png" alt="">
+                        <img class="w-50 mx-auto" src="https://cdn.haitrieu.com/wp-content/uploads/2022/05/Logo-JT-Express-Slogan.png" alt="">
                     </div>
                 </div>
 
                 <div class="col-md-12">
                     <div class="partner-img text-center">
-                        <img class="w-50 mx-auto" src="uploads/partner-4.png" alt="">
+                        <img class="w-50 mx-auto" src="https://home.ahamove.com/wp-content/uploads/2022/02/logo-moi-2022-02-e1644389788464.png" alt="">
                     </div>
                 </div>
 
                 <div class="col-md-12">
                     <div class="partner-img text-center">
-                        <img class="w-50 mx-auto" src="uploads/partner-5.png" alt="">
+                        <img class="w-50 mx-auto" src="https://cdn.haitrieu.com/wp-content/uploads/2022/05/Logo-Viettel-Post-Transparent.png" alt="">
                     </div>
                 </div>
 
                 <div class="col-md-12">
                     <div class="partner-img text-center">
-                        <img class="w-50 mx-auto" src="uploads/partner-1.png" alt="">
-                    </div>
-                </div>
-
-                <div class="col-md-12">
-                    <div class="partner-img text-center">
-                        <img class="w-50 mx-auto" src="uploads/partner-1.png" alt="">
+                        <img class="w-50 mx-auto" src="https://cdn.haitrieu.com/wp-content/uploads/2022/05/Logo-GHN-Slogan-En.png" alt="">
                     </div>
                 </div>
             </div>
@@ -310,8 +308,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h3 class="section-title">Our Happy Customers</h3>
-                    <p class="section-subtitle">The passage experienced a surge in popularity during the 1960s when again during the 90s as desktop publishers</p>
+                    <h3 class="section-title">Đánh giá từ khách hàng</h3>
                 </div>
             </div>
 
@@ -319,42 +316,43 @@
                 <div class="col-md-4">
                     <div class="testimonial-img text-center">
                         <div class="img">
-                            <img class="w-100" src="uploads/testimonial-1.png" alt="">
+                            <img class="w-100" src="https://scontent.fhan4-6.fna.fbcdn.net/v/t39.30808-6/294956968_509557307745007_3714294036389033215_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=5b_2dIxwiRcQ7kNvgFXqRa6&_nc_ht=scontent.fhan4-6.fna&oh=00_AYDIJ4GYdt3L6fLUYP_NZD5jgu-CEhXBod3yHdgAOPnUDg&oe=66B122BF" alt="">
                         </div>
 
                         <div class="img">
-                            <img class="w-100" src="uploads/testimonial-1.png" alt="">
+                            <img class="w-100" src="https://kenh14cdn.com/203336854389633024/2022/9/11/photo-1-1662914854718393712664.jpg" alt="">
                         </div>
 
                         <div class="img">
-                            <img class="w-100" src="uploads/testimonial-1.png" alt="">
+                            <img class="w-100" src="uploads/testimonial-3.png" alt="">
                         </div>
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div class="testimonial-text">
                         <div class="testimonial-info">
-                            <p>“ There are many variati ons passages of but the majority have suffered alteration in some form, injected humour randomised words which don't look even slightly believable. If you are going to use a passage of text all the loss.</p>
-                            <h3>Salvador Stanley</h3>
-                            <h4>Happy Customer</h4>
+                            <p>“ Sản phẩm sạch, tươi và rất tốt cho sức khỏe. Tôi rất hài lòng với chất lượng và dịch vụ của cửa hàng.</p>
+                            <h3>Nguyễn Văn A</h3>
+                            <h4>Khách hàng hài lòng</h4>
                         </div>
 
                         <div class="testimonial-info">
-                            <p>“ There are many variati ons passages of but the majority have suffered alteration in some form, injected humour randomised words which don't look even slightly believable. If you are going to use a passage of text all the loss.</p>
-                            <h3>Salvador Stanley</h3>
-                            <h4>Happy Customer</h4>
+                            <p>“ Món ăn rất ngon, giá cả hợp lý và nhân viên phục vụ nhiệt tình. Tôi sẽ quay lại lần sau.</p>
+                            <h3>Trần Thị B</h3>
+                            <h4>Khách hàng hài lòng</h4>
                         </div>
 
                         <div class="testimonial-info">
-                            <p>“ There are many variati ons passages of but the majority have suffered alteration in some form, injected humour randomised words which don't look even slightly believable. If you are going to use a passage of text all the loss.</p>
-                            <h3>Salvador Stanley</h3>
-                            <h4>Happy Customer</h4>
+                            <p>“ Chất lượng sản phẩm vượt trội, tôi hoàn toàn tin tưởng khi mua sắm tại đây. Đánh giá 5 sao!</p>
+                            <h3>Lê Văn C</h3>
+                            <h4>Khách hàng hài lòng</h4>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- TESTIMONIAL PART END -->
 
     <!-- CONTACT NOW PART END -->

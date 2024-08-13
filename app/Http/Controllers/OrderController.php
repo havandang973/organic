@@ -25,7 +25,8 @@ class OrderController extends Controller
         $this->addressRepo = $addressRepo;
     }
 
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         $id = Auth::user()->id;
         $addresses = $this->addressRepo->getAllAddressByUserId($id);
         $cartItems = Cart::content();
@@ -49,23 +50,24 @@ class OrderController extends Controller
         return view('checkout', compact('addresses'));
     }
 
-//    public function store(Request $request) {
-//        $request->validate([
-//            'name' => 'required|',
-//            'address' => 'required|',
-//            'email' => 'required|email:rfc,dns',
-//            'phone' => 'required|numeric|',
-//        ]);
-//
-//        $data = $request->all();
-////        Order::query()->create($data);
-//        return view('order', compact('data'));
-//    }
+    //    public function store(Request $request) {
+    //        $request->validate([
+    //            'name' => 'required|',
+    //            'address' => 'required|',
+    //            'email' => 'required|email:rfc,dns',
+    //            'phone' => 'required|numeric|',
+    //        ]);
+    //
+    //        $data = $request->all();
+    ////        Order::query()->create($data);
+    //        return view('order', compact('data'));
+    //    }
 
-    public function showOrder(Request $request) {
+    public function showOrder(Request $request)
+    {
         $query = Order::query()->where('user_id', auth()->id())->latest('created_at');
 
-//        dd($query);
+        //        dd($query);
         if ($request->has('status') && $request->status != '') {
             $query->where('status', $request->status);
         }
@@ -83,7 +85,8 @@ class OrderController extends Controller
         return view('order', compact('orders'));
     }
 
-    public function showOrderDetail($orderId) {
+    public function showOrderDetail($orderId)
+    {
         $order = Order::with('orderDetail')->where('id', $orderId)->latest('created_at')->firstOrFail();
 
         return view('order-details', compact('order'));
@@ -103,12 +106,15 @@ class OrderController extends Controller
         return response()->json(['success' => false, 'message' => 'Không thể hủy đơn hàng.']);
     }
 
-
     public function checkOrderStatus()
     {
         $orders = Order::query()->where('user_id', auth()->id())->latest('created_at')->get();
         return response()->json(['orders' => $orders]);
-
     }
 
+    public function checkOrderNew()
+    {
+        $newOrders = Order::where('created_at', '>', now()->subSecond(20))->count();
+        return response()->json(['newOrders' => $newOrders,  'checkedAt' => now()->toDateTimeString()]);
+    }
 }

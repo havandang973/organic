@@ -1,7 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
+    function getStatusText(status) {
+        const statusTexts = {
+            'PENDING': 'Đang xử lý',
+            'CANCELED': 'Đã hủy',
+            'COMPLETED': 'Đã hoàn thành',
+            'DELIVERY': 'Đang giao hàng',
+            'CONFIRMED': 'Đã xác nhận',
+            'PAID': 'Đã thanh toán'
+        };
+        return statusTexts[status] || status;
+    }
 
     function updateOrderStatuses() {
-
         axios.get('/api/check-order-status')
             .then(function(response) {
                 // console.log(response)
@@ -17,11 +27,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             var statusCell = orderRow.querySelector('.order-status');
                             var btnCancel = orderRow.querySelector('.cancel-button');
                             if (order.status) {
-                                statusCell.innerText = order.status;
+                                statusCell.innerText = getStatusText(order.status);
                                 statusCell.className = getStatusClass(order.status) + " order-status";
                             }
                         }
-                        console.log(statusSelect)
 
                         if (statusSelect) {
                             Array.from(statusSelect.options).forEach(option => {
@@ -45,9 +54,12 @@ document.addEventListener('DOMContentLoaded', function() {
             case 'CANCELED':
                 return 'text-danger';
             case 'COMPLETED':
+            case 'PAID':
                 return 'text-success';
             case 'DELIVERY':
                 return 'text-primary';
+            case 'CONFIRMED':
+                return 'text-info';
             default:
                 return '';
         }
