@@ -1,14 +1,13 @@
 <?php
 
+use App\Http\Controllers\AddressController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CompleteController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\CompleteController;
-use \App\Http\Controllers\Admin\UserController;
-use \App\Http\Controllers\OrderEmailController;
-use App\Http\Controllers\AddressController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,14 +32,15 @@ Route::get('/order-details/product/{orderId}', [OrderController::class, 'showOrd
 
 Route::post('canceled/order/{orderId}', [OrderController::class, 'canceledOrder'])->name('canceled.order');
 Route::get('/api/check-order-status', [\App\Http\Controllers\OrderController::class, 'checkOrderStatus']);
+Route::get('/api/check-order-new', [\App\Http\Controllers\OrderController::class, 'checkOrderNew']);
 
-//Route::get('/deletes', [UserController::class, 'deletes']);
+Route::get('/products', [ProductController::class, 'index'])->name('products');
 
 Route::get('/header', function () {
     return view('layouts.header');
 });
 
-Route::get('/', [ProductController::class, 'index'])->name('home');
+Route::get('/', [ProductController::class, 'bestProduct'])->name('home');
 
 Route::get('/products/{id}', [ProductController::class, 'find'])->name('productDetail');
 
@@ -70,12 +70,18 @@ Route::prefix('admin')->middleware(['CheckRole:CUSTOMER', 'AuthAdmin'])->group(f
         Route::get('/product/{name}', [\App\Http\Controllers\Admin\ProductController::class, 'index_edit']);
         Route::post('/product/{name}', [\App\Http\Controllers\Admin\ProductController::class, 'edit'])->name('edit.product');
         Route::post('/status/{orderId}', [\App\Http\Controllers\Admin\OrderController::class, 'edit'])->name('edit.status');
+        Route::get('/category-product/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('category.edit');
+        Route::put('/category-product/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('category.update');
+        Route::get('/brand-product/{id}', [\App\Http\Controllers\Admin\BrandController::class, 'edit'])->name('brand.edit');
+        Route::put('/brand-product/{id}', [\App\Http\Controllers\Admin\BrandController::class, 'update'])->name('brand.update');
     });
     Route::prefix('/delete')->group(function () {
         Route::get('/user/{name}', [UserController::class, 'index_delete']);
         Route::post('/user/{name}', [UserController::class, 'delete'])->name('delete.user');
         Route::get('/product/{name}', [\App\Http\Controllers\Admin\ProductController::class, 'delete'])->name('delete.product');
-        Route::get('/order/{orderId}', [\App\Http\Controllers\Admin\OrderController::class, 'delete'])->name('delete.order');
+        Route::get('/order/{orderCode}', [\App\Http\Controllers\Admin\OrderController::class, 'delete'])->name('delete.order');
+        Route::delete('/category-product/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'destroy'])->name('category.product.destroy');
+        Route::delete('/brand-product/{id}', [\App\Http\Controllers\Admin\BrandController::class, 'destroy'])->name('brand.destroy');
     });
     Route::prefix('/list')->group(function () {
         Route::get('/product', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('list.product');
@@ -88,9 +94,7 @@ Route::prefix('admin')->middleware(['CheckRole:CUSTOMER', 'AuthAdmin'])->group(f
 
     });
     Route::prefix('/add')->group(function () {
-        Route::get('/product', function () {
-            return view('admin.add.product');
-        });
+        Route::get('/product', [\App\Http\Controllers\Admin\ProductController::class, 'index_add']);
         Route::post('/product', [\App\Http\Controllers\Admin\ProductController::class, 'create'])->name('add.product');
         Route::get('/post', function () {
             return view('admin.add.post');
@@ -107,9 +111,13 @@ Route::prefix('admin')->middleware(['CheckRole:CUSTOMER', 'AuthAdmin'])->group(f
         return view('admin.cat');
     })->name('admin.cat');
 
-    Route::get('/catProduct', function () {
-        return view('admin.catProduct');
-    })->name('admin.catProduct');
+    Route::get('/category-product', [\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('category.product');
+    Route::post('/category-product', [\App\Http\Controllers\Admin\CategoryController::class, 'store'])->name('category.product.store');
+
+    Route::get('/brand-product', [\App\Http\Controllers\Admin\BrandController::class, 'index'])->name('brand.product');
+    Route::post('/brand-product', [\App\Http\Controllers\Admin\BrandController::class, 'store'])->name('brand.product.store');
+
+    Route::get('/order/{id}/invoice', [\App\Http\Controllers\Admin\OrderController::class, 'generateInvoice'])->name('order.invoice');
 });
 
 Route::get('/dashboard', function () {

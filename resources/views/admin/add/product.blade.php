@@ -16,6 +16,18 @@
                     </div>
                     <div class="mt-4 flex gap-4">
                         <div class="flex-1">
+                            <x-input-label for="category" :value="__('Danh mục')" />
+                            <x-select name="category_id" id="category" :value="old('category')" label="Danh mục">
+                                <option value="" selected>Danh mục</option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" {{ old('category') == $category->category ? 'selected' : '' }}>
+                                        {{ $category->category }}
+                                    </option>
+                                @endforeach
+                            </x-select>
+                            <x-input-error :messages="$errors->get('category')" class="mt-2" />
+                        </div>
+                        <div class="flex-1">
                             <x-input-label for="price" :value="__('Giá sản phẩm')" />
                             <x-text-input placeholder="Giá sản phẩm" id="price" class="block mt-1 w-full" type="text" name="price" :value="old('price')"  autofocus autocomplete="price" />
                             <x-input-error :messages="$errors->get('price')" class="mt-2" />
@@ -39,7 +51,14 @@
                         </div>
                         <div class="flex-1">
                             <x-input-label for="brand" :value="__('Thương hiệu')" />
-                            <x-text-input placeholder="Thương hiệu" id="brand" class="block mt-1 w-full" type="text" name="brand" :value="old('brand')"  autofocus autocomplete="brand" />
+                            <x-select name="brand_id" id="brand" :value="old('brand')" label="Thương hiệu">
+                                <option value="" selected>Thương hiệu</option>
+                                @foreach($brands as $brand)
+                                    <option value="{{ $brand->id }}" {{ old('brand') == $brand->brand ? 'selected' : '' }}>
+                                        {{ $brand->brand }}
+                                    </option>
+                                @endforeach
+                            </x-select>
                             <x-input-error :messages="$errors->get('brand')" class="mt-2" />
                         </div>
                     </div>

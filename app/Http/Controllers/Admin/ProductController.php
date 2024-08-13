@@ -3,12 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
+use App\Repositories\CompareProductRepository;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function __construct(ProductRepository $productRepo)
+    {
+        $this->productRepo = $productRepo;
+    }
+
     public function index(Request $request) {
         $query = Product::query();
 
@@ -34,22 +43,31 @@ class ProductController extends Controller
         return view('admin.list.product', compact('products', 'lowStockProducts'));
     }
 
+    public function index_add() {
+        $categories = Category::query()->get();
+        $brands = Brand::query()->get();
+
+        return view('admin.add.product', compact('categories', 'brands'));
+    }
+
     public function index_edit(Request $request, $name) {
         $product = Product::query()->where('name', $name)->first();
         return view('admin.edit.product', compact('product'));
     }
 
     public function create(Request $request) {
+//        dd($request->all());
         $request->validate([
             'name' => ['required'],
             'price' => ['required', 'numeric'],
             'discount' => ['required', 'numeric'],
             'code' => ['required'],
             'img' => ['required'],
-            'brand' => ['required'],
+            'brand_id' => ['required'],
             'color' => ['required'],
             'origin' => ['required'],
             'max_amount' => ['required', 'numeric'],
+            'category_id' => ['required'],
             'describe' => ['required'],
         ]);
 
@@ -66,6 +84,7 @@ class ProductController extends Controller
 
             $input['thumbnail'] = $img;
         }
+
         Product::query()->create($input);
 
 //        Product::query()->create([
@@ -81,25 +100,58 @@ class ProductController extends Controller
 //            'describe' => $request->describe_detail,
 //        ]);
 
-        toastr()->success('Thêm sản phẩm thành công', ['timeOut' => 2000]);
-        return redirect()->route('list.product');
+        return redirect()->route('list.product')->with('success', 'Thêm sản phẩm thành công');
     }
 
     public function edit(Request $request, $name) {
         $product = Product::query()->where('name', $name)->first();
 
-//        $request->validate(
-//            [
-//                'name' => 'required',
-//                'email' => 'required|email:rfc,dns|unique:users,email,' . $user->id
-//            ]
-//        );
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required|numeric|min:1',
+            'discount' => 'nullable|numeric',
+            'code' => 'required|unique:products,code,' . $product->id,
+            'brand' => 'required',
+            'color' => 'required',
+            'origin' => 'required',
+            'max_amount' => 'required|numeric',
+            'describe' => 'required',
+            'img' => 'nullable|image',
+        ], [
+            'name.required' => 'Tên sản phẩm là bắt buộc.',
+            'price.required' => 'Giá sản phẩm là bắt buộc.',
+            'price.numeric' => 'Giá sản phẩm phải là số.',
+            'price.min' => 'Giá sản phẩm phải lớn hơn 0.',
+            'discount.numeric' => 'Giảm giá phải là số.',
+            'code.required' => 'Mã sản phẩm là bắt buộc.',
+            'code.unique' => 'Mã sản phẩm đã tồn tại.',
+            'brand.required' => 'Thương hiệu là bắt buộc.',
+            'color.required' => 'Màu sắc là bắt buộc.',
+            'origin.required' => 'Nguồn gốc là bắt buộc.',
+            'max_amount.required' => 'Số lượng tối đa là bắt buộc.',
+            'max_amount.numeric' => 'Số lượng tối đa phải là số.',
+            'describe.required' => 'Mô tả sản phẩm là bắt buộc.',
+            'img.image' => 'Ảnh sản phẩm phải là định dạng hình ảnh hợp lệ.',
+        ]);        
+        
         $data = $request->all();
+
+        if ($request->hasFile('img')) {
+            // Xóa ảnh cũ 
+            if ($product->thumbnail && file_exists(public_path($product->thumbnail))) {
+                unlink(public_path($product->thumbnail));
+            }
+    
+            // Lưu ảnh mới
+            $imageName = $request->img->getClientOriginalName();
+            $request->img->move(public_path('uploads/'), $imageName);
+            $data['thumbnail'] = 'uploads/'.$imageName;
+        }
+        
         $product->fill($data);
         $product->save();
 
-        toastr()->success('Chỉnh sửa sản phẩm thành công', ['timeOut' => 2000]);
-        return redirect()->route('list.product');
+        return redirect()->route('list.product')->with('success', 'Chỉnh sửa sản phẩm thành công');
     }
 
     public function delete(Request $request, $name) {
@@ -108,7 +160,6 @@ class ProductController extends Controller
 //        dd($product->currentPage());
         $product->delete();
 
-        toastr()->success('Xóa sản phẩm thành công', ['timeOut' => 2000]);
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Xóa sản phẩm thành công');
     }
 }

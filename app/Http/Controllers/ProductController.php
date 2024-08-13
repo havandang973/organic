@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
 use App\Repositories\CompareProductRepository;
 use App\Services\ProductService;
@@ -19,20 +21,37 @@ class ProductController extends Controller
         $this->compareProductRepo = $compareProductRepo;
     }
 
-    public function index() {
-        $products = $this->productRepo->getAllProduct();
+    public function index(Request $request)
+    {
+        $brands = Brand::query()->get();
+        $categories = Category::query()->get();
+        $query = $this->productRepo->getAllProduct();
+
+        if ($request->has('category') && $request->category != '') {
+            $query->where('category_id', $request->category);
+        }
+        
+        $products = $query->paginate(4);
+
+        return view('product', compact('products', 'brands', 'categories'));
+    }
+
+    public function bestProduct()
+    {
+        $products = $this->productRepo->getAllProduct()->get();
         return view('index', compact('products'));
     }
 
-    public function find($id) {
-//            $product = Product::query()->with('description')->findOrFail($id);
-//            $products = Product::all()->random(3);
+    public function find($id)
+    {
+        //            $product = Product::query()->with('description')->findOrFail($id);
+        //            $products = Product::all()->random(3);
 
-            $product = $this->productRepo->getProductById($id);
-//            $products = $this->productRepo->getRandomProduct(7);
-            $products = $this->productRepo->getAllProduct();
+        $product = $this->productRepo->getProductById($id);
+        //            $products = $this->productRepo->getRandomProduct(7);
+        $products = $this->productRepo->getAllProduct()->get();
 
-            return view('product-details', ['product' => $product, 'products' => $products]);
+        return view('product-details', ['product' => $product, 'products' => $products]);
     }
 
     public function showCompare(Request $request)

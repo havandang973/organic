@@ -22,7 +22,7 @@ class ProductRepository extends BaseRepository
 
     public function getAllProduct()
     {
-        return $this->model->get();
+        return $this->model->query();
     }
 
     public function getProductById($id)
@@ -34,4 +34,14 @@ class ProductRepository extends BaseRepository
     {
         return $this->model->get()->random($amount);
     }
+
+//    public function getDistinctBrands()
+//    {
+//        return $this->model->select('brand')->distinct()->pluck('brand');
+//    }
+
+//    public function getDistinctCategory()
+//    {
+//        return $this->model->select('category')->distinct()->pluck('category');
+//    }
 }

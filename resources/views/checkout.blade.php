@@ -114,7 +114,7 @@
                                                 </table>
                                             </div>
                                             <div class="checkout_btn text-end mt-3">
-                                                <button type="submit" class="btn border-radius-0 border-transparent">Thanh toán</button>
+                                                <button type="submit" name="redirect" class="btn border-radius-0 border-transparent">Thanh toán</button>
                                             </div>
                                         </div>
                                     </div>
