@@ -20,13 +20,13 @@ class CartController extends Controller
     }
 
     public function index() {
-        if (!Auth::check()) {
-            return view('auth.login');
-        }
+        // if (!Auth::check()) {
+        //     return view('auth.login');
+        // }
 
-        $id = Auth::user()->id;
-        $addresses = $this->addressRepo->getAllAddressByUserId($id);
-        return view('cart-overview', compact('addresses'));
+        // $id = Auth::user()->id;
+        // $addresses = $this->addressRepo->getAllAddressByUserId($id);
+        return view('cart-overview');
     }
 
     public function add(Request $request, $id)

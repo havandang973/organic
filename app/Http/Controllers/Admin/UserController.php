@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +14,42 @@ class UserController extends Controller
         $users = User::paginate(5);
         return view('admin.list.user', compact('users'));
     }
+
+    public function customer(Request $request)
+{
+    $query = User::withCount([
+        'order as orders_count' => function ($query) {
+            $query->where('status', 'COMPLETED');
+        }
+    ])
+    ->having('orders_count', '>=', 3);
+
+    // Apply filters
+    if ($request->filled('name')) {
+        $query->where('name', 'like', '%' . $request->input('name') . '%');
+    }
+
+    if ($request->filled('email')) {
+        $query->where('email', 'like', '%' . $request->input('email') . '%');
+    }
+
+    if ($request->filled('order_count_min')) {
+        $query->having('orders_count', '>=', $request->input('order_count_min'));
+    }
+
+    if ($request->filled('order_count_max')) {
+        $query->having('orders_count', '<=', $request->input('order_count_max'));
+    }
+
+    $customers = $query->get();
+
+    foreach ($customers as $customer) {
+        $customer->latest_order_date = $customer->order()->where('status', 'COMPLETED')->latest('created_at')->value('created_at');
+    }
+
+    return view('admin.list.customer', compact('customers'));
+}
+
 
     public function add(Request $request) {
         $request->validate([

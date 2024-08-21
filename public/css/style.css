@@ -1848,8 +1848,8 @@ button:hover {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top center;
-    padding-top: 200px;
-    padding-bottom: 100px;
+    padding-top: 150px;
+    /* padding-bottom: 100px; */
 }
 
 .footer_widget_title h2 {

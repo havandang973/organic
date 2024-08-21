@@ -31,6 +31,18 @@ class LoginRequest extends FormRequest
             'password' => ['required', 'string'],
         ];
     }
+    
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'Email là bắt buộc.',
+            'email.string' => 'Email phải là một chuỗi ký tự.',
+            'email.email' => 'Email phải là một địa chỉ email hợp lệ.',
+            
+            'password.required' => 'Mật khẩu là bắt buộc.',
+            'password.string' => 'Mật khẩu phải là một chuỗi ký tự.',
+        ];
+    }
 
     /**
      * Attempt to authenticate the request's credentials.
@@ -45,7 +57,7 @@ class LoginRequest extends FormRequest
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'email' => 'Thông tin đăng nhập không chính xác.',
             ]);
         }
 
@@ -68,10 +80,7 @@ class LoginRequest extends FormRequest
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
-                'seconds' => $seconds,
-                'minutes' => ceil($seconds / 60),
-            ]),
+            'email' => 'Quá nhiều lần thử đăng nhập. Vui lòng thử lại sau :seconds giây.',
         ]);
     }
 

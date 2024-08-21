@@ -27,10 +27,10 @@ class CompleteController extends Controller
 
             $paymentMethodData = [
                 'method' => 'Thanh toán online',
-                'bank' => $data['vnp_BankCode'],  // Ngân hàng
-                'transaction_code' => $data['vnp_TmnCode'],  // Mã giao dịch
-                'total' => Cart::total(),  // Tổng tiền
-                'time' =>  now()->toDateTimeString(),  // Thời gian
+                'bank' => $data['vnp_BankCode'] ?? '',  
+                'transaction_code' => $data['vnp_TmnCode'] ?? '',
+                'total' => Cart::total(),
+                'time' => now()->toDateTimeString(),
             ];
 
             $order = Order::query()->where('order_code', $orderCode)->first();
@@ -59,8 +59,18 @@ class CompleteController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+
+        $paymentMethodData = [
+            'method' => $data['payment_method'],
+            'bank' => $data['payment_method'] == 'Thanh toán online' ? 'Lỗi thanh toán' : '',  // Ngân hàng
+            'transaction_code' => $data['payment_method'] == 'Thanh toán online' ? 'Lỗi thanh toán' : '', // Mã giao dịch
+            'total' => Cart::total(),  // Tổng tiền
+            'time' =>  now()->toDateTimeString(),  // Thời gian
+        ];
+
         $data['user_id'] = auth()->id();
         $data['order_code'] = str()->random(10);
+        $data['payment_method'] = json_encode($paymentMethodData, JSON_UNESCAPED_UNICODE);
 
         $order = Order::query()->create($data);
         $carts = Cart::content();
@@ -84,7 +94,9 @@ class CompleteController extends Controller
 
         $products = OrderDetail::query()->where('order_id', $orderDetail['order_id'])->get();
 
-        if ($data['payment_method'] === Transaction::ONLINE) {
+        $paymentMethodArray = json_decode($data['payment_method'], true);
+
+        if ($paymentMethodArray['method'] === Transaction::ONLINE) {
             $this->vnpay($data, Cart::total());
         }
 
