@@ -27,6 +27,10 @@ class OrderController extends Controller
 
     public function index(Request $request)
     {
+        if (!Auth::check()) {
+            return view('auth.login');
+        }
+
         $id = Auth::user()->id;
         $addresses = $this->addressRepo->getAllAddressByUserId($id);
         $cartItems = Cart::content();
@@ -40,7 +44,13 @@ class OrderController extends Controller
         }
 
         foreach ($cartItems as $item) {
-            $maxQty = Product::find($item->id)->max_amount;
+            try {
+                $maxQty = Product::find($item->id)->max_amount;
+            } catch (\Exception $e) {
+                toastr()->warning('Sản phẩm đã cập nhật. Vui lòng thanh toán lại.', ['timeOut' => 3000]);
+                return back();
+            }
+            
             if ($item->qty > $maxQty) {
                 toastr()->warning('Sản phẩm trong giỏ hàng vượt quá số lượng trong kho.', ['timeOut' => 3000]);
                 return view('cart-overview', compact('addresses'));
@@ -87,8 +97,10 @@ class OrderController extends Controller
 
     public function showOrderDetail($orderId)
     {
-        $order = Order::with('orderDetail')->where('id', $orderId)->latest('created_at')->firstOrFail();
-
+        $order = Order::with(['orderDetail.product' => function ($query) {
+            $query->withTrashed();
+        }])->where('id', $orderId)->latest('created_at')->firstOrFail();
+    
         return view('order-details', compact('order'));
     }
 

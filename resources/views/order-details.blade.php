@@ -15,9 +15,27 @@
                 <b>Mã Đơn Hàng: #</b>
                 <p>Ngày Đặt: {{$order->created_at}} </p>
                 <p>Tổng Số Tiền: <span class="text-success">{{number_format($totalAll, 0, "", ".")}} VNĐ</span></p>
-                <p>Trạng Thái:
-                    <span class="{{ $order->status === 'PENDING' ? 'text-warning' : ($order->status === 'CANCELED' ? 'text-danger' : ($order->status === 'COMPLETED' ? 'text-success' : ($order->status === 'DELIVERY' ? 'text-primary' : ''))) }}">
-                        {{ $order->status }}
+                <p>Trạng thái:
+                    <span id="order-status"
+                        class="order-status {{ $order->status === 'CONFIRMED'
+                            ? 'text-info'
+                            : ($order->status === 'PENDING'
+                                ? 'text-warning'
+                                : ($order->status === 'CANCELED'
+                                    ? 'text-danger'
+                                    : ($order->status === 'COMPLETED' || $order->status === 'PAID'
+                                        ? 'text-success'
+                                        : ($order->status === 'DELIVERY'
+                                            ? 'text-primary'
+                                            : '')))) }}">
+                        {{ [
+                            'PENDING' => 'Đang xử lý',
+                            'CANCELED' => 'Đã hủy',
+                            'COMPLETED' => 'Đã hoàn thành',
+                            'DELIVERY' => 'Đang giao hàng',
+                            'CONFIRMED' => 'Đã xác nhận',
+                            'PAID' => 'Đã thanh toán',
+                        ][$order->status] ?? $order->status }}
                     </span>
                 </p>
 
@@ -39,8 +57,8 @@
                                 <td>
                                     <div class="d-flex justify-content-start align-items-center text-nowrap">
                                         <div class="avatar-wrapper">
-                                            <div class="avatar me-2">
-                                                <img src="{{ asset($order_detail->product->thumbnail) }}" alt="" class="rounded-2" style="width: 80px;">
+                                            <div class="avatar me-2" style="width: 80px;">
+                                                <img src="{{ asset($order_detail->product->thumbnail) }}" alt="" class="rounded-2">
                                             </div>
                                         </div>
                                         <div class="d-flex flex-column">

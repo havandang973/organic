@@ -3,7 +3,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="navbar-brand" href="index.html">
-                    <img src="{{asset('uploads/logo.png')}}" alt="">
+                    <img src="{{asset('uploads/organic.png')}}" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa-solid fa-bars" style="color: #ffffff;"></i>
@@ -12,42 +12,37 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="index.html">Home</a>
+                            <a class="nav-link" href="/">Trang chủ</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#full-about">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#product">Product</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#full-testimonial">Testimonial</a>
-                        </li>
+                        {{-- id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" --}}
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Pages
+                            <a class="nav-link dropdown-toggle" href="/products">
+                                Sản phẩm
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="productdetails.html">Product Details</a>
-                                <a class="dropdown-item" href="blog.html">Blog</a>
-                                <a class="dropdown-item" href="blogdetails.html">Blog Details</a>
-                                <a class="dropdown-item" href="404-error.html">404-Error</a>
-                                <a class="dropdown-item" href="cartoverview.html">Cartoverview</a>
-                                <a class="dropdown-item" href="checkout.html">Checkout</a>
+                                @foreach ($categories as $category)
+                                    <a class="dropdown-item" href="{{ url('/products?category='.$category->id) }}">{{ $category->category }}</a>
+                                @endforeach
                             </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#full-about">Giới thiệu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#full-testimonial">Đánh giá</a>
                         </li>
                     </ul>
 
                     <div class="header-content">
                         <div class="header_contact text-right">
-                            <span>Call Us!</span>
-                            <span class="phone_no">+00 569 846 348</span>
+                            <span>Liên hệ!</span>
+                            <span class="phone_no">0348 478 579</span>
                         </div>
                         <div class="header_icon" style="display: flex; justify-content: center; align-items: center">
                             <a href="/compare" style="width: 100%">
                                 <i class="fa-solid fa-code-compare" style="color: #ffffff; font-size: 18px"></i>
                                 <span id="amountCompare" class="cart_no" style="font-size: 13px; font-weight: 500; padding: 11px; display: flex; justify-content: center; align-items: center">
-                                    <span>0</span>
+                                    <span>{{$amount}}</span>
                                 </span>
                             </a>
                         </div>
@@ -115,5 +110,14 @@
         font-size: 1rem; /* Kích thước chữ */
         font-weight: 600; /* Độ đậm chữ */
     }
+
+    .nav-item.dropdown:hover .dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-menu {
+        margin-top: 0;
+    }
+
 </style>
 

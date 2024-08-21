@@ -37,7 +37,10 @@ class OrderController extends Controller
         }
 
         if ($request->filled('payment_method')) {
-            $query->where('payment_method', $request->payment_method);
+            $query->whereRaw(
+                'JSON_UNQUOTE(JSON_EXTRACT(payment_method, "$.method")) = ?',
+                [$request->payment_method]
+            );
         }
 
         if ($request->filled('status')) {
@@ -63,10 +66,16 @@ class OrderController extends Controller
         $orders = $query->latest('created_at')->paginate(5);
 
         foreach ($orders as $order) {
-            $order_details = OrderDetail::query()->where('order_id', $order->id)->get();
-            
+            $order_details = OrderDetail::query()
+            ->where('order_id', $order->id)
+            ->with(['product' => function($query) {
+                $query->withTrashed(); // Bao gồm sản phẩm đã bị xóa mềm
+            }])
+            ->get();
+
+            // dd($order_details);
             $order->payment_method === Transaction::ONLINE ? $order->payment_method = json_decode($order->payment_method, true) : '';
-            
+
             $totalAll = 0;
             foreach ($order_details as $order_detail) {
                 $price = $order_detail->product->price - (($order_detail->product->price * $order_detail->product->discount) / 100);
@@ -74,7 +83,6 @@ class OrderController extends Controller
                 $totalAll += $total;
             }
             $order->total_amount = $totalAll;
-        
         }
 
         return view('admin.list.order', compact('orders'));
@@ -105,5 +113,83 @@ class OrderController extends Controller
 
         return $pdf->stream();
         //        return $pdf->download('invoice.pdf');
+    }
+
+    public function orderPrint(Request $request)
+    {   
+        $query = Order::query();
+
+        if ($request->filled('order_code')) {
+            $query->where('order_code', 'like', '%' . $request->order_code . '%');
+        }
+
+        if ($request->filled('email')) {
+            $query->where('email', 'like', '%' . $request->email . '%');
+        }
+
+        if ($request->filled('name')) {
+            $query->where('name', 'like', '%' . $request->name . '%');
+        }
+
+        if ($request->filled('address')) {
+            $query->where('address', 'like', '%' . $request->address . '%');
+        }
+
+        if ($request->filled('phone')) {
+            $query->where('phone', 'like', '%' . $request->phone . '%');
+        }
+
+        if ($request->filled('payment_method')) {
+            $query->whereRaw(
+                'JSON_UNQUOTE(JSON_EXTRACT(payment_method, "$.method")) = ?',
+                [$request->payment_method]
+            );        
+        }
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        if ($request->filled('from_date')) {
+            try {
+                $query->whereDate('created_at', '>=', $request->from_date);
+            } catch (\Exception $e) {
+                // handle exception if from_date is not a valid date
+            }
+        }
+
+        if ($request->filled('to_date')) {
+            try {
+                $query->whereDate('created_at', '<=', $request->to_date);
+            } catch (\Exception $e) {
+                // handle exception if to_date is not a valid date
+            }
+        }
+
+        $orders = $query->latest('created_at')->get();
+
+        foreach ($orders as $order) {
+            $order_details = OrderDetail::query()
+            ->where('order_id', $order->id)
+            ->with(['product' => function($query) {
+                $query->withTrashed(); // Bao gồm sản phẩm đã bị xóa mềm
+            }])
+            ->get();
+
+            // dd($order_details);
+            $order->payment_method === Transaction::ONLINE ? $order->payment_method = json_decode($order->payment_method, true) : '';
+
+            $totalAll = 0;
+            foreach ($order_details as $order_detail) {
+                $price = $order_detail->product->price - (($order_detail->product->price * $order_detail->product->discount) / 100);
+                $total = $order_detail->qty * $price;
+                $totalAll += $total;
+            }
+            $order->total_amount = $totalAll;
+        }
+
+        $title = $request->customTitle ? $request->customTitle : 'Danh sách';
+        $pdf = PDF::loadView('admin.report', compact('orders', 'title'));
+        return $pdf->stream();
     }
 }

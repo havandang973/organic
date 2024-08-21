@@ -6,9 +6,8 @@ addToCompareBtns.forEach(function(btn) {
 
         axios.post(btn.closest('.addToCompareForm').action, formData)
             .then(function (response) {
-                console.log(response)
                 document.getElementById('amountCompare').innerText = response.data.compareProductAmount;
-                localStorage.setItem('compareProductAmount', response.data.compareProductAmount);
+                // localStorage.setItem('compareProductAmount', response.data.compareProductAmount);
 
                 // document.getElementById('error-amount') ? document.getElementById('error-amount').innerText = '' : ''
 
@@ -28,8 +27,7 @@ removeCompares.forEach(function (btn) {
         axios.post(btn.closest('.formDeleteCompare').action, formData)
             .then(function (response) {
                 console.log(response)
-                localStorage.setItem('compareProductAmount', response.data.compareProductAmount);
-                getCompareProductAmount();
+                document.getElementById('amountCompare').innerText = response.data.compareProductAmount--;
                 btn.closest('.item-compare').remove();
             })
             .catch(function (error) {
@@ -38,13 +36,13 @@ removeCompares.forEach(function (btn) {
     });
 });
 
-function getCompareProductAmount() {
-    var compareProductAmount = localStorage.getItem('compareProductAmount');
-    if (compareProductAmount !== null) {
-        document.getElementById('amountCompare').innerText = compareProductAmount;
-    }
-}
+// function getCompareProductAmount() {
+//     var compareProductAmount = localStorage.getItem('compareProductAmount');
+//     if (compareProductAmount !== null) {
+//         document.getElementById('amountCompare').innerText = compareProductAmount;
+//     }
+// }
 
-document.addEventListener('DOMContentLoaded', function() {
-    getCompareProductAmount();
-});
+// document.addEventListener('DOMContentLoaded', function() {
+//     getCompareProductAmount();
+// });

@@ -1,6 +1,7 @@
 @extends('admin.index')
 
 @section('content')
+
     <div class="container-fluid py-5">
         <div class="row">
             <div class="col">
@@ -76,55 +77,125 @@
 
         <div class="card">
             <div class="card-header font-weight-bold">
-                ĐƠN HÀNG MỚI
+                Thống kê 
             </div>
-            <div class="card-body">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Khách hàng</th>
-                        <th scope="col">Địa chỉ</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Số điện thoại</th>
-                        <th scope="col">Trạng thái</th>
-                        <th scope="col">Thời gian</th>
-                        <th scope="col">Tác vụ</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php use App\Enums\Status; $t = ($orders->currentPage() - 1) * $orders->perPage() + 1; ?>
-                    @foreach($orders as $order)
-                        <tr>
-                            <th scope="row">{{$t++}}</th>
-                            <td>{{$order->name}}</td>
-                            <td>{{$order->address}}</td>
-                            <td>{{$order->email}}</td>
-                            <td>{{$order->phone}}</td>
-                            <td>
-                                <span class="inline-block rounded-lg text-white px-2 py-1 text-xs font-bold mr-3
-                                        @if($order->status === Status::CANCELED)
-                                            bg-red-500
-                                        @elseif($order->status === Status::COMPLETED)
-                                            bg-green-500
-                                        @elseif($order->status === Status::DELIVERY)
-                                            bg-blue-500
-                                        @else
-                                            bg-yellow-500
-                                        @endif">{{$order->status}}
-                                </span>
-                            </td>
-                            <td>{{$order->created_at}}</td>
-                            <td>
-                                <a href="{{route('list.orderDetail', $order->id)}}" class="btn bg-green-600 btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
-                                {{--                                <a href="{{route('delete.order', $order->id)}}" class="btn bg-red-500 btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>--}}
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-                {{$orders->links()}}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="container-fluid py-5">
+                        <form action="" method="GET">
+                            <div class="row">
+                                <!-- Biểu đồ Doanh số theo tháng -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <select name="year_sales" id="year_sales" class="form-control" onchange="this.form.submit()">
+                                            @for ($i = date('Y'); $i >= 2022; $i--)
+                                                <option value="{{ $i }}" {{ request('year_sales', 2024) == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                    <canvas id="salesChart" style="max-width: 100%; height: auto;"></canvas>
+                                </div>
+                    
+                                <!-- Biểu đồ Đơn hàng thành công -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <select name="year_successful" id="year_successful" class="form-control" onchange="this.form.submit()">
+                                            @for ($i = date('Y'); $i >= 2022; $i--)
+                                                <option value="{{ $i }}" {{ request('year_successful', 2024) == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                    <canvas id="successfulOrdersChart" style="max-width: 100%; height: auto;"></canvas>
+                                </div>
+                    
+                                <!-- Biểu đồ Khách hàng mới -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <select name="year_customers" id="year_customers" class="form-control" onchange="this.form.submit()">
+                                            @for ($i = date('Y'); $i >= 2022; $i--)
+                                                <option value="{{ $i }}" {{ request('year_customers', 2024) == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                    <canvas id="customersChart" style="max-width: 100%; height: auto;"></canvas>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <script>
+        var ctxSales = document.getElementById('salesChart').getContext('2d');
+        var ctxSuccess = document.getElementById('successfulOrdersChart').getContext('2d');
+        var ctxCancel = document.getElementById('customersChart').getContext('2d');
+    
+        var successfulOrdersData = @json(array_values($successfulOrders));
+        var salesData = @json(array_values($sales));
+        var customersData =  @json(array_values($customerRegistrations));
+
+        var months = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
+    
+        // Biểu đồ Doanh số
+        new Chart(ctxSales, {
+            type: 'bar',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: 'Doanh số theo tháng',
+                    data: salesData,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    
+        // Biểu đồ Đơn hàng thành công
+        new Chart(ctxSuccess, {
+            type: 'line',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: 'Đơn hàng thành công theo tháng',
+                    data: successfulOrdersData,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    
+        // Kahcsh hàng mới
+        new Chart(ctxCancel, {
+            type: 'line',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: 'Khách hàng mới',
+                    data: customersData,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
 @endsection
+

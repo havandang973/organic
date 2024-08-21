@@ -19,7 +19,7 @@ addToCartBtns.forEach(function(btn) {
                 // }
             })
             .catch(function (error) {
-                // showNotification('Sản phẩm này đã hết hàng.');
+                showNotification('Sản phẩm này đã hết hàng.', 'error');
                 document.getElementById('error-amount').innerText = error.response.data.message;
             });
     });

@@ -25,6 +25,7 @@
 
     <script src="https://cdn.tiny.cloud/1/xzg54i4713kryp53dkt9k9y7xci6nw373kqwn0ennlq45qth/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
         tinymce.init({
@@ -147,7 +148,7 @@
                         </a>
                         <i class="arrow fas fa-angle-right"></i>
                     </li>
-                    <li class="nav-link active">
+                    {{-- <li class="nav-link active">
                         <a href="{{route('list.post')}}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="far fa-folder"></i>
@@ -174,7 +175,7 @@
                             <li><a href="{{route('list.post')}}">Danh sách</a></li>
                             <li><a href="{{route('admin.cat')}}">Danh mục</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
                     <li class="nav-link active">
                         <a href="{{route('list.product')}}">
                             <div class="nav-link-icon d-inline-flex">
@@ -203,6 +204,15 @@
                         </ul>
                     </li>
                     <li class="nav-link active">
+                        <a href="{{route('list.customer')}}">
+                            <div class="nav-link-icon d-inline-flex">
+                                <i class="far fa-folder"></i>
+                            </div>
+                            Khách hàng thân thiết
+                        </a>
+                        <i class="arrow fas fa-angle-right"></i>
+                    </li>
+                    <li class="nav-link active">
                         <a href="{{route('list.user')}}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="far fa-folder"></i>
@@ -216,7 +226,16 @@
                             <li><a href="{{route('list.user')}}">Danh sách</a></li>
                         </ul>
                     </li>
-
+                    <li class="nav-link active">
+                        <a href="https://app.crisp.chat" target="_blank">
+                            <div class="nav-link-icon d-inline-flex">
+                                <i class="far fa-folder"></i>
+                            </div>
+                            Hỗ trợ khách hàng
+                        </a>
+                        <i class="arrow fas fa-angle-right"></i>
+                    </li>
+                    
                     <!-- <li class="nav-link"><a>Bài viết</a>
                         <ul class="sub-menu">
                             <li><a>Thêm mới</a></li>
@@ -235,8 +254,6 @@
                 @yield('content')
             </div>
         </div>
-
-
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/dist/toastr.min.js"></script>

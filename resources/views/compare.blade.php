@@ -4,18 +4,22 @@
         <div class="mb-4">
             <form method="GET" action="/compare">
                 <div class="row mb-3">
-                    <div class="col-md-3 mb-2">
-                        <select name="sort_price" class="form-select" aria-label="Sắp xếp giá" style="height: 100%;">
+                    <div class="col-md-3 mb-2" style="display: grid; place-items: center;">
+                        <select name="sort_price" class="form-select" aria-label="Sắp xếp giá" style="height: fit-content; padding: 10px 20px">
                             <option value="">Sắp xếp theo giá</option>
                             <option value="asc" {{ request('sort_price') == 'asc' ? 'selected' : '' }}>Giá tăng dần</option>
                             <option value="desc" {{ request('sort_price') == 'desc' ? 'selected' : '' }}>Giá giảm dần</option>
                         </select>
-                    </div>
+                    </div>                                      
                     <div class="col-md-3 mb-2">
+                        <label for="min_price">Giá từ</label>
                         <input type="number" name="min_price" class="form-control" placeholder="Giá tối thiểu" value="{{ request('min_price') }}">
+                        <small class="form-text text-muted">Nhập giá thấp nhất bạn muốn tìm kiếm.</small>
                     </div>
                     <div class="col-md-3 mb-2">
+                        <label for="max_price">Giá đến</label>
                         <input type="number" name="max_price" class="form-control" placeholder="Giá tối đa" value="{{ request('max_price') }}">
+                        <small class="form-text text-muted">Nhập giá cao nhất bạn muốn tìm kiếm.</small>
                     </div>
                     <div class="col-md-3 mb-2 d-flex align-items-center justify-content-center">
                         <button class="btn btn-primary btn-sm rounded-0 text-white" type="submit">Lọc</button>

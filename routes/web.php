@@ -85,7 +85,8 @@ Route::prefix('admin')->middleware(['CheckRole:CUSTOMER', 'AuthAdmin'])->group(f
     });
     Route::prefix('/list')->group(function () {
         Route::get('/product', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('list.product');
-        Route::get('/user', [UserController::class, 'index'])->name('list.user');
+        Route::get('/user', [UserController::class, 'index'])->name('list.user')->middleware(['CheckManager:MANAGER']);
+        Route::get('/customers', [UserController::class, 'customer'])->name('list.customer');
         Route::get('/post', function () {
             return view('admin.list.post');
         })->name('list.post');
@@ -101,7 +102,7 @@ Route::prefix('admin')->middleware(['CheckRole:CUSTOMER', 'AuthAdmin'])->group(f
         })->name('add.post');
         Route::get('/user', function () {
             return view('admin.add.user');
-        });
+        })->middleware(['CheckManager:MANAGER']);;
         Route::post('/user', [UserController::class, 'add'])->name('add.user');
     });
 
@@ -118,6 +119,8 @@ Route::prefix('admin')->middleware(['CheckRole:CUSTOMER', 'AuthAdmin'])->group(f
     Route::post('/brand-product', [\App\Http\Controllers\Admin\BrandController::class, 'store'])->name('brand.product.store');
 
     Route::get('/order/{id}/invoice', [\App\Http\Controllers\Admin\OrderController::class, 'generateInvoice'])->name('order.invoice');
+    Route::get('/order/print', [\App\Http\Controllers\Admin\OrderController::class, 'orderPrint'])->name('order.print');
+
 });
 
 Route::get('/dashboard', function () {
