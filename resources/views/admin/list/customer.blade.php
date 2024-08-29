@@ -25,6 +25,36 @@
                     <label for="order_count_max" class="mr-2">Số lượng đơn hàng tối đa</label>
                     <input type="number" class="form-control" id="order_count_max" name="order_count_max" value="{{ request('order_count_max') }}">
                 </div>
+                <div class="form-group mr-2">
+                    <label for="month" class="mr-2">Tháng</label>
+                    <select class="form-control" id="month" name="month">
+                        <option value="">Chọn tháng</option>
+                        @for ($i = 1; $i <= 12; $i++)
+                            <option value="{{ $i }}" {{ request('month') == $i ? 'selected' : '' }}>
+                                {{ $i }}
+                            </option>
+                        @endfor
+                    </select>
+                </div>
+                <div class="form-group mr-2">
+                    <label for="year" class="mr-2">Năm</label>
+                    <select class="form-control" id="year" name="year">
+                        <option value="">Chọn năm</option>
+                        @foreach (range(2020, date('Y')) as $yearOption)
+                            <option value="{{ $yearOption }}" {{ request('year') == $yearOption ? 'selected' : '' }}>
+                                {{ $yearOption }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group mr-2">
+                    <label for="sort" class="mr-2">Sắp xếp theo số lượng đơn hàng</label>
+                    <select class="form-control" id="sort" name="sort">
+                        <option value="">Chọn sắp xếp</option>
+                        <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>Tăng dần</option>
+                        <option value="desc" {{ request('sort') == 'desc' ? 'selected' : '' }}>Giảm dần</option>
+                    </select>
+                </div>
                 <button type="submit" class="btn btn-primary">Lọc</button>
                 <button type="button" class="btn btn-danger ml-2" id="clearAll">Xóa tất cả</button>
             </form>

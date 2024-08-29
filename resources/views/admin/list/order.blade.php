@@ -83,8 +83,11 @@
                     <div class="form-group mb-3">
                         <input type="text" class="form-control mr-2" id="customTitle" name="customTitle" placeholder="Nhập tiêu đề in" value="{{ request('customTitle') }}">
                         <button type="submit" class="btn btn-primary mr-2">Lọc</button>
-                        <a href="{{ route('order.print', request()->except(['_token', '_method'])) }}" target="_blank" class="btn btn-info mr-2" title="Print">
-                            <i class="fa fa-print"></i> In
+                        <a href="{{ route('order.print', ['format' => 'pdf'] + request()->except(['_token', '_method'])) }}" target="_blank" class="btn btn-info mr-2" title="Print">
+                            <i class="fa fa-print"></i> In PDF
+                        </a>
+                        <a href="{{ route('order.print', ['format' => 'excel'] + request()->except(['_token', '_method'])) }}" target="_blank" class="btn btn-info mr-2" title="Print">
+                            <i class="fa fa-print"></i> Xuất Exel
                         </a>
                         <a href="{{ route('list.order') }}" class="btn btn-danger" title="clearFilter">
                             Xóa lọc

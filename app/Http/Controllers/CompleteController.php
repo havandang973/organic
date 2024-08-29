@@ -14,6 +14,8 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Mail;
 use App\Enums\Status;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class CompleteController extends Controller
 {
@@ -59,6 +61,35 @@ class CompleteController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+
+        $messages = [
+            'name.required' => 'Vui lòng nhập họ tên.',
+            'name.string' => 'Họ tên phải là chuỗi ký tự.',
+            'name.max' => 'Họ tên không được vượt quá 255 ký tự.',
+            'address.required' => 'Vui lòng nhập địa chỉ.',
+            'address.string' => 'Địa chỉ phải là chuỗi ký tự.',
+            'address.max' => 'Địa chỉ không được vượt quá 255 ký tự.',
+            'email.required' => 'Vui lòng nhập email.',
+            'email.email' => 'Email không đúng định dạng.',
+            'email.max' => 'Email không được vượt quá 255 ký tự.',
+            'phone.required' => 'Vui lòng nhập số điện thoại.',
+            'phone.digits' => 'Số điện thoại phải chứa chính xác 10 chữ số.',
+            'payment_method.required' => 'Vui lòng chọn phương thức thanh toán.',
+        ];
+        
+        // Validate dữ liệu đầu vào
+        $validator = Validator::make($data, [
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|digits:10',
+            'note' => 'nullable|string',
+            'payment_method' => ['required', Rule::in(['Thanh toán online', 'Thanh toán khi nhận hàng'])],
+        ], $messages);
+        
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         $paymentMethodData = [
             'method' => $data['payment_method'],

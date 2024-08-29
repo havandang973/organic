@@ -1,16 +1,16 @@
 <header id="full_nav">
     <div class="header">
-        <div class="container">
+        {{-- <div class="container"> --}}
             <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="index.html">
-                    <img src="{{asset('uploads/organic.png')}}" alt="">
+                <a class="navbar-brand" href="/">
+                    <img src="{{asset('uploads/logo.png')}}" alt="" class="logo-img">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa-solid fa-bars" style="color: #ffffff;"></i>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mx-auto">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent" style="justify-content: space-evenly">
+                    <ul class="navbar-nav" style="width: 50%; justify-content: space-evenly">
                         <li class="nav-item active">
                             <a class="nav-link" href="/">Trang chủ</a>
                         </li>
@@ -26,14 +26,28 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#full-about">Giới thiệu</a>
+                            <a class="nav-link" href="/tdee-calculator">Tính TDEE</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#full-testimonial">Đánh giá</a>
+                            <a class="nav-link" href="/news">Tin tức</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/introduce">Giới thiệu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/feedback">Đánh giá</a>
                         </li>
                     </ul>
-
+                    
                     <div class="header-content">
+                        <form action="{{ url('/search') }}" method="GET" class="search-form mr-4">
+                            <div class="search">
+                                <input type="text" class="searchTerm" name="query" placeholder="Tìm kiếm sản phẩm...">
+                                <button type="submit" class="searchButton">
+                                  <i class="fa fa-search"></i>
+                               </button>
+                             </div>
+                        </form>
                         <div class="header_contact text-right">
                             <span>Liên hệ!</span>
                             <span class="phone_no">0348 478 579</span>
@@ -55,7 +69,6 @@
                             </a>
                         </div>
                     </div>
-
                     @if(\Illuminate\Support\Facades\Auth::check())
                         <!-- Settings Dropdown -->
                         <div class="dropdown ml-lg-4">
@@ -93,7 +106,7 @@
                     @endif
                 </div>
             </nav>
-        </div>
+        {{-- </div> --}}
     </div>
 </header>
 
@@ -101,8 +114,23 @@
 <script src="{{ asset('js/cart/update.js') }}"></script>
 <script src="{{ asset('js/cart/delete.js') }}"></script>
 <script src="{{ asset('js/product/compare.js') }}"></script>
-
+<script>
+    document.querySelector('.search-btn').addEventListener('click', <a href="https://nodemy.vn/tim-hieu-ve-ham-trong-javascript-cach-tao-truyen-tham-so-va-su-dung-mot-cach-hieu-qua-don-gian-de-hieu-danh-cho-nguoi-moi-bat-dau-important/">function</a> () {
+	<a href="https://nodemy.vn/hieu-arrow-function-va-this-trong-javascript-tao-ra-nhung-ham-manh-me-voi-cu-phap-ngan-gon-huong-dan-day-du-cho-nguoi-moi-bat-dau-important/">this</a>.parentElement.classList.toggle('open')
+	this.previousElementSibling.focus()
+})
+</script>
 <style>
+    .logo-img {
+        width: 100%;
+        padding: 8px;
+    }
+
+    @media (max-width: 768px) {
+        .logo-img {
+            width: 70%;
+        }
+    }
     .dropdown-toggle-custom {
         color: #ffffff; /* Màu chữ nút */
         border-radius: 0.375rem; /* Bo tròn góc */
@@ -119,5 +147,52 @@
         margin-top: 0;
     }
 
+    .search {
+        width: 100%;
+        position: relative;
+        display: flex;
+    }
+
+    .searchTerm {
+        width: 100%;
+        border: 1px solid #606161;
+        border-right: none;
+        padding: 10px;
+        border-radius: 5px 0 0 5px;
+        outline: none;
+        color: #9DBFAF;
+        background-color: #03262c;
+        box-shadow: 0 0 0 4px rgba(3, 38, 44, 0.5); /* Hiệu ứng vòng quanh */
+
+    }
+    .searchTerm::placeholder {
+        color: #ffffff; /* Màu chữ của placeholder */
+    }
+    .searchTerm:focus{
+        color: white;
+    }
+
+    .searchButton {
+        width: 40px;
+        border: 1px solid #606161;
+        background: #03262c;
+        padding: 5px;
+        text-align: center;
+        color: #fff;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+    }
+
+    .searchButton:hover {
+        background-color: #138b45;
+    }
+
+    .wrap{
+        width: 30%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 </style>
 

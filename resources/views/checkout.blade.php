@@ -1,6 +1,6 @@
 <x-app-layout>
     <!-- HERO SECTION PART START -->
-    <div class="hero_section">
+    {{-- <div class="hero_section">
         <div class="png_img"><img class="img-fluid" src="img/leaf.png" alt="" /></div>
         <div class="container">
             <div class="row">
@@ -12,15 +12,20 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- HERO SECTION PART END -->
 
     <!-- ORDER PART STRAT -->
     <div class="order_part">
-        <div class="container">
+        <div class="container" style="margin-top: 5rem;">
             <div class="">
                 <div class="col-12">
                     <div class="billing_content">
+                        <div class="mb-4">
+                            <a href="{{ url()->previous() }}" class="border-radius-0;">
+                                <i class="fa fa-arrow-left text-danger"></i> <ins class="text-danger">Quay lại</ins>
+                            </a>
+                        </div>
                         <div class="billing_head text-uppercase mb-4">
                             <h2>Các địa chỉ đã lưu</h2>
                             <div class="row g-2">
@@ -54,60 +59,66 @@
                                         <table class="table font-weight-normal">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col" class="text-uppercase" colspan="2">Phương thức
-                                                        thanh toán</th>
+                                                    <th scope="col" class="text-uppercase" colspan="2">Phương thức thanh toán</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <td>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="payment_method" id="banking"
-                                                                value="Thanh toán online" checked />
-                                                            <label class="form-check-label" for="banking">Thanh toán
-                                                                online</label>
+                                                            <input class="form-check-input" type="radio" name="payment_method" id="banking" value="Thanh toán online" />
+                                                            <label class="form-check-label" for="banking">Thanh toán online</label>
                                                         </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="payment_method" id="money"
-                                                                value="Thanh toán khi nhận hàng" />
-                                                            <label class="form-check-label" for="money">Thanh toán
-                                                                khi nhận hàng</label>
+                                                            <input class="form-check-input" type="radio" name="payment_method" id="money" value="Thanh toán khi nhận hàng" />
+                                                            <label class="form-check-label" for="money">Thanh toán khi nhận hàng</label>
                                                         </div>
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table>
+                                        @error('payment_method')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
-
+                                    
                                     <div class="row g-2">
                                         <div class="col-md-6 mb-3">
-                                            <input value="{{ old('name') }}" type="text"
-                                                class="form-control border-radius-0" id="checkout_name" name="name"
-                                                placeholder="Họ tên" />
+                                            <input value="{{ old('name') }}" type="text" class="form-control border-radius-0 @error('name') is-invalid @enderror" id="checkout_name" name="name" placeholder="Họ tên" />
+                                            @error('name')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <input value="{{ old('address') }}" name="address" type="text"
-                                                class="form-control border-radius-0" placeholder="Địa chỉ">
+                                            <input value="{{ old('address') }}" name="address" type="text" class="form-control border-radius-0 @error('address') is-invalid @enderror" placeholder="Địa chỉ">
+                                            @error('address')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <input value="{{ old('email') }}" name="email" type="text"
-                                                class="form-control border-radius-0" placeholder="Email">
+                                            <input value="{{ old('email') }}" name="email" type="text" class="form-control border-radius-0 @error('email') is-invalid @enderror" placeholder="Email">
+                                            @error('email')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <input value="{{ old('phone') }}" name="phone" type="text"
-                                                class="form-control border-radius-0" placeholder="Số điện thoại">
+                                            <input value="{{ old('phone') }}" name="phone" type="text" class="form-control border-radius-0 @error('phone') is-invalid @enderror" placeholder="Số điện thoại">
+                                            @error('phone')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-12 mb-3">
-                                            <textarea class="form-control border-radius-0" id="checkout_billing_textarea" name="note" rows="2"
-                                                placeholder="Ghi chú (Nếu có) :"></textarea>
+                                            <textarea class="form-control border-radius-0 @error('note') is-invalid @enderror" id="checkout_billing_textarea" name="note" rows="2" placeholder="Ghi chú (Nếu có) :">{{ old('note') }}</textarea>
+                                            @error('note')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
+                                    
 
                                     <div class="col-12 col-lg-4">
                                         <div class="order_content">

@@ -63,7 +63,7 @@
     /*Features part*/
     /*-------------------------------------------*/
     .full-features {
-        padding: 50px 0px;
+        padding-top: 50px;
     }
 
     .slick-dots li {
@@ -75,7 +75,7 @@
     /*-------------------------------------------*/
     .full-about {
         padding: 50px 0;
-        margin-bottom: 50px;
+        /* margin-bottom: 50px; */
     }
 
     .about-title h2 {
@@ -1366,6 +1366,7 @@
     /*Header part*/
     /*-------------------------------------------*/
     .navbar {
+        width: 100%;
         padding: 10px 10px;
     }
 
@@ -1916,6 +1917,7 @@
     /*Header part*/
     /*-------------------------------------------*/
     .navbar {
+        width: 100%;
         padding: 10px 10px;
     }
 
@@ -1924,7 +1926,7 @@
     /*-------------------------------------------*/
     .full-banner {
         height: auto;
-        padding: 140px 5px 90px 5px;
+        padding: 80px 5px 1px 5px;
     }
 
     .banner-content h1 {

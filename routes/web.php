@@ -4,6 +4,7 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CompleteController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -23,6 +24,29 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/', function () {
 //    return view('index');
 //});
+Route::get('/t', [\App\Http\Controllers\Admin\ProductController::class, 'bestSellingProducts']);
+
+Route::get('/search', [ProductController::class, 'search'])->name('search');
+Route::get('/tdee-calculator', function() {
+    return view('tdee-calculator');
+});
+
+Route::get('/news', function() {
+    return view('news.news');
+});
+
+Route::get('/introduce', function() {
+    return view('introduce');
+});
+
+Route::get('/news/news1', function() {
+    return view('news.news1');
+})->name('news1');
+
+Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback');
+Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
+
+
 Route::get('/compare', [ProductController::class, 'showCompare']);
 Route::post('/compare/product/add/{id}', [ProductController::class, 'storeCompare'])->name('compare.add');
 Route::post('/compare/product/delete/{id}', [ProductController::class, 'deleteCompare'])->name('compare.delete');
@@ -119,7 +143,7 @@ Route::prefix('admin')->middleware(['CheckRole:CUSTOMER', 'AuthAdmin'])->group(f
     Route::post('/brand-product', [\App\Http\Controllers\Admin\BrandController::class, 'store'])->name('brand.product.store');
 
     Route::get('/order/{id}/invoice', [\App\Http\Controllers\Admin\OrderController::class, 'generateInvoice'])->name('order.invoice');
-    Route::get('/order/print', [\App\Http\Controllers\Admin\OrderController::class, 'orderPrint'])->name('order.print');
+    Route::get('/order/print/{format}', [\App\Http\Controllers\Admin\OrderController::class, 'orderPrint'])->name('order.print');
 
 });
 

@@ -38,12 +38,12 @@
 
                             <div class="d-flex justify-content-center flex-column mt-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Log in') }}
+                                    {{ __('Đăng nhập') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link mt-2" href="{{ route('password.request') }}">
-                                        {{ __('Forgot your password?') }}
+                                        {{ __('Quên mật khẩu?') }}
                                     </a>
                                 @endif
                             </div>

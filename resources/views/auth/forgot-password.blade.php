@@ -5,7 +5,7 @@
                 <div class="bg-white py-8">
                     <h2 class="text-black w-full h-full text-lg font-semibold border-bottom py-3 my-3">QUÊN MẬT KHẨU</h2>
                     <div class="mb-4 text-muted">
-                        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+                        {{ __('Quên mật khẩu. Khách hàng hãy nhập email đã đăng ký.') }}
                     </div>
 
                     <!-- Session Status -->
@@ -22,7 +22,7 @@
 
                         <div class="d-flex justify-content-end mt-4">
                             <button type="submit" class="btn btn-primary">
-                                {{ __('Email Password Reset Link') }}
+                                {{ __('Xác nhận') }}
                             </button>
                         </div>
                     </form>

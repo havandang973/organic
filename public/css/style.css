@@ -227,16 +227,17 @@ button:hover {
 .header {
     position: absolute;
     width: 100%;
-    top: 20px;
+    top: 0px;
     left: 0;
-    z-index: 2;
+    z-index: 1000;
 }
 .navbar {
     background: url(../uploads/header-bg.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    padding: 10px 50px;
+    padding: 10px 180px 0px 180px;
+    width: 100%;
 }
 
 .navbar-brand {
@@ -382,7 +383,7 @@ button:hover {
     padding: 200px 200px;
     background: url('https://freshcart.codescandy.com/assets/images/slider/slide-1.jpg');
     background-repeat: no-repeat;
-    /*background-size: cover;*/
+    background-size: contain;
     background-position: center;
     background-color: #cfe7d9;
 }
@@ -573,7 +574,7 @@ button:hover {
     background-position: top center;
     background-size: cover;
     padding: 40px 0;
-    margin-bottom: 100px;
+    /* margin-bottom: 50px; */
     /*position: relative;*/
     /*overflow: hidden;*/
 }
@@ -663,7 +664,7 @@ button:hover {
 /*BEST SELLER PART CSS START*/
 /*-------------------------------------------*/
 .full-bestSeller {
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 .product {
     border: 2px solid #dcedd8;
@@ -890,7 +891,7 @@ button:hover {
 /*-------------------------------------------*/
 .full-partners {
     background-color: #f6faf5;
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
     padding: 50px 0;
 }
 /*-------------------------------------------*/
@@ -1176,9 +1177,9 @@ button:hover {
 /* HERO SECTION PART CSS START*/
 /*------------------------------------------*/
 .hero_section {
-    background: url(../uploads/product_hero_section_bg.jpg);
+    background: url(../uploads/banner_poster.jpg);
     background-repeat: no-repeat !important;
-    background-position: center !important;
+    /* background-position: center !important; */
     background-size: cover !important;
     padding-top: 150px;
     padding-bottom: 120px;
@@ -1394,7 +1395,7 @@ button:hover {
 
 .recent_post,
 .populer_tag {
-    margin-top: 50px;
+    /* margin-top: 50px; */
     padding: 20px 30px;
     border: 2px solid #e9f8e6;
 }
@@ -1666,7 +1667,7 @@ button:hover {
 /* PRODUCT DETAILS PART CSS START */
 /*------------------------------------------*/
 .product_details {
-    padding: 100px 0;
+    padding: 50px 0;
 }
 
 .small_img {
@@ -1811,7 +1812,7 @@ button:hover {
 /* CART OVERVIEW PART CSS START */
 /*------------------------------------------*/
 .cart_overview {
-    padding: 100px 0;
+    padding: 50px 0;
 }
 .cartoverview_title {
     background: #e2f6de;

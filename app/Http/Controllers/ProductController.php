@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Order;
 use App\Repositories\CompareProductRepository;
 use App\Services\ProductService;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -27,19 +28,32 @@ class ProductController extends Controller
         $categories = Category::query()->get();
         $query = $this->productRepo->getAllProduct();
 
-        if ($request->has('category') && $request->category != '') {
-            $query->where('category_id', $request->category);
+        if ($request->has('category')) {
+            $query->where('category_id', $request->query('category'));
         }
-        
-        $products = $query->paginate(4);
+
+        if ($request->has('categories')) {
+            $query->whereIn('category_id', $request->input('categories'));
+        }
+
+        if ($request->has('brands')) {
+            $query->whereIn('brand_id', $request->input('brands'));
+        }
+
+        if ($request->has('price_min') && $request->has('price_max')) {
+            $query->whereBetween('price', [$request->input('price_min'), $request->input('price_max')]);
+        }
+
+        $products = $query->paginate(6);
 
         return view('product', compact('products', 'brands', 'categories'));
     }
 
     public function bestProduct()
     {
-        $products = $this->productRepo->getAllProduct()->get();
-        return view('index', compact('products'));
+        $bestSellingProducts = $this->bestSellingProducts();
+        $newProducts = $this->productRepo->getAllProduct()->orderBy('created_at', 'DESC')->take(8)->get();
+        return view('index', compact('bestSellingProducts', 'newProducts'));
     }
 
     public function find($id)
@@ -98,5 +112,30 @@ class ProductController extends Controller
         $amount = $this->compareProductRepo->countProductByUser();
 
         return response()->json(['compareProductAmount' => $amount]);
+    }
+
+    public function bestSellingProducts()
+    {
+        $products = Order::where('status', 'COMPLETED')
+            ->with('orderDetail.product') // Tải thông tin chi tiết đơn hàng và sản phẩm
+            ->get()
+            ->flatMap(fn($order) => $order->orderDetail) // Lấy tất cả chi tiết đơn hàng từ các đơn hàng thành công
+            ->groupBy('product_id') // Nhóm theo sản phẩm
+            ->sortByDesc(fn($group) => $group->sum('qty')) // Sắp xếp theo số lượng bán giảm dần
+            ->take(6)
+            ->map(fn($group) => $group->first()->product); // Chỉ trả về thông tin sản phẩm
+
+        return $products;
+    }
+
+    public function search(Request $request)
+    {
+        $brands = Brand::query()->get();
+        $categories = Category::query()->get();
+
+        $query = $request->input('query');
+        $products = Product::where('name', 'LIKE', "%{$query}%")->paginate(6);
+
+        return view('product', compact('products', 'brands', 'categories'));
     }
 }

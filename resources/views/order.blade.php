@@ -1,5 +1,20 @@
 <x-app-layout>
-    <div class="container" style="padding: 9.5rem 0 3rem 0;">
+        <!-- HERO SECTION PART START -->
+        <div class="hero_section">
+            {{-- <div class="png_img"><img class="w-100 img-fluid" src="{{asset('uploads/banner_poster.jpg')}}" alt="" /></div> --}}
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="herosection_content">
+                            <h2 style="color: #fff">Đơn hàng</h2>
+                            <a href="/" class="btn border-radius-0 border-transparent">Trang chủ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- HERO SECTION PART END-->
+    <div class="container" style="padding: 2.5rem 0 3rem 0;">
         <h2 class="text-center mb-4">Đơn Hàng</h2>
 
         <!-- Form lọc trạng thái và ngày -->

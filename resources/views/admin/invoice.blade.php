@@ -1,124 +1,3 @@
-{{--<!DOCTYPE html>--}}
-{{--<html>--}}
-{{--<head>--}}
-{{--    <title>Hóa đơn</title>--}}
-{{--    <style>--}}
-{{--        body {--}}
-{{--            font-family: DejaVu Sans, sans-serif;--}}
-{{--            margin: 0;--}}
-{{--            padding: 0;--}}
-{{--            background: #f4f4f4;--}}
-{{--        }--}}
-{{--        .invoice-container {--}}
-{{--            width: 80%;--}}
-{{--            margin: 0 auto;--}}
-{{--            background: #fff;--}}
-{{--            padding: 20px;--}}
-{{--            border: 1px solid #ccc;--}}
-{{--            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);--}}
-{{--        }--}}
-{{--        h1, h2, h3, p {--}}
-{{--            margin: 0 0 10px 0;--}}
-{{--            padding: 0;--}}
-{{--            color: #333;--}}
-{{--        }--}}
-{{--        h1 {--}}
-{{--            font-size: 24px;--}}
-{{--            text-align: center;--}}
-{{--            margin-bottom: 20px;--}}
-{{--        }--}}
-{{--        h2 {--}}
-{{--            font-size: 20px;--}}
-{{--            border-bottom: 1px solid #ccc;--}}
-{{--            padding-bottom: 5px;--}}
-{{--            margin-bottom: 10px;--}}
-{{--        }--}}
-{{--        h3 {--}}
-{{--            font-size: 18px;--}}
-{{--            margin-top: 20px;--}}
-{{--        }--}}
-{{--        p {--}}
-{{--            font-size: 16px;--}}
-{{--        }--}}
-{{--        .customer-info p {--}}
-{{--            margin: 5px 0;--}}
-{{--        }--}}
-{{--        table {--}}
-{{--            width: 100%;--}}
-{{--            border-collapse: collapse;--}}
-{{--            margin-top: 20px;--}}
-{{--        }--}}
-{{--        th, td {--}}
-{{--            border: 1px solid #ddd;--}}
-{{--            padding: 10px;--}}
-{{--            text-align: left;--}}
-{{--        }--}}
-{{--        th {--}}
-{{--            background: #f0f0f0;--}}
-{{--            font-weight: normal;--}}
-{{--        }--}}
-{{--        td {--}}
-{{--            font-weight: normal;--}}
-{{--        }--}}
-{{--        .total-amount {--}}
-{{--            text-align: right;--}}
-{{--            margin-top: 20px;--}}
-{{--            font-size: 18px;--}}
-{{--            font-weight: bold;--}}
-{{--            color: #333;--}}
-{{--        }--}}
-{{--    </style>--}}
-{{--</head>--}}
-{{--<body>--}}
-{{--<div class="invoice-container">--}}
-{{--    <h1>Hóa đơn thanh toán</h1>--}}
-{{--    <div class="customer-info">--}}
-{{--        <p>Mã đơn hàng: <strong>{{ $order->order_code }}</strong></p>--}}
-{{--        <p>Khách hàng: <strong>{{ $order->name }}</strong></p>--}}
-{{--        <p>Số điện thoại: <strong>{{ $order->phone }}</strong></p>--}}
-{{--        <p>Email: <strong>{{ $order->email }}</strong></p>--}}
-{{--        <p>Địa chỉ nhận hàng: <strong>{{ $order->address }}</strong></p>--}}
-{{--        <p>Phương thức thanh toán: <strong>{{ $order->payment_method }}</strong></p>--}}
-{{--        <p>Ngày đặt hàng: <strong>{{ $order->created_at }}</strong></p>--}}
-{{--        <p>Ghi chú: <strong>{{ $order->note ? $order->note : 'Không có' }}</strong></p>--}}
-{{--    </div>--}}
-{{--    <h2>Chi tiết hóa đơn</h2>--}}
-{{--    <table>--}}
-{{--        <thead>--}}
-{{--        <tr>--}}
-{{--            <th>Sản phẩm</th>--}}
-{{--            <th>SL</th>--}}
-{{--            <th>Giá</th>--}}
-{{--            <th>Tổng tiền</th>--}}
-{{--        </tr>--}}
-{{--        </thead>--}}
-{{--        <tbody>--}}
-{{--        @foreach ($order->orderDetail as $detail)--}}
-{{--            <tr>--}}
-{{--                <td>{{ $detail->product->name }}</td>--}}
-{{--                <td>{{ $detail->qty }}</td>--}}
-{{--                <td>{{ number_format($detail->price, 0, "", ".") }} vnđ</td>--}}
-{{--                <td>{{ number_format($detail->qty * $detail->price, 0, "", ".") }} vnđ</td>--}}
-{{--            </tr>--}}
-{{--        @endforeach--}}
-{{--        </tbody>--}}
-{{--    </table>--}}
-{{--    <?php--}}
-{{--    $totalAll = 0;--}}
-{{--    foreach ($order->orderDetail as $detail) {--}}
-{{--        $price = $detail->product->price - (($detail->product->price * $detail->product->discount)/100);--}}
-{{--        $total = $detail->qty * $price;--}}
-{{--        $totalAll += $total;--}}
-{{--    }--}}
-{{--    ?>--}}
-{{--    <div class="total-amount">--}}
-{{--        <p>Thanh toán: {{ number_format($totalAll, 0, "", ".") }} VNĐ</p>--}}
-{{--    </div>--}}
-{{--</div>--}}
-{{--</body>--}}
-{{--</html>--}}
-
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -131,30 +10,49 @@
             margin: 0;
             padding: 0;
             color: #333;
+            /* background-color: #f5f5f5; */
         }
         .container {
-            width: 80%;
+            width: 70%;
             margin: auto;
             padding: 20px;
             border: 1px solid #ddd;
             border-radius: 8px;
-            background-color: #f9f9f9;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .header {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
             margin-bottom: 20px;
         }
         .header img {
-            max-width: 150px;
+            max-width: 120px;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
         }
         .header h1 {
             margin: 0;
+            font-size: 24px;
+            color: #333;
+            text-align: right;
         }
         .customer-info, .order-info {
             margin-bottom: 20px;
         }
+        .customer-info h3, .order-info h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #555;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+        }
         .customer-info p, .order-info p {
             margin: 5px 0;
+            font-size: 16px;
         }
         .order-items {
             width: 100%;
@@ -163,18 +61,27 @@
         }
         .order-items th, .order-items td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 12px;
             text-align: left;
         }
         .order-items th {
-            background-color: #f2f2f2;
+            background-color: #f4f4f4;
+            color: #555;
+            font-size: 16px;
+        }
+        .order-items td {
+            font-size: 15px;
         }
         .total {
             text-align: right;
+            font-size: 18px;
+            font-weight: bold;
         }
         .footer {
             margin-top: 20px;
             text-align: center;
+            font-size: 16px;
+            color: #777;
         }
     </style>
 </head>
@@ -182,7 +89,10 @@
 <div class="container">
     <!-- Header -->
     <div class="header">
-        <h2>HÓA ĐƠN</h2>
+        <!-- Logo bên trái -->
+        <img src="https://img.freepik.com/free-vector/100-organic-food-certified-label_1017-19669.jpg" alt="Logo">
+        <!-- Tiêu đề hóa đơn bên phải -->
+        <h1>HÓA ĐƠN</h1>
     </div>
 
     <!-- Thông tin khách hàng -->
@@ -244,5 +154,7 @@
 </div>
 </body>
 </html>
+
+
 
 
