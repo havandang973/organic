@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use App\Repositories\CompareProductRepository;
@@ -52,7 +53,10 @@ class ProductController extends Controller
 
     public function index_edit(Request $request, $name) {
         $product = Product::query()->where('name', $name)->first();
-        return view('admin.edit.product', compact('product'));
+        $categories = Category::query()->get();
+        $brands = Brand::query()->get();
+
+        return view('admin.edit.product', compact('product', 'categories', 'brands'));
     }
 
     public function create(Request $request) {
@@ -111,7 +115,6 @@ class ProductController extends Controller
             'price' => 'required|numeric|min:1',
             'discount' => 'nullable|numeric',
             'code' => 'required|unique:products,code,' . $product->id,
-            'brand' => 'required',
             'color' => 'required',
             'origin' => 'required',
             'max_amount' => 'required|numeric',
@@ -125,7 +128,6 @@ class ProductController extends Controller
             'discount.numeric' => 'Giảm giá phải là số.',
             'code.required' => 'Mã sản phẩm là bắt buộc.',
             'code.unique' => 'Mã sản phẩm đã tồn tại.',
-            'brand.required' => 'Thương hiệu là bắt buộc.',
             'color.required' => 'Màu sắc là bắt buộc.',
             'origin.required' => 'Nguồn gốc là bắt buộc.',
             'max_amount.required' => 'Số lượng tối đa là bắt buộc.',

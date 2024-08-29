@@ -13,7 +13,7 @@
 
                                 <!-- Name -->
                                 <div class="form-group">
-                                    <label for="name">{{ __('Name') }}</label>
+                                    <label for="name">{{ __('Họ tên') }}</label>
                                     <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus autocomplete="name">
                                     @error('name')
                                     <span class="text-danger">{{ $message }}</span>
@@ -31,7 +31,7 @@
 
                                 <!-- Password -->
                                 <div class="form-group mt-3">
-                                    <label for="password">{{ __('Password') }}</label>
+                                    <label for="password">{{ __('Mật khẩu') }}</label>
                                     <input id="password" type="password" class="form-control" name="password" required autocomplete="new-password">
                                     @error('password')
                                     <span class="text-danger">{{ $message }}</span>
@@ -40,7 +40,7 @@
 
                                 <!-- Confirm Password -->
                                 <div class="form-group mt-3">
-                                    <label for="password_confirmation">{{ __('Confirm Password') }}</label>
+                                    <label for="password_confirmation">{{ __('Xác nhận mật khẩu') }}</label>
                                     <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                     @error('password_confirmation')
                                     <span class="text-danger">{{ $message }}</span>
@@ -49,11 +49,11 @@
 
                                 <div class="d-flex flex-column align-items-center mt-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Register') }}
+                                        {{ __('Đăng kí') }}
                                     </button>
 
                                     <a class="btn btn-link mt-2" href="{{ route('login') }}">
-                                        {{ __('Already registered?') }}
+                                        {{ __('Đã có tài khoản?') }}
                                     </a>
                                 </div>
                             </form>

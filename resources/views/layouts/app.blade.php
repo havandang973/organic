@@ -353,7 +353,7 @@
 <style>
     #notification {
         position: fixed;
-        top: 20px;
+        top: 80px;
         right: 20px;
         padding: 15px;
         border-radius: 5px;

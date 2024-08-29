@@ -1,24 +1,25 @@
 <x-app-layout>
     <!-- HERO SECTION PART START -->
     <div class="hero_section">
-        <div class="png_img"><img class="img-fluid" src="img/leaf.png" alt="" /></div>
+        {{-- <div class="png_img"><img class="w-100 img-fluid" src="{{asset('uploads/banner_poster.jpg')}}" alt="" /></div> --}}
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="herosection_content">
-                        <h2>Cart Overview</h2>
-                        <a href="index.html" class="btn border-radius-0 border-transparent">Home - Pages</a>
+                        <h2 style="color: #fff">Giỏ hàng</h2>
+                        <a href="/" class="btn border-radius-0 border-transparent">Trang chủ</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- HERO SECTION PART END -->
+    <!-- HERO SECTION PART END-->
 
     <!-- CART OVERVIEW PART START -->
     <div class="cart_overview">
         <div class="container">
-            <div class="row">
+            <h2 class="text-center mb-4">Giỏ hàng</h2>
+            <div class="row" style="margin-top: 4rem">
                 <div class="col-xs-12 col-sm-12 col-md-12 table-responsive">
                     <form class="updateCartForm" action="{{ route('update') }}" method="POST">
                         <table class="table">
@@ -143,7 +144,7 @@
                     </div>
                     @if (Cart::count())
                         <div id="checkout" class="checkout_btn text-right">
-                            <a href="/checkout" class="btn border-radius-0 border-transparent">Thanh toán</a>
+                            <a href="/checkout" class="btn border-radius-0 border-transparent">Tiếp tục</a>
                             <input type="hidden" name="total" value="{{ Cart::total() }} đ">
                         </div>
                     @endif

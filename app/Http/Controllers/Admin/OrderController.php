@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\Transaction;
+use App\Exports\OrdersExport;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\App;
+use Maatwebsite\Excel\Facades\Excel;
 
 class OrderController extends Controller
 {
@@ -115,7 +117,7 @@ class OrderController extends Controller
         //        return $pdf->download('invoice.pdf');
     }
 
-    public function orderPrint(Request $request)
+    public function orderPrint(Request $request, $format)
     {   
         $query = Order::query();
 
@@ -188,8 +190,20 @@ class OrderController extends Controller
             $order->total_amount = $totalAll;
         }
 
-        $title = $request->customTitle ? $request->customTitle : 'Danh sách';
-        $pdf = PDF::loadView('admin.report', compact('orders', 'title'));
-        return $pdf->stream();
+        // $title = $request->customTitle ? $request->customTitle : 'Danh sách';
+        // $pdf = PDF::loadView('admin.report', compact('orders', 'title'));
+        // return $pdf->stream();
+
+        // return Excel::download(new OrdersExport, 'orders.xlsx');
+
+        if ($format == 'pdf') {
+            $title = $request->customTitle ? $request->customTitle : 'Danh sách';
+            $pdf = PDF::loadView('admin.report', compact('orders', 'title'));
+            return $pdf->stream();
+        } 
+        
+        if ($format == 'excel') {
+            return Excel::download(new OrdersExport, 'orders.xlsx');
+        }
     }
 }

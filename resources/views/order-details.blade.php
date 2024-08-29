@@ -12,7 +12,7 @@
             }
             ?>
             <div class="card-header" style="font-weight: 600">
-                <b>Mã Đơn Hàng: #</b>
+                <p>Mã Đơn Hàng:  {{$order->order_code}}</p>
                 <p>Ngày Đặt: {{$order->created_at}} </p>
                 <p>Tổng Số Tiền: <span class="text-success">{{number_format($totalAll, 0, "", ".")}} VNĐ</span></p>
                 <p>Trạng thái:

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\OrderDetail;
+use App\Models\Product;
 use Carbon\Carbon;
 use App\Models\User;
 
@@ -32,17 +33,21 @@ class DashboardController extends Controller
 
         $totalFormatted = $this->calculateTotalSales($start_date, $end_date);
         $salesMessage = "Tổng doanh số từ " . ($start_date ?? 'đầu') . " đến " . ($end_date ?? 'nay') . " là: " . $totalFormatted . " VNĐ";
+        $bestSellingProducts = $this->bestSellingProducts(); // Lấy sản phẩm bán chạy nhất
+        $oldestProducts = $this->oldestProducts();
 
         return view('admin.dashboard', compact(
-            'orders', 
-            'qtyOrderComplete', 
-            'qtyOrderPending', 
-            'qtyOrderCancel', 
-            'totalFormatted', 
-            'salesMessage', 
-            'sales', 
-            'successfulOrders', 
-            'customerRegistrations'
+            'orders',
+            'qtyOrderComplete',
+            'qtyOrderPending',
+            'qtyOrderCancel',
+            'totalFormatted',
+            'salesMessage',
+            'sales',
+            'successfulOrders',
+            'customerRegistrations',
+            'bestSellingProducts',
+            'oldestProducts'
         ));
     }
 
@@ -122,5 +127,40 @@ class DashboardController extends Controller
         }
 
         return number_format($total, 0, ',', '.');
+    }
+
+    public function bestSellingProducts()
+    {
+        // Truy vấn các sản phẩm bán chạy nhất trong các đơn hàng có trạng thái 'thành công'
+        $products = Order::where('status', 'COMPLETED')
+            ->with('orderDetail.product') // Tải thông tin chi tiết đơn hàng và sản phẩm
+            ->get()
+            ->flatMap(function ($order) {
+                return $order->orderDetail; // Lấy tất cả chi tiết đơn hàng từ các đơn hàng thành công
+            })
+            ->groupBy('product_id') // Nhóm theo sản phẩm
+            ->map(function ($group) {
+                $totalQuantity = $group->sum('qty');
+                $product = $group->first()->product;
+                return [
+                    'product' => $product,
+                    'total_quantity_sold' => $totalQuantity,
+                ];
+            })
+            ->sortByDesc('total_quantity_sold') // Sắp xếp theo số lượng bán giảm dần
+            ->take(2); // Lấy 10 sản phẩm bán chạy nhất
+
+        return $products;
+    }
+
+    public function oldestProducts($limit = 2)
+    {
+        // Truy vấn các sản phẩm, sắp xếp theo `updated_at` tăng dần để lấy sản phẩm lâu được cập nhật nhất
+        $products = Product::where('max_amount', '>', 0)
+            ->orderBy('updated_at', 'asc') // Sắp xếp theo `updated_at` tăng dần
+            ->take($limit) // Giới hạn số lượng sản phẩm lấy ra, mặc định là 10 sản phẩm
+            ->get();
+
+        return $products;
     }
 }

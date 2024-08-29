@@ -39,7 +39,7 @@
 <body>
     <div id="warpper" class="nav-fixed">
         <nav class="topnav shadow navbar-light bg-white d-flex">
-            <div class="navbar-brand"><a href="?"><img src="https://food-03.web4s.vn/uploads/plugin/setting/3/1566437894-1150892441-organic.png"></a></div>
+            {{-- <div class="navbar-brand"><a href="?" style="border-radius: 100%"><img src="{{asset('uploads/logo-admin.png')}}"></a></div> --}}
             <div class="nav-right ">
                 <div class="btn-group mr-auto">
                     <button type="button" class="btn dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

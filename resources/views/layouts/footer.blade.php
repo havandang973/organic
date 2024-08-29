@@ -15,13 +15,13 @@
                             <li><span>Địa chỉ: &nbsp;</span>Hoàng Mai, Hà Nội</li>
                         </ul>
                         <div class="footer_social">
-                            <ul class="footer_social_icons">
-                                <li><a href="#"><i class="icofont-skype"></i></a></li>
-                                <li><a href="#"><i class="icofont-facebook"></i></a></li>
-                                <li><a href="#"><i class="icofont-twitter"></i></a></li>
-                                <li><a href="#"><i class="icofont-whatsapp"></i></a></li>
-                            </ul>
-                        </div>
+							<ul class="" style="font-size: 22px; display: inline-flex">
+								<li><a href="#"><i class="fa-brands fa-tiktok mr-3"></i></a></li>
+								<li><a href="#"><i class="fa-brands fa-facebook mr-3"></i></a></li>
+								<li><a href="#"><i class="fa-brands fa-twitter mr-3"></i></a></li>
+								<li><a href="#"><i class="fa-solid fa-envelope"></i></a></li>
+							</ul>
+						</div>
                     </div>
                 </div>
             

@@ -2,13 +2,13 @@
 
 <!-- HERO SECTION PART START -->
 <div class="hero_section">
-    <div class="png_img"><img class="w-100 img-fluid" src="{{asset('uploads/leaf.png')}}" alt="" /></div>
+    {{-- <div class="png_img"><img class="w-100 img-fluid" src="{{asset('uploads/banner_poster.jpg')}}" alt="" /></div> --}}
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="herosection_content">
-                    <h2>Product Details</h2>
-                    <a href="/" class="btn border-radius-0 border-transparent">Home - Pages</a>
+                    <h2 style="color: #fff">Chi tiết sản phẩm</h2>
+                    <a href="/" class="btn border-radius-0 border-transparent">Trang chủ</a>
                 </div>
             </div>
         </div>

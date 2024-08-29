@@ -55,7 +55,7 @@
 
                     <div class="flex items-center justify-center flex-col mt-4 space-y-2">
                         <x-primary-button class="ms-3">
-                            {{ __('Log in') }}
+                            {{ __('Đăng nhập') }}
                         </x-primary-button>
 
 {{--                        @if (Route::has('password.request'))--}}
