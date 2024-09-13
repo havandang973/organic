@@ -4,7 +4,7 @@
     <xml>
     <o:OfficeDocumentSettings>
         <o:AllowPNG/>
-        <o:PixelsPerInch>96</o:PixelsPerInch>
+        <o:PixelsPerInch></o:PixelsPerInch>
     </o:OfficeDocumentSettings>
     </xml>
 
@@ -124,15 +124,15 @@
                 <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
                     <table width="100%" cellpadding="0" cellspacing="0" border="0">
                         <td align="center" style="background-color: #e7e7e7;">
-                            <div class="u-row-container" style="padding: 20px 0px;background-color: transparent">
-                                <img align="center" border="0" src="https://food-03.web4s.vn/uploads/plugin/setting/3/1566437894-1150892441-organic.png" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 201px;" width="201"/>
-                            </div>
+                            {{-- <div class="u-row-container" style="padding: 20px 0px;background-color: transparent">
+                                <img align="center" border="0" src="{{asset('uploads/logo.png')}}" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 201px;" width="201"/>
+                            </div> --}}
                             <div class="u-row-container" style="padding: 0px;background-color: transparent">
                                 <div class="u-row" style="margin: 0 auto;min-width: 320px;max-width: 640px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #f2f2f2;">
                                     <div style="border-collapse: collapse;display: table;width: 100%;height: 100%;background-color: transparent;">
                                         <table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:640px;"><tr style="background-color: #f2f2f2;">
 
-                                        <td align="center" width="640" style="width: 640px;padding: 20px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top">
+                                        <td align="center" width="640" style="width: 640px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top">
                                         <div class="u-col u-col-100" style="max-width: 320px;min-width: 640px;display: table-cell;vertical-align: top;">
                                             <div style="height: 100%;width: 100% !important;">
                                                 <div style="box-sizing: border-box; height: 100%; padding: 20px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;">
@@ -193,7 +193,7 @@
                                                     <table cellpadding="0" cellspacing="0" border="0" style="width:640px;">
                                                         <tr style="background-color: #e67e23;">
 
-                                        <td align="center" width="245" style="width: 245px;padding: 0px 20px 0px 15px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;" valign="top">
+                                        <td align="center" width="245" style="width: 245px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;" valign="top">
                                         <div class="u-col u-col-38p33" style="max-width: 320px;min-width: 245.31px;display: table-cell;vertical-align: top;">
                                             <div style="height: 100%;width: 100% !important;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;">
                                                 <div style="box-sizing: border-box; height: 100%; padding: 0px 20px 0px 15px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;">

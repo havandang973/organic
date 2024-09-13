@@ -85,7 +85,7 @@
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <a class="dropdown-item dropdown-item-custom" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
-                                        {{ __('Log Out') }}
+                                        {{ __('Đăng xuất') }}
                                     </a>
                                 </form>
                             </div>
@@ -93,12 +93,12 @@
                     @else
                         @if (Route::has('login'))
                             <div class="d-flex ml-lg-4">
-                                <div class="border-right pr-4">
+                                <div class="border-right pr-2">
                                     <a href="{{ route('login') }}" class="text-light">Đăng nhập</a>
                                 </div>
                                 @endif
                                 @if (Route::has('register'))
-                                    <div class="pl-4">
+                                    <div class="pl-2">
                                         <a href="{{ route('register') }}" class="text-light">Đăng kí tài khoản</a>
                                     </div>
                             </div>

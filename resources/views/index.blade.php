@@ -400,7 +400,7 @@
     <!-- PARTNERS PART END -->
 
     <!-- OFFER PART START -->
-    <div class="full-offer">
+    {{-- <div class="full-offer">
         <div class="bg-1"></div>
         <div class="bg-2"></div>
         <div class="container">
@@ -414,11 +414,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- OFFER PART END -->
 
     <!-- TESTIMONIAL PART START -->
-    <div class="container mt-5">
+    {{-- <div class="container mt-5">
         <div class="section-template">
 		<div class="section-banner">
 			<a href="#" class="section-order">
@@ -433,7 +433,7 @@
 			<button id="section-button" type="button" class="btn btn-primary">XEM THÊM ...</button>
 		</div>
 	 </div>
-    </div>
+    </div> --}}
     <!-- TESTIMONIAL PART END -->
 
     <!-- CONTACT NOW PART END -->

@@ -22,7 +22,7 @@
                 <div class="col-12">
                     <div class="billing_content">
                         <div class="mb-4">
-                            <a href="{{ url()->previous() }}" class="border-radius-0;">
+                            <a href="/cart" class="border-radius-0;">
                                 <i class="fa fa-arrow-left text-danger"></i> <ins class="text-danger">Quay lại</ins>
                             </a>
                         </div>

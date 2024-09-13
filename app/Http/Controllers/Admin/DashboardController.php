@@ -113,13 +113,13 @@ class DashboardController extends Controller
 
     private function calculateTotalSales($start_date, $end_date)
     {
-        $orderCompletes = Order::where('status', Status::COMPLETED);
+        $orderCompletes = Order::where('status', Status::COMPLETED); //lấy order thành công
         if ($start_date && $end_date) {
             $orderCompletes->whereBetween('created_at', [$start_date, $end_date]);
         }
         $orderCompletes = $orderCompletes->get();
 
-        $productCompletes = OrderDetail::whereIn('order_id', $orderCompletes->pluck('id'))->get();
+        $productCompletes = OrderDetail::whereIn('order_id', $orderCompletes->pluck('id'))->get(); //lấy order chi tiết thoe id order thành công
 
         $total = 0;
         foreach ($productCompletes as $productComplete) {
@@ -158,7 +158,7 @@ class DashboardController extends Controller
         // Truy vấn các sản phẩm, sắp xếp theo `updated_at` tăng dần để lấy sản phẩm lâu được cập nhật nhất
         $products = Product::where('max_amount', '>', 0)
             ->orderBy('updated_at', 'asc') // Sắp xếp theo `updated_at` tăng dần
-            ->take($limit) // Giới hạn số lượng sản phẩm lấy ra, mặc định là 10 sản phẩm
+            ->take($limit) // Giới hạn số lượng sản phẩm lấy ra
             ->get();
 
         return $products;
